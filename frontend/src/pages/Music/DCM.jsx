@@ -6,14 +6,14 @@ const DCM = () => {
       <div className="max-w-5xl mx-auto">
         {/* Title */}
         <h2 className="text-4xl font-bold text-blue-800 mb-6 text-center">
-          Dynamic Choral Ministry (DCM)
+          Divine Charm Melodies (DCM)
         </h2>
 
         {/* Who we are */}
         <div className="mb-10">
           <h3 className="text-2xl font-semibold text-blue-700 mb-2">Who We Are</h3>
           <p className="text-gray-700 leading-relaxed">
-            The Dynamic Choral Ministry (DCM) is a mission-driven choral group under the Music Department of DEKUSDA.
+            Divine Charm Melodies (DCM) is a mission-driven choral group under the Music Department of DEKUSDA.
             Our core purpose is to spread the gospel through spiritually uplifting music and service to the community.
             We believe in ministry through song, mentorship, and outreach—both within Dedan Kimathi University and beyond.
           </p>
@@ -40,25 +40,12 @@ const DCM = () => {
           </ul>
         </div>
 
-        {/* Members */}
+        {/* Members Placeholder */}
         <div className="mb-10">
           <h3 className="text-2xl font-semibold text-blue-700 mb-4">Our Team</h3>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 text-center">
-            {/* Replace these with real members later */}
-            {[
-              { name: 'John Doe', role: 'Chairperson' },
-              { name: 'Jane Mwangi', role: 'Music Director' },
-              { name: 'Samuel Otieno', role: 'Missions Coordinator' },
-              { name: 'Grace Achieng', role: 'Treasurer' },
-              { name: 'David Kimani', role: 'Prayer & Welfare' },
-              { name: 'Mercy Wanja', role: 'Secretary' },
-            ].map((member, idx) => (
-              <div key={idx} className="bg-white p-4 rounded shadow-sm hover:shadow-md transition">
-                <h4 className="font-bold text-blue-800">{member.name}</h4>
-                <p className="text-gray-600 text-sm">{member.role}</p>
-              </div>
-            ))}
-          </div>
+          <p className="text-gray-600 italic text-center">
+            Team roles and members will be updated soon.
+          </p>
         </div>
       </div>
     </section>
