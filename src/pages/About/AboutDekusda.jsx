@@ -1,0 +1,6 @@
+export const AboutDekusda = () => {
+    return (
+        <>
+        </>
+    );
+}
