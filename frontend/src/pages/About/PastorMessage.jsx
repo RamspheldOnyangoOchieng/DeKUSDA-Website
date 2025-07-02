@@ -1,23 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
 
-const PastorMessage = () => {
-    return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="p-8 bg-white rounded-lg shadow-lg">
-                <h1 className="mb-4 text-2xl font-bold">Pastor's Message</h1>
-                <p className="mb-4 text-lg">
-                    Welcome to the Dekusda page! Here, you can find a collection of beautiful hymns sung by our talented choir members.
-                </p>
-                <p className="mb-4 text-lg">
-                    We are excited to share our music with you and hope it brings you joy and inspiration.
-                </p>
-                <p className="mb-4 text-lg">
-                    Thank you for visiting our page, and we look forward to sharing more with you soon!
-                </p>
-            </div>
+export default function ChaplainsMessage() {
+  return (
+    <section className="p-6 mx-auto mt-10 max-w-5xl bg-white rounded-2xl shadow-md dark:bg-gray-900">
+      <h2 className="mb-6 text-3xl font-bold text-center text-gray-800 dark:text-white">
+        Chaplain's Message
+      </h2>
+
+      <div className="flex flex-col gap-6 items-center md:flex-row">
+        {/* Image using public src path */}
+        <div className="flex-shrink-0">
+          <img
+            src="/images/pastor-frank.jpg"
+            alt="Pastor Frank Maina"
+            className="object-cover w-64 h-auto rounded-2xl shadow-md"
+          />
         </div>
-    );
-};
 
-export default PastorMessage;
+        {/* Text Content */}
+        <div className="flex-1 text-lg text-gray-700 dark:text-gray-300">
+          <p className="mb-4">Hello there.</p>
+
+          <p className="mb-4">
+            Welcome to <span className="font-semibold text-blue-600 dark:text-blue-400">Dedan Kimathi University Seventh-Day Adventist Church</span>.
+            We're here to support Adventist students in finding space for spiritual exploration and nourishment — reminding you that,
+            <span className="italic"> “The fear of the Lord is the beginning of wisdom.”</span>
+          </p>
+
+          <p className="mb-4">
+            Here, we are nurturing <span className="font-semibold">spirit</span>, <span className="font-semibold">soul</span>, and <span className="font-semibold">service</span>.
+            Our Chaplaincy department offers pastoral care, spiritual programs, and opportunities for service — embracing diversity and fostering well-being.
+          </p>
+
+          <p className="mb-6">
+            May the good Lord bless you for visiting this site.
+          </p>
+
+          <div className="text-right">
+            <p className="text-xl font-medium text-gray-800 dark:text-white">Pastor Frank Maina,</p>
+            <p className="text-gray-700 dark:text-gray-400">Chaplain</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
