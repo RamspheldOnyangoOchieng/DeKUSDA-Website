@@ -66,9 +66,7 @@ const PersonalMinistriesPage = () => {
         </section>
       </main>
 
-      <footer className="bg-blue-900 text-white p-4 text-center mt-10">
-        <p>&copy; {new Date().getFullYear()} Seventh-day Adventist Church - Personal Ministries</p>
-      </footer>
+      
     </div>
   );
 };
