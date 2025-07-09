@@ -1,24 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import dekusdachurchlogo from '../../assets/dekusdachurchlogo.png'
 
 export const Sidebar = () => {
     return (
-        <aside className="w-64 min-h-screen bg-gradient-to-b from-yellow-600 via-red-700 to-green-900 shadow-2xl flex flex-col p-6">
-            <h2 className="text-2xl font-extrabold text-white mb-8 tracking-wide border-b-2 border-yellow-400 pb-2">
-                Quick Links
-            </h2>
-            <nav className="flex flex-col space-y-4">
-                <Link to="/" className="text-yellow-200 hover:text-yellow-400 font-semibold transition">Home</Link>
-                <Link to="/Aboutdekusda" className="text-yellow-200 hover:text-yellow-400 font-semibold transition">About DeKUSDA</Link>
-                <Link to="/Personalministries" className="text-yellow-200 hover:text-yellow-400 font-semibold transition">Personal Ministries</Link>
-                <Link to="/PCM" className="text-yellow-200 hover:text-yellow-400 font-semibold transition">Public Campus Ministries</Link>
-                <Link to="/Churchchoir" className="text-yellow-200 hover:text-yellow-400 font-semibold transition">Church Choir</Link>
-                <Link to="/Announcements" className="text-yellow-200 hover:text-yellow-400 font-semibold transition">Announcements</Link>
-            </nav>
-            <div className="mt-12 bg-white bg-opacity-10 rounded-lg p-4 border-l-4 border-yellow-400 shadow-lg">
-                <h3 className="text-lg font-bold text-yellow-300 mb-2">Announcement</h3>
-                <p className="text-white">Join us for Sabbath worship every Saturday at 9:00 AM!</p>
-            </div>
-        </aside>
+        <>
+         <div className='w-[15%] min-h-screen bg-gradient-to-b from-blue-600 to-white'>
+            <img src={dekusdachurchlogo} alt="DeKUSDA Church Logo" 
+            className='
+            xs:w-16 xs:h-16 xs:ml-1 xs:mt-4
+            sm:w-20 sm:h-20 sm:ml-3 sm:mt-4
+            md:w-24 md:h-24 md:ml-6 md:mt-4
+            lg:w-24 lg:h-24 lg:ml-8 lg:mt-4
+            xl:w-32 xl:h-32 xl:ml-12 fixed xl:mt-6
+            bg-transparent flex filter brightness-0 invert sepia saturate-100 hue-rotate-180'/>
+        </div>
+        </>
     );
-};
+}
+

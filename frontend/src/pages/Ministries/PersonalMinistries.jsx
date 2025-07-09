@@ -1,4 +1,6 @@
-const PersonalMinistriesPage = () => {
+import React from 'react';
+
+export const PersonalMinistries = () => {
   return (
     <div className="min-h-screen text-gray-800 bg-gray-100">
       <header className="p-6 text-white bg-blue-900 shadow-md">
@@ -70,4 +72,4 @@ const PersonalMinistriesPage = () => {
   );
 };
 
-export default PersonalMinistriesPage;
+export default PersonalMinistries;

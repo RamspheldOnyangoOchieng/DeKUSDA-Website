@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Evangelism() {
+export const Evangelism() {
   return (
     <section className="max-w-5xl mx-auto px-6 py-10 bg-white dark:bg-gray-900 rounded-2xl shadow-md">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 dark:text-white mb-6">
@@ -81,3 +81,5 @@ export default function Evangelism() {
     </section>
   );
 }
+
+export default Evangelism;

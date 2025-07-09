@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ElderMessage = () => {
+export const  ElderMessage=() => {
   return (
     <section className="px-6 py-12 font-sans text-gray-800 bg-gray-100 lg:px-24">
       <div className="p-6 mx-auto max-w-5xl bg-white rounded-xl shadow-md md:p-10">

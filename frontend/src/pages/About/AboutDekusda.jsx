@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './aboutDekusda.css';
-import sdaLogo from '../../assets/dekusdalogo.jpg';
-import churchImage from '../../assets/church.jpeg';
 import bibleStudyImg from '../../assets/BIBLESTUDY.jpg';
+import churchImage from '../../assets/church.jpeg';
+import sdaLogo from '../../assets/dekusdalogo.jpg';
 import choirImg from '../../assets/harmonization.jpg';
-import missionsImg from '../../assets/mission.jpg';
 import instagramIcon from '../../assets/instagram.png';
+import missionsImg from '../../assets/mission.jpg';
 import youtubeIcon from '../../assets/youtube.png';
+import './aboutDekusda.css';
 
 const useTypingEffect = (text, speed = 100) => {
   const [displayedText, setDisplayedText] = useState('');
@@ -23,7 +23,7 @@ const useTypingEffect = (text, speed = 100) => {
   return displayedText;
 };
 
-const AboutDekusda = () => {
+export const AboutDekusda = () => {
   const welcomeText = 'WELCOME TO (DEKUSDA) DEDAN KIMATHI UNIVERSITY';
   const typedWelcome = useTypingEffect(welcomeText, 120);
 

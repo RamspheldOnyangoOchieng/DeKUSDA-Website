@@ -37,4 +37,4 @@ export default function ChurchProgram() {
     </div>
   );
 }
->>>>>>> 55bf9b35e6fbe7a2846edd580f3c93dcb4ff9548
+

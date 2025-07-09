@@ -1,6 +1,6 @@
 import React from "react";
 
-const Blissful = () => {
+export const Blissful = () => {
   return (
     <div>
       <h1>Blissful Music Group</h1>

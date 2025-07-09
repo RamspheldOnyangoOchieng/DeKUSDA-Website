@@ -1,5 +1,5 @@
 
-const COE = () => {
+export const COE = () => {
     return (
         <div>
             <h1>Code of Ethics</h1>

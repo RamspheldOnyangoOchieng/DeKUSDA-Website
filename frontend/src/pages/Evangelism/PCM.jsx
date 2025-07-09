@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function PublicCampusMinistry() {
+export const PCM = () => {
   return (
     <section className="px-6 py-12 mx-auto max-w-6xl bg-white rounded-2xl shadow-lg dark:bg-gray-900">
       {/* Logo */}
@@ -81,3 +81,5 @@ export default function PublicCampusMinistry() {
     </section>
   );
 }
+
+export default PCM;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Leaders2024 = () => {
+export const Leaders2024 = () => {
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-yellow-400 via-red-500 to-green-900">
             <h1 className="mb-4 text-4xl font-bold text-white">Leaders 2024</h1>

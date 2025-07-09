@@ -1,13 +1,9 @@
 import React from "react";
 
-const Books = () => {
+export function Books(props) {
+  // TODO: implement component logic or return existing JSX
   return (
-    <div>
-      <h1>Books and Resources</h1>
-      <p>This is the Books and Resources page.</p>
-    </div>
+    <div>Books Page</div>
   );
-};
-
-export default Books;
+}
 

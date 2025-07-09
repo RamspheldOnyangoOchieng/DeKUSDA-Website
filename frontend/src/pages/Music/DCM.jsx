@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DCM = () => {
+export const DCM = () => {
   return (
     <section className="px-6 py-12 bg-gray-50 lg:px-24">
       <div className="mx-auto max-w-5xl">

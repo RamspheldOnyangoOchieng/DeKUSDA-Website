@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const videos = [
   { title: 'Tell It Over Once Again', id: 'Y-vQpYOlSxc' },
@@ -8,7 +8,7 @@ const videos = [
   { title: 'Rainbow of Perfect Love', id: 'KvfUW3-dZq8' },
 ];
 
-const ChurchChoir = () => {
+export const ChurchChoir = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [showModal, setShowModal] = useState(false);

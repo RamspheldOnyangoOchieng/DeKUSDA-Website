@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './AboutSDA.css';
 
-import logo from '../../assets/logo.jpg';
 import ellenWhite from '../../assets/HELLEN G WHITE.jpg';
+import logo from '../../assets/logo.jpg';
 
-const AboutSDA = () => {
+export const AboutSDA = () => {
   const [showWhiteBio, setShowWhiteBio] = useState(false);
   const [activeQa, setActiveQa] = useState(null);
 

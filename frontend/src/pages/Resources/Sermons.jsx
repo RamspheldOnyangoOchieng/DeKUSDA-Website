@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Sermons = () => {
+export const Sermons = () => {
     (
         <div>
             <h1>Welcome to the Sermons Page</h1>

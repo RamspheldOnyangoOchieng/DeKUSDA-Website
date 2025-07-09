@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ChaplainsMessage() {
+export const PastorMessage = () => {
   return (
     <section className="p-6 mx-auto mt-10 max-w-5xl bg-white rounded-2xl shadow-md dark:bg-gray-900">
       <h2 className="mb-6 text-3xl font-bold text-center text-gray-800 dark:text-white">
@@ -45,3 +45,4 @@ export default function ChaplainsMessage() {
     </section>
   );
 }
+export default PastorMessage;
