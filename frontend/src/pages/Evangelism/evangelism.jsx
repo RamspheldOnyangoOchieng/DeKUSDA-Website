@@ -13,7 +13,8 @@ export const Evangelism() {
           src="/images/evangelism-team.png" // Optional: replace with your real image
           alt="Evangelism Team"
           className="w-72 rounded-xl shadow-md"
-        />
+      
+        
       </div>
 
       <div className="text-lg text-gray-700 dark:text-gray-300 space-y-6">
