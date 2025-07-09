@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Evangelism() {
+const Evangelism = () => {
   return (
     <section className="max-w-5xl mx-auto px-6 py-10 bg-white dark:bg-gray-900 rounded-2xl shadow-md">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 dark:text-white mb-6">
@@ -10,11 +10,10 @@ export const Evangelism() {
       {/* Optional image */}
       <div className="flex justify-center mb-6">
         <img
-          src="/images/evangelism-team.png" // Optional: replace with your real image
+          src="/images/evangelism-team.png" // Make sure this image exists in public/images
           alt="Evangelism Team"
           className="w-72 rounded-xl shadow-md"
-      
-        
+        />
       </div>
 
       <div className="text-lg text-gray-700 dark:text-gray-300 space-y-6">
@@ -81,6 +80,6 @@ export const Evangelism() {
       </div>
     </section>
   );
-}
+};
 
 export default Evangelism;
