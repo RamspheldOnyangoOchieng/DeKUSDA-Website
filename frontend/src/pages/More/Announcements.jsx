@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from '../../components/Layout/Header';
+import Footer from '../../components/Layout/Footer';
 
 const program = [
   { day: 'Sunday', time: '2:00 - 5:00 PM', activity: 'Choir Practice' },
@@ -14,27 +16,34 @@ const program = [
 
 export default function ChurchProgram() {
   return (
-    <div className="p-8">
-      <h2 className="mb-6 text-2xl font-bold">DeKUSDA Church Weekly Program</h2>
-      <table className="min-w-full border border-gray-300">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="px-4 py-2 border">Day</th>
-            <th className="px-4 py-2 border">Time</th>
-            <th className="px-4 py-2 border">Activity</th>
-          </tr>
-        </thead>
-        <tbody>
-          {program.map((item, idx) => (
-            <tr key={idx} className="text-center">
-              <td className="px-4 py-2 border">{item.day}</td>
-              <td className="px-4 py-2 border">{item.time}</td>
-              <td className="px-4 py-2 border">{item.activity}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <Header />
+
+      <main className="px-6 py-10 mx-auto max-w-5xl font-sans bg-gray-50 min-h-screen">
+        <h2 className="mb-6 text-3xl font-bold text-center text-blue-900">DeKUSDA Church Weekly Program</h2>
+        <div className="overflow-x-auto rounded-xl shadow-lg bg-white">
+          <table className="min-w-full border border-gray-300 text-gray-800">
+            <thead className="bg-blue-100 text-blue-800">
+              <tr>
+                <th className="px-6 py-3 border font-semibold text-left">Day</th>
+                <th className="px-6 py-3 border font-semibold text-left">Time</th>
+                <th className="px-6 py-3 border font-semibold text-left">Activity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {program.map((item, idx) => (
+                <tr key={idx} className="even:bg-gray-50 hover:bg-blue-50 transition">
+                  <td className="px-6 py-3 border">{item.day}</td>
+                  <td className="px-6 py-3 border">{item.time}</td>
+                  <td className="px-6 py-3 border">{item.activity}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <Footer />
+    </>
   );
 }
-
