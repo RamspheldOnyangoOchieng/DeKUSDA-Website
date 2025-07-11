@@ -36,7 +36,7 @@ export const Home = () => {
     const slides = [
         {
             image: Dekusdamain,
-            title: "Welcome to DEKUSDA",
+            title: " DEKUSDA Family",
             ctaLink: "/Aboutdekusda"
         },
         {
@@ -94,29 +94,29 @@ export const Home = () => {
                             className="xs:w-full sm: md: lg: xl:w-full xl:h-svh"
                         >
                             {slides.map((slide, index) => (
-                                <SwiperSlide key={index}>
-                                    <div className="relative w-full h-full">
-                                        <img
-                                            src={slide.image}
-                                            alt={`Slide ${index + 1}`}
-                                            className="object-contain w-full h-auto transition-all duration-75 sm:h-auto sm:object-cover md:h-auto lg:h-svh xl:h-svh"
-                                        />
-                                        
-                                        <div className="absolute inset-0 bg-gradient-to-t from-darkBlue/80 via-darkBlue/40 to-transparent"></div>
-                                        
-                                        <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white">
-                                            <h1 className="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl text-shadow-lg">
-                                                {slide.title}
-                                            </h1>
-                                            <button 
-                                                className="px-8 py-3 font-bold text-white transition-all duration-300 transform rounded-full shadow-lg bg-gradient-to-r from-primaryBlue to-darkBlue hover:from-darkBlue hover:to-primaryBlue hover:scale-105 hover:shadow-xl animate-pulse"
-                                                onClick={() => window.location.href = slide.ctaLink}
-                                            >
-                                                Learn More
-                                            </button>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
+                            <SwiperSlide key={index}>
+                            <div className="flex flex-col items-center justify-center w-full h-full">
+                              <img
+                                src={slide.image}
+                                alt={`Slide ${index + 1}`}
+                                className="object-cover w-full h-[70vh] rounded-md shadow-lg"
+                              />
+                          
+                              {/* Compact and Stylish Label Container */}
+                              <div className="mt-4 px-4 py-2 bg-gradient-to-r from-primaryBlue to-darkBlue text-white rounded-full shadow-md backdrop-blur-sm text-center w-fit">
+                                <h2 className="text-lg font-semibold tracking-wide">{slide.title}</h2>
+                              </div>
+                          
+                              <button
+                                className="mt-3 px-5 py-1.5 text-sm font-medium text-white bg-primaryBlue rounded-full hover:bg-darkBlue transition duration-300"
+                                onClick={() => window.location.href = slide.ctaLink}
+                              >
+                                Learn More
+                              </button>
+                            </div>
+                          </SwiperSlide>
+                          
+
                             ))}
                         </Swiper>
 
