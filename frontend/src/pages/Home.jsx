@@ -94,21 +94,32 @@ export const Home = () => {
                             className="xs:w-full sm: md: lg: xl:w-full xl:h-svh"
                         >
                             {slides.map((slide, index) => (
-                            <SwiperSlide key={index}>
-                            <div className="flex flex-col items-center justify-center w-full h-full">
-                              <img
-                                src={slide.image}
-                                alt={`Slide ${index + 1}`}
-                                className="object-cover w-full h-[70vh] rounded-md shadow-lg"
-                              />
-                          
-                              {/* Compact and Stylish Label Container */}
-                              <div className="mt-4 px-4 py-2 bg-gradient-to-r from-primaryBlue to-darkBlue text-white rounded-full shadow-md backdrop-blur-sm text-center w-fit">
-                                <h2 className="text-lg font-semibold tracking-wide">{slide.title}</h2>
-                              </div>
-                            </div>
-                          </SwiperSlide>
-                          
+                                <SwiperSlide key={index}>
+  <div className="flex flex-col items-center justify-center w-full h-full">
+    <img
+      src={slide.image}
+      alt={`Slide ${index + 1}`}
+      className="object-cover w-full h-[70vh] rounded-md shadow-lg"
+    />
+
+    {/* Title Badge */}
+    <div className="mt-4 px-4 py-2 bg-gradient-to-r from-primaryBlue to-darkBlue text-white rounded-full shadow-md backdrop-blur-sm text-center w-fit">
+      <h2 className="text-lg font-semibold tracking-wide">{slide.title}</h2>
+    </div>
+
+    {/* Button only for 'DeKUSDA Family' */}
+    {slide.title === "DeKUSDA Family" && (
+      <button
+        className="mt-3 px-5 py-1.5 text-sm font-medium text-white bg-primaryBlue rounded-full hover:bg-darkBlue transition duration-300"
+        onClick={() => window.location.href = slide.ctaLink}
+      >
+        Learn More
+      </button>
+    )}
+  </div>
+</SwiperSlide>
+
+                         
                           
 
                             ))}
