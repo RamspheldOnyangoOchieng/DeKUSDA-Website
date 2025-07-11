@@ -227,7 +227,7 @@ export const Home = () => {
                                 <div className="flex items-center">
                                     <AiOutlineInfoCircle className="w-6 h-6 mr-3 text-primaryBlue" />
                                     <p className="font-medium text-darkBlue">
-                                        This week's AY will be hosted by the PCM department!
+                                        This is a High Sabbath week.
                                     </p>
                                 </div>
                             </div>
