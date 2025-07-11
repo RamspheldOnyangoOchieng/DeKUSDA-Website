@@ -80,7 +80,7 @@ export const Footer = () => {
                         </div>
                         <div className="text-sm">
                             <p className="mb-2"><strong>Emergency Contact:</strong></p>
-                            <p className="text-gray-300">Chaplain: +254 XXX XXX XXX</p>
+                            <p className="text-gray-300">Chaplain: +254 712 220 411</p>
                             <p className="text-gray-300">Church Office: +254 748 260 864 </p>
                         </div>
                     </div>
