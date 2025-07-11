@@ -156,3 +156,4 @@ export const ChurchChoir = () => {
 };
 
 export default ChurchChoir;
+

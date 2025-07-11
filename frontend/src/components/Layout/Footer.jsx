@@ -9,7 +9,7 @@ export const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                     {/* Church Info */}
                     <div>
-                        <h4 className="text-lg font-bold text-lightBlue mb-4">About DeKUT SDA Church</h4>
+                        <h4 className="text-lg font-bold text-lightBlue mb-4">About DeKUSDA Church</h4>
                         <p className="text-sm leading-relaxed">
                             A university-based Seventh-day Adventist Church centered on nurturing spiritual growth, 
                             fellowship, and academic excellence through Christ. Welcome home.
@@ -19,7 +19,7 @@ export const Footer = () => {
                                 <strong>Location:</strong> Dedan Kimathi University of Technology
                             </p>
                             <p className="text-sm text-gray-300">
-                                <strong>Email:</strong> info@dekusda.org
+                                <strong>Email:</strong> dekutsda@students.dkut.ac.ke
                             </p>
                         </div>
                     </div>
@@ -43,11 +43,11 @@ export const Footer = () => {
                         <ul className="text-sm space-y-2">
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Friday Vespers: 7:00 PM
+                                Friday Vespers: 6:30 PM
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Sabbath School: 9:00 AM
+                                Sabbath School: 8:30 AM
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
@@ -55,11 +55,15 @@ export const Footer = () => {
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Afternoon Fellowship: 3:00 PM
+                                Afternoon Fellowship: 2:00 PM
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Midweek Prayer: Wednesday 7:00 PM
+                                Midweek Prayer: Wednesday 5:00 PM - 6:00PM
+                            </li>
+                            <li className="flex items-center">
+                                <span className="text-lightBlue mr-2"></span>
+                                Bible Study: Wednesday 6:30 PM - 8:00PM
                             </li>
                         </ul>
                     </div>
@@ -77,7 +81,7 @@ export const Footer = () => {
                         <div className="text-sm">
                             <p className="mb-2"><strong>Emergency Contact:</strong></p>
                             <p className="text-gray-300">Chaplain: +254 XXX XXX XXX</p>
-                            <p className="text-gray-300">Church Office: +254 XXX XXX XXX</p>
+                            <p className="text-gray-300">Church Office: +254 748 260 864 </p>
                         </div>
                     </div>
                 </div>
@@ -89,7 +93,7 @@ export const Footer = () => {
                 <div className="flex flex-col md:flex-row justify-between items-center">
                     <div className="text-center md:text-left mb-4 md:mb-0">
                         <p className="text-sm text-gray-500">
-                            © {new Date().getFullYear()} DeKUT SDA Church. Powered by Faith & Technology.
+                            © {new Date().getFullYear()} DeKUSDA Church. Powered by Faith & Technology.
                         </p>
                         <p className="text-xs text-gray-600 mt-1">
                             Designed by Tech Ministry | Built with  for our community
