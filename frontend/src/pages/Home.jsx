@@ -106,15 +106,9 @@ export const Home = () => {
                               <div className="mt-4 px-4 py-2 bg-gradient-to-r from-primaryBlue to-darkBlue text-white rounded-full shadow-md backdrop-blur-sm text-center w-fit">
                                 <h2 className="text-lg font-semibold tracking-wide">{slide.title}</h2>
                               </div>
-                          
-                              <button
-                                className="mt-3 px-5 py-1.5 text-sm font-medium text-white bg-primaryBlue rounded-full hover:bg-darkBlue transition duration-300"
-                                onClick={() => window.location.href = slide.ctaLink}
-                              >
-                                Learn More
-                              </button>
                             </div>
                           </SwiperSlide>
+                          
                           
 
                             ))}
