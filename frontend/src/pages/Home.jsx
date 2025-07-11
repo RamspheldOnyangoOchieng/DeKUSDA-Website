@@ -74,7 +74,7 @@ export const Home = () => {
                     <div className="relative -mt-2 overflow-hidden">
                         <Swiper
                             modules={[Autoplay, Navigation]}
-                            autoplay={{ delay: 3000, disableOnInteraction: false }}
+                            autoplay={{ delay: 6000, disableOnInteraction: false }}
                             loop
                             onSwiper={(swiper) => {
                                 setTimeout(() => {
