@@ -15,7 +15,7 @@ import { Blissful } from './pages/Music/Blissful';
 import { COE } from './pages/Resources/COE';
 import { Sermons } from './pages/Resources/Sermons';
 import { Books } from './pages/Resources/Books';
-import PrayerDepartment from './pages/Ministries/PrayerDepartment'; // ✅ FIXED (default import)
+import PrayerDepartment from './pages/Ministries/PrayerDepartment'; 
 
 function App() {
   return (
