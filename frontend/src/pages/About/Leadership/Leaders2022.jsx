@@ -1,8 +1,12 @@
-import React from "react";
+import React from 'react';
 
-export function Leaders2022(props) {
-  // TODO: implement component logic or return existing JSX
+const Leaders2022 = () => {
   return (
-    <div>Leaders 2022 Page</div>
+    <div>
+      <h1>Leadership Team 2022</h1>
+      {/* Add your content here */}
+    </div>
   );
-}
+};
+
+export default Leaders2022;
