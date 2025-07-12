@@ -6,16 +6,17 @@ export const PersonalMinistries = () => {
   // List of families for Bible study meetings
   const families = [
     "Sentinels Family",
-    "Fountain of Life",
+    "Fountain of Life Family",
     "Doves Family",
-    "House of Bread",
+    "House of Bread Family",
     "Heralds Family",
-    "Pillars of Truth",
+    "Pillars of Truth Family",
     "Royals Family",
     "House of Bread Family",
     "Peniel Family",
-    "Pearls & Goshen",
-    "Town Estate" // New family added here
+    "Pearls Family ",
+    "Goshen Family ",
+    "Town Estate Family" // New family added here
   ];
 
   return (
