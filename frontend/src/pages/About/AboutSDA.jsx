@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './AboutSDA.css';
 
+import { Header } from '../../components/Layout/Header';
+import { Footer } from '../../components/Layout/Footer';
+
 import ellenWhite from '../../assets/HELLEN G WHITE.jpg';
 import logo from '../../assets/logo.jpg';
 
-export const AboutSDA = () => {
+const AboutSDA = () => {
   const [showWhiteBio, setShowWhiteBio] = useState(false);
   const [activeQa, setActiveQa] = useState(null);
 
@@ -56,175 +59,162 @@ export const AboutSDA = () => {
   ];
 
   return (
-    <div className="page-container">
-      
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <nav>
-          <h2>Quick Links</h2>
-          <ul>
-            <li><a href="#history-section">History</a></li>
-            <li><a href="#qa-section">Frequent Q&A</a></li>
-            <li><a href="#global-impact">Global Impact</a></li>
-            <li><a href="#white-section">Ellen G. White</a></li>
-            <li><a href="#mission-section">Mission & Structure</a></li>
-          </ul>
-        </nav>
-        <div className="sidebar-note">
-          <h3>Did You Know?</h3>
-          <p>Seventh-day Adventists observe the Sabbath on Saturday, emphasizing rest, worship, and family.</p>
-        </div>
-      </aside>
-
-      {/* Main Content */}
-      <main className="main-content">
-        {/* Hero Section (no background now) */}
-        <div className="hero-section plain-hero">
-          <div className="hero-content">
-            <h1>ABOUT SEVENTH DAY ADVENTIST CHURCH (SDA)</h1>
-            <p className="church-motto">"Come now, let us reason together" - Isaiah 1:18</p>
-            <p className="student-call">A faith that welcomes intellectual inquiry</p>
+    <>
+      <Header />
+      <div className="page-container">
+        <aside className="sidebar blue-sidebar">
+          <nav>
+            <h2>Quick Links</h2>
+            <ul>
+              <li><a href="#history-section">History</a></li>
+              <li><a href="#qa-section">Frequent Q&A</a></li>
+              <li><a href="#global-impact">Global Impact</a></li>
+              <li><a href="#white-section">Ellen G. White</a></li>
+              <li><a href="#mission-section">Mission & Structure</a></li>
+            </ul>
+          </nav>
+          <div className="sidebar-note">
+            <h3>Did You Know?</h3>
+            <p>Seventh-day Adventists observe the Sabbath on Saturday, emphasizing rest, worship, and family.</p>
           </div>
-        </div>
+        </aside>
 
-        {/* History Section */}
-        <section id="history-section" className="history-section">
-          <div className="history-image-container">
-            <img
-              src={logo}
-              alt="SDA Church History"
-              className="history-image"
-            />
-            <div className="year-badge">1863</div>
-            <div className="history-video-container">
-              <h3>The Adventist Story in 3 Minutes</h3>
-              <div className="video-wrapper">
-                <iframe
-                  src="https://www.youtube.com/embed/0YUCQmNRZCM?start=28"
-                  title="SDA History Explained"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+        <main className="main-content">
+          <div className="hero-section plain-hero">
+            <div className="hero-content">
+              <h1>ABOUT SEVENTH DAY ADVENTIST CHURCH (SDA)</h1>
+              <p className="church-motto">"Come now, let us reason together" - Isaiah 1:18</p>
+              <p className="student-call">A faith that welcomes intellectual inquiry</p>
+            </div>
+          </div>
+
+          <section id="history-section" className="history-section">
+            <div className="history-image-container">
+              <img src={logo} alt="SDA Church History" className="history-image" />
+              <div className="year-badge">1863</div>
+              <div className="history-video-container">
+                <h3>The Adventist Story in 3 Minutes</h3>
+                <div className="video-wrapper">
+                  <iframe
+                    src="https://www.youtube.com/embed/0YUCQmNRZCM?start=28"
+                    title="SDA History Explained"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="history-text">
-            <h2>SMALL HISTORY ABOUT SDA</h2>
-            <p>
-              The Seventh-day Adventist Church emerged from the Great Awakening movements of the
-              19th century, when young Bible students began questioning mainstream interpretations
-              of Scripture.
-            </p>
+            <div className="history-text">
+              <h2>SMALL HISTORY ABOUT SDA</h2>
+              <p>
+                The Seventh-day Adventist Church emerged from the Great Awakening movements of the
+                19th century, when young Bible students began questioning mainstream interpretations
+                of Scripture.
+              </p>
 
-            {/* Q&A Section */}
-            <section id="qa-section" className="controversial-qa">
-              <h3>FREQUENT Q&A</h3>
+              <section id="qa-section" className="controversial-qa">
+                <h3>FREQUENT Q&A</h3>
 
-              {qaItems.map((item) => (
-                <div className="qa-item" key={item.id}>
-                  <button
-                    onClick={() => setActiveQa(activeQa === item.id ? null : item.id)}
-                    aria-expanded={activeQa === item.id}
-                    aria-controls={`answer-${item.id}`}
-                    className="qa-question-button"
-                  >
-                    <span>{item.question}</span>
-                    <span>{activeQa === item.id ? '−' : '+'}</span>
-                  </button>
-                  {activeQa === item.id && (
-                    <div id={`answer-${item.id}`} className="qa-answer">
-                      {item.answer}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </section>
-          </div>
-        </section>
-
-        {/* Global Impact Section */}
-        <section id="global-impact" className="global-impact">
-          <h2>Adventist Global Impact</h2>
-          <div className="impact-grid">
-            <div className="impact-card">
-              <h3>Education</h3>
-              <p><strong>118</strong> universities worldwide</p>
-              <p>Education in <strong>150+</strong> languages</p>
+                {qaItems.map((item) => (
+                  <div className="qa-item" key={item.id}>
+                    <button
+                      onClick={() => setActiveQa(activeQa === item.id ? null : item.id)}
+                      aria-expanded={activeQa === item.id}
+                      aria-controls={`answer-${item.id}`}
+                      className="qa-question-button"
+                    >
+                      <span>{item.question}</span>
+                      <span>{activeQa === item.id ? '−' : '+'}</span>
+                    </button>
+                    {activeQa === item.id && (
+                      <div id={`answer-${item.id}`} className="qa-answer">
+                        {item.answer}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </section>
             </div>
-            <div className="impact-card">
-              <h3>Healthcare</h3>
-              <p><strong>175</strong> hospitals</p>
-              <p>Loma Linda ranked top hospital in CA</p>
-            </div>
-            <div className="impact-card">
-              <h3>Humanitarian</h3>
-              <p>ADRA in <strong>118</strong> countries</p>
-              <p><strong>10M+</strong> served annually</p>
-            </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Ellen G. White Section */}
-        <section id="white-section" className="white-section">
-          <div className="white-portrait">
-            <img
-              src={ellenWhite}
-              alt="Ellen G. White"
-              className="ellen-white-img"
-            />
-          </div>
-          <div className="white-content">
-            <h2>Ellen G. WHITE MESSAGE OF HOPE</h2>
-            <p>
-              Ellen G. White's message of hope centers on God's unfailing love and the assurance of
-              salvation through Jesus Christ. She emphasized that no one is beyond God's mercy, and
-              that those who come to Him with a repentant heart will find forgiveness, healing, and
-              strength to overcome.
-            </p>
+          <section id="global-impact" className="global-impact">
+            <h2>Adventist Global Impact</h2>
+            <div className="impact-grid">
+              <div className="impact-card">
+                <h3>Education</h3>
+                <p><strong>118</strong> universities worldwide</p>
+                <p>Education in <strong>150+</strong> languages</p>
+              </div>
+              <div className="impact-card">
+                <h3>Healthcare</h3>
+                <p><strong>175</strong> hospitals</p>
+                <p>Loma Linda ranked top hospital in CA</p>
+              </div>
+              <div className="impact-card">
+                <h3>Humanitarian</h3>
+                <p>ADRA in <strong>118</strong> countries</p>
+                <p><strong>10M+</strong> served annually</p>
+              </div>
+            </div>
+          </section>
 
-            {showWhiteBio && (
+          <section id="white-section" className="white-section">
+            <div className="white-portrait">
+              <img src={ellenWhite} alt="Ellen G. White" className="ellen-white-img" />
+            </div>
+            <div className="white-content">
+              <h2>Ellen G. White</h2>
               <div className="white-bio">
-                <p>
-                  Her book <em>Education</em> presents a revolutionary view: "True education means
-                  more than the pursuit of a certain course of study. It prepares the student for the
-                  joy of service in this world and for the higher joy of wider service in the world to
-                  come."
-                </p>
-                <div className="white-downloads">
-                  <a
-                    href="/downloads/great-controversy-student.pdf"
-                    className="download-btn"
-                    download
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#2c5aa0">
-                      <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
-                    </svg>
-                    Download <em>The Great Controversy</em>
-                  </a>
-                  <p className="download-note">Student edition with study guides</p>
-                </div>
+                <p><em>
+                  Ellen G. White (1827-1915) was a founder of the SDA Church and is considered a prophet by
+                  the community. Her writings shape SDA beliefs and lifestyle.
+                </em></p>
               </div>
-            )}
-            <button
-              onClick={() => setShowWhiteBio(!showWhiteBio)}
-              className="toggle-bio-btn"
-              aria-expanded={showWhiteBio}
-            >
-              {showWhiteBio ? 'Show Less' : 'Learn More'}
-            </button>
-          </div>
-        </section>
 
-        {/* Mission Section */}
-        <h1 id="mission-section">MISSION AND THE CHURCH STRUCTURES</h1>
-        <section className="mission-section">
-          <p>
-            The mission of the Seventh-day Adventist Church is to proclaim the everlasting gospel of Jesus Christ to all nations, emphasizing holistic health, education, and community service. The Church is organized with a global structure that includes local churches, conferences, unions, divisions, and the General Conference, ensuring effective leadership and unity across 215 countries.
-          </p>
-        </section>
-      </main>
-    </div>
+              <div className="white-downloads">
+                <a
+                  href="https://egwwritings.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="download-btn"
+                >
+                  Download Writings
+                </a>
+                <p className="download-note">Thousands of documents and books freely available.</p>
+              </div>
+
+              <button onClick={() => setShowWhiteBio(!showWhiteBio)}>
+                {showWhiteBio ? 'Hide' : 'Show'} More About Ellen White
+              </button>
+
+              {showWhiteBio && (
+                <div className="white-extra-bio">
+                  <p>
+                    Ellen White's ministry spanned over 70 years and emphasized health, education, and
+                    spiritual revival. Her legacy continues to influence millions worldwide.
+                  </p>
+                </div>
+              )}
+            </div>
+          </section>
+
+          <section id="mission-section" className="mission-structure">
+            <h2>Mission & Church Structure</h2>
+            <p>
+              The mission of the SDA Church is to proclaim the everlasting gospel of Jesus Christ to all
+              people, teaching biblical principles and promoting a healthy, balanced lifestyle.
+            </p>
+            <ul>
+              <li>Global organizational structure</li>
+              <li>Emphasis on youth and community programs</li>
+              <li>Active missionary work worldwide</li>
+            </ul>
+          </section>
+        </main>
+      </div>
+      <Footer />
+    </>
   );
 };
 
