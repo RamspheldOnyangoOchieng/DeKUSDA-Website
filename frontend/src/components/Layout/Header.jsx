@@ -67,6 +67,7 @@ export const Header = () => {
                 <li><Link to="/AMO_ALO" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">AMO / ALO</Link></li>
                 <li><Link to="/Health" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">Health Department</Link></li>
                 <li><Link to="/SabbathSchool" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">Sabbath School</Link></li>
+                <li><Link to="/Prophecy" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">Prophecy</Link></li>
               </ul>
             </details>
           </li>
@@ -89,7 +90,14 @@ export const Header = () => {
               </ul>
             </details>
           </li>
-          <li><Link to="/Announcements" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">More</Link></li>
+          <li>
+            <details>
+              <summary className="cursor-pointer hover:underline underline-offset-2">More</summary>
+              <ul className="pl-4 space-y-2">
+                <li><Link to="/Announcements" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">Announcements</Link></li>
+              </ul>
+            </details>
+          </li>
         </ul>
       </div>
 
@@ -99,12 +107,11 @@ export const Header = () => {
           <ul className="text-sm text-blue-900 space-x-4 flex">
             <li className='my-10 xl:text-lg lg:text-[1rem] font-georgia font-normal'><Link to="/">Home</Link></li>
 
+            {/* About Us Dropdown */}
             <li className='relative z-50 group'>
               <div className='flex items-center justify-center my-10 xl:text-lg lg:text-[1rem] font-georgia font-normal cursor-pointer'>
                 About Us
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='h-4 w-4'>
-                  <path d="M6 9l6 6 6-6" fill="none" stroke="black" strokeWidth="2" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='h-4 w-4'><path d="M6 9l6 6 6-6" fill="none" stroke="black" strokeWidth="2" /></svg>
               </div>
               <ul className='absolute left-0 -mt-6 lg:w-44 xl:w-52 bg-neutral-100 rounded-xs shadow-lg transition-all duration-300 hidden group-hover:block space-y-4 text-md font-bold border border-neutral-200 ml-0 pt-2'>
                 <li className='text-black font-normal hover:underline underline-offset-1 pl-2'><Link to="/Aboutdekusda">About DeKUSDA</Link></li>
@@ -114,12 +121,11 @@ export const Header = () => {
               </ul>
             </li>
 
+            {/* Ministries Dropdown */}
             <li className='relative z-50 group'>
               <div className='flex items-center justify-center my-10 xl:text-lg lg:text-[1rem] font-georgia font-normal cursor-pointer'>
                 Ministries/Departments
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='h-4 w-4'>
-                  <path d="M6 9l6 6 6-6" fill="none" stroke="black" strokeWidth="2" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='h-4 w-4'><path d="M6 9l6 6 6-6" fill="none" stroke="black" strokeWidth="2" /></svg>
               </div>
               <ul className='absolute left-0 -mt-6 lg:w-44 xl:w-52 bg-neutral-100 rounded-xs shadow-lg transition-all duration-300 hidden group-hover:block space-y-4 text-md font-bold border border-neutral-200 ml-0 pt-2'>
                 <li className='text-black font-normal hover:underline underline-offset-1 pl-2'><Link to="/Personalministries">Personal ministries</Link></li>
@@ -127,15 +133,15 @@ export const Header = () => {
                 <li className='text-black font-normal hover:underline underline-offset-1 pl-2'><Link to="/AMO_ALO">AMO / ALO</Link></li>
                 <li className='text-black font-normal hover:underline underline-offset-1 pl-2'><Link to="/Health">Health Department</Link></li>
                 <li className='text-black font-normal hover:underline underline-offset-1 pl-2'><Link to="/SabbathSchool">Sabbath School</Link></li>
+                <li className='text-black font-normal hover:underline underline-offset-1 pl-2'><Link to="/Prophecy">Prophecy</Link></li>
               </ul>
             </li>
 
+            {/* Evangelism */}
             <li className='relative z-50 group'>
               <div className='flex items-center justify-center my-10 xl:text-lg lg:text-[1rem] font-georgia font-normal cursor-pointer'>
                 Evangelism
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='h-4 w-4'>
-                  <path d="M6 9l6 6 6-6" fill="none" stroke="black" strokeWidth="2" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='h-4 w-4'><path d="M6 9l6 6 6-6" fill="none" stroke="black" strokeWidth="2" /></svg>
               </div>
               <ul className='absolute left-0 -mt-6 lg:w-44 xl:w-52 bg-neutral-100 rounded-xs shadow-lg transition-all duration-300 hidden group-hover:block space-y-4 text-md font-bold border border-neutral-200 ml-0 pt-2'>
                 <li className='text-black font-normal hover:underline underline-offset-1 pl-2'><Link to="/PCM">PCM</Link></li>
@@ -143,12 +149,11 @@ export const Header = () => {
               </ul>
             </li>
 
+            {/* Resources */}
             <li className='relative z-50 group'>
               <div className='flex items-center justify-center my-10 xl:text-lg lg:text-[1rem] font-georgia font-normal cursor-pointer'>
                 Resources
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='h-4 w-4'>
-                  <path d="M6 9l6 6 6-6" fill="none" stroke="black" strokeWidth="2" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='h-4 w-4'><path d="M6 9l6 6 6-6" fill="none" stroke="black" strokeWidth="2" /></svg>
               </div>
               <ul className='absolute left-0 -mt-6 lg:w-44 xl:w-52 bg-neutral-100 rounded-xs shadow-lg transition-all duration-300 hidden group-hover:block space-y-4 text-md font-bold border border-neutral-200 ml-0 pt-2'>
                 <li className='text-black font-normal hover:underline underline-offset-1 pl-2'><Link to="/Books">Books</Link></li>
@@ -157,7 +162,16 @@ export const Header = () => {
               </ul>
             </li>
 
-            <li className='my-10 xl:text-lg lg:text-[1rem] font-georgia font-normal'><Link to="/Announcements">More</Link></li>
+            {/* More (with dropdown) */}
+            <li className='relative z-50 group'>
+              <div className='flex items-center justify-center my-10 xl:text-lg lg:text-[1rem] font-georgia font-normal cursor-pointer'>
+                More
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='h-4 w-4'><path d="M6 9l6 6 6-6" fill="none" stroke="black" strokeWidth="2" /></svg>
+              </div>
+              <ul className='absolute left-0 -mt-6 lg:w-44 xl:w-52 bg-neutral-100 rounded-xs shadow-lg transition-all duration-300 hidden group-hover:block space-y-4 text-md font-bold border border-neutral-200 ml-0 pt-2'>
+                <li className='text-black font-normal hover:underline underline-offset-1 pl-2'><Link to="/Announcements">Announcements</Link></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </nav>
