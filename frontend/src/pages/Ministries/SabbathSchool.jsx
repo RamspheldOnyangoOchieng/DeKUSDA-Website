@@ -7,13 +7,14 @@ const SabbathSchool = () => {
     <>
       <Header />
 
-      <div className="bg-white text-gray-800 px-6 py-12 max-w-5xl mx-auto">
-        {/* Heading */}
-        <h1 className="text-4xl font-bold text-center text-blue-900 mb-2">Sabbath School Department</h1>
-        <p className="text-center italic text-lg text-gray-600 mb-10">
-          "Building Faith, Deepening Fellowship, Sharing Hope"
-        </p>
+      {/* Full-width title bar */}
+      <div className="bg-blue-900 text-white text-center py-4">
+        <h1 className="text-3xl md:text-4xl font-bold">Sabbath School Department</h1>
+        <p className="italic text-lg mt-1">"Building Faith, Deepening Fellowship, Sharing Hope"</p>
+      </div>
 
+      {/* Main content */}
+      <div className="bg-white text-gray-800 px-6 py-12 md:px-20 font-sans">
         {/* Intro */}
         <section className="space-y-5 mb-12">
           <p>
@@ -35,7 +36,7 @@ const SabbathSchool = () => {
         {/* Weekly Program */}
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-blue-800 mb-4">📅 Weekly Program – Every Sabbath</h2>
-          <div className="space-y-3">
+          <div className="space-y-3 text-lg">
             <p><strong>7:50 – 8:20 AM:</strong> Morning Prayer</p>
             <p>
               <strong>8:20 – 9:00 AM:</strong> General Program – Welcome, Songs, Announcements<br />
@@ -56,7 +57,7 @@ const SabbathSchool = () => {
         {/* Midweek Program */}
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-blue-800 mb-3">📖 Midweek Study – Thursday Lesson Harmonisation</h2>
-          <p>
+          <p className="text-lg">
             Every Thursday from <strong>4:30 PM to 6:00 PM</strong>, we meet for lesson harmonisation—
             an interactive time to explore the week's topic in detail, align insights, and prepare
             spiritually for Sabbath.
@@ -66,7 +67,7 @@ const SabbathSchool = () => {
         {/* Welcome Message */}
         <section className="bg-blue-50 border border-blue-200 p-6 rounded-xl shadow-sm">
           <h2 className="text-2xl font-semibold text-blue-900 mb-4">📬 A Welcome Message from the Superintendent</h2>
-          <p className="italic mb-4">
+          <p className="italic text-lg text-gray-700">
             "Welcome to Sabbath School at DeKUT SDA Church! Whether you're new or returning, there's a
             space here for you—to learn, to share, and to grow. As young people navigating faith in a
             university environment, we need each other—and we need the Word of God even more. Come study

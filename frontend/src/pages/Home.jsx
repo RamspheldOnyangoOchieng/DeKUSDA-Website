@@ -28,6 +28,8 @@ import Dekusdamain from '../assets/Dekusdamain.jpg';
 import Fofanas from '../assets/Fofanas.jpg';
 import Pilgrims from '../assets/Pilgrims.jpg';
 import Dekusda3 from '../assets/Dekusda3.jpg';
+import Mission from '../assets/mission2.jpeg';
+
 import { Footer } from '../components/Layout/Footer';
 import { Header } from '../components/Layout/Header';
 import { Sidebar } from '../components/Layout/Sidebar';
@@ -36,7 +38,7 @@ export const Home = () => {
     const slides = [
         {
             image: Dekusdamain,
-            title: " DEKUSDA Family",
+            title: "DEKUSDA Family",
             ctaLink: "/Aboutdekusda"
         },
         {
@@ -58,8 +60,14 @@ export const Home = () => {
             image: Fofanas,
             title: "Fofana",
             ctaLink: "/About/AboutSDA"
+        },
+        {
+            image: Mission,
+            title: "Mission Emphasis",
+            ctaLink: "/About/Mission"
         }
     ];
+    
 
     const prevRef = useRef(null);
     const nextRef = useRef(null);
@@ -94,36 +102,49 @@ export const Home = () => {
                             className="xs:w-full sm: md: lg: xl:w-full xl:h-svh"
                         >
                             {slides.map((slide, index) => (
-                                <SwiperSlide key={index}>
-  <div className="flex flex-col items-center justify-center w-full h-full">
-    <img
-      src={slide.image}
-      alt={`Slide ${index + 1}`}
-      className="object-cover w-full h-[70vh] rounded-md shadow-lg"
-    />
-
-    {/* Title Badge */}
-    <div className="mt-4 px-4 py-2 bg-gradient-to-r from-primaryBlue to-darkBlue text-white rounded-full shadow-md backdrop-blur-sm text-center w-fit">
-      <h2 className="text-lg font-semibold tracking-wide">{slide.title}</h2>
-    </div>
-
-    {/* Button only for 'DeKUSDA Family' */}
-    {slide.title === "DeKUSDA Family" && (
-      <button
-        className="mt-3 px-5 py-1.5 text-sm font-medium text-white bg-primaryBlue rounded-full hover:bg-darkBlue transition duration-300"
-        onClick={() => window.location.href = slide.ctaLink}
-      >
-        Learn More
-      </button>
-    )}
-  </div>
-</SwiperSlide>
+                             <SwiperSlide key={index}>
+                             <div className="w-full flex flex-col items-center justify-center px-4">
+                               <div
+                                 className={`w-full h-[70vh] mb-4 rounded-xl shadow-xl relative overflow-hidden ${
+                                   slide.image === Mission
+                                     ? 'bg-[url("/textures/dots.svg")] bg-repeat bg-cover bg-blend-overlay bg-white/60'
+                                     : ''
+                                 }`}
+                               >
+                                 <img
+                                   src={slide.image}
+                                   alt={`Slide ${index + 1}`}
+                                   className={`w-full h-full rounded-xl transition-all duration-500 ${
+                                     slide.image === Mission ? 'object-contain' : 'object-cover'
+                                   }`}
+                                 />
+                               </div>
+                           
+                               {/* Title */}
+                               <div className="text-center w-full flex flex-col items-center space-y-2">
+                                 <h2 className="text-xl sm:text-2xl font-semibold text-white bg-gradient-to-r from-primaryBlue to-darkBlue px-6 py-2 rounded-full shadow-md">
+                                   {slide.title}
+                                 </h2>
+                           
+                                 {slide.title === "DEKUSDA Family" && (
+                                   <button
+                                     className="px-5 py-1.5 text-sm font-medium text-white bg-primaryBlue rounded-full hover:bg-darkBlue transition duration-300"
+                                     onClick={() => window.location.href = slide.ctaLink}
+                                   >
+                                     Learn More
+                                   </button>
+                                 )}
+                               </div>
+                             </div>
+                           </SwiperSlide>
+                           
 
                          
                           
 
                             ))}
                         </Swiper>
+                        
 
                         <button
                             ref={prevRef}

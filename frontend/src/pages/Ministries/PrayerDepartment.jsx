@@ -9,10 +9,10 @@ const PrayerDepartment = () => {
       <div className="w-full">
         <Header />
 
-        {/* Hero Section */}
-        <div className="relative bg-gradient-to-r from-primaryBlue to-darkBlue text-white py-20 px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Prayer Department</h1>
-          <p className="text-xl max-w-3xl mx-auto">
+        {/* Hero Section (Reduced height) */}
+        <div className="relative bg-gradient-to-r from-primaryBlue to-darkBlue text-white py-10 px-6 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">Prayer Department</h1>
+          <p className="text-lg max-w-2xl mx-auto">
             The spiritual foundation of DEKUSDA, fostering a culture of prayer and devotion
           </p>
         </div>

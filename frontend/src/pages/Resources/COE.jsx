@@ -27,9 +27,15 @@ export default function SabbathCalendar() {
     <>
       <Header />
 
-      <main className="px-6 py-10 mx-auto max-w-6xl font-sans bg-gray-50 min-h-screen">
-        <h2 className="mb-6 text-3xl font-bold text-center text-blue-900">May–August 2025 Sabbath Program</h2>
+      {/* Full-width blue title header */}
+      <div className="w-full bg-blue-900 text-white py-8 text-center">
+        <h1 className="text-3xl md:text-4xl font-bold">
+          May–August 2025 Sabbath Program
+        </h1>
+      </div>
 
+      {/* Page Content */}
+      <main className="px-6 py-10 mx-auto max-w-6xl font-sans bg-gray-50 min-h-screen">
         <div className="overflow-x-auto rounded-xl shadow-lg bg-white">
           <table className="min-w-full border border-gray-300 text-gray-800">
             <thead className="bg-blue-100 text-blue-800">

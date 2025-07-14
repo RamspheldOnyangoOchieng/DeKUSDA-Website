@@ -15,10 +15,13 @@ import Leaders2024 from './pages/About/Leadership/Leaders2024';
 // Ministries / Departments
 import PersonalMinistries from './pages/Ministries/PersonalMinistries';
 import PrayerDepartment from './pages/Ministries/PrayerDepartment';
-import AMO_ALO from './pages/Ministries/AMO_ALO'; // ✅ Properly default-exported
+import AMO_ALO from './pages/Ministries/AMO_ALO';
 import Health from './pages/Ministries/Health';
 import SabbathSchool from './pages/Ministries/SabbathSchool';
-import Prophecy from './pages/Ministries/Prophecy';
+import ProphecyDepartment from './pages/Ministries/Prophecy';
+
+
+
 
 // Evangelism
 import PCM from './pages/Evangelism/PCM';
@@ -35,8 +38,8 @@ import Sermons from './pages/Resources/Sermons';
 import Books from './pages/Resources/Books';
 
 // More Pages
-import Announcements from './pages/More/Announcements'; // ✅ Located under "More"
-import SabbathCalendar from './pages/Resources/COE'; // ✅ Reusing COE as Calendar
+import Announcements from './pages/More/Announcements';
+import SabbathCalendar from './pages/Resources/COE'; // Reusing COE for Calendar
 
 function App() {
   return (
@@ -60,7 +63,9 @@ function App() {
         <Route path="/AMO_ALO" element={<AMO_ALO />} />
         <Route path="/Health" element={<Health />} />
         <Route path="/SabbathSchool" element={<SabbathSchool />} />
-        <Route path="/Prophecy" element={<Prophecy />} />
+        <Route path="/Prophecy" element={<ProphecyDepartment />} />
+
+
 
         {/* Evangelism */}
         <Route path="/PCM" element={<PCM />} />
