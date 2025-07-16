@@ -26,7 +26,7 @@ const useTypingEffect = (text, speed = 100) => {
 };
 
 export const AboutDekusda = () => {
-  const welcomeText = 'WELCOME TO (DEKUSDA) DEDAN KIMATHI UNIVERSITY';
+  const welcomeText = 'WELCOME TO DEDAN KIMATHI UNIVERSITY(DeKUSDA)';
   const typedWelcome = useTypingEffect(welcomeText, 120);
 
   return (
@@ -62,13 +62,7 @@ export const AboutDekusda = () => {
             </blockquote>
           </div>
 
-          <div className="learn-more-container">
-            <p>
-              Would you like to learn more about SDA?{' '}
-              <Link to="/about-sda">Click here</Link>
-            </p>
-          </div>
-
+         
           <main className="main-container">
             <section id="who-we-are" className="section-container">
               <h2>ABOUT US!</h2>
@@ -122,9 +116,6 @@ export const AboutDekusda = () => {
                   <p>We serve the community — helping the needy, sharing hope and love. We also have missions
                     every year. Want to know about our upcoming mission?
                   </p>
-                  <Link to="/ministries/personalministries" className="missions-link">
-                    Click here for more
-                  </Link>
                 </div>
               </div>
             </section>
