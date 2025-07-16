@@ -13,6 +13,9 @@ export default {
         softGray: '#64748b',
         white: '#ffffff',
       },
+      fontFamily: {
+        georgia: ['Georgia', 'serif'],
+      },
     },
   },
   plugins: [],
