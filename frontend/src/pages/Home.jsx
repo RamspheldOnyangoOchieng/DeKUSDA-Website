@@ -27,7 +27,7 @@ import Collettes from '../assets/Collettes.jpg';
 import Dekusdamain from '../assets/Dekusdamain.jpg';
 import Fofanas from '../assets/Fofanas.jpg';
 import Pilgrims from '../assets/Pilgrims.jpg';
-import Dekusda3 from '../assets/Dekusda3.jpg';
+import Church from '../assets/church.jpeg';
 import Mission from '../assets/mission2.jpeg';
 
 import { Footer } from '../components/Layout/Footer';
@@ -221,7 +221,7 @@ export const Home = () => {
                                 <div className="flex justify-center">
                                     <div className="relative">
                                         <img 
-                                            src={Dekusda3} 
+                                            src={Church} 
                                             alt="DEKUSDA Church Family" 
                                             className="object-cover border-4 border-white rounded-full shadow-2xl w-80 h-80"
                                         />
