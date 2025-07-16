@@ -81,10 +81,11 @@ export const Footer = () => {
                         <h4 className="text-lg font-bold text-lightBlue mb-4">Stay Connected</h4>
                         <p className="text-sm mb-4">Follow us on our channels:</p>
                         <div className="flex space-x-4 text-2xl mb-6">
-                            <a href="#" className="hover:text-lightBlue transition-colors" title="Facebook"><AiFillFacebook /></a>
-                            <a href="#" className="hover:text-lightBlue transition-colors" title="Instagram"><AiFillInstagram /></a>
+                            <a href="https://chat.whatsapp.com/ILydxcM2OmlDT4Z0egZhNu?mode=ac_c" className="hover:text-lightBlue transition-colors" title="WhatsApp Group" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
+                            <a href="https://www.instagram.com/dekusda_church/profilecard/?igsh=MWh3NXJtcHNhM3FybA==" className="hover:text-lightBlue transition-colors" title="Instagram"><AiFillInstagram /></a>
                             <a href="#" className="hover:text-lightBlue transition-colors" title="YouTube"><AiFillYoutube /></a>
-                            <a href="#" className="hover:text-lightBlue transition-colors" title="Email"><AiOutlineMail /></a>
+                            <a href="mailto:dekusda@students.dkut.ac.ke" className="hover:text-lightBlue transition-colors" title="Email"><AiOutlineMail /></a>
+
                         </div>
                         <div className="text-sm">
                             <p className="mb-2"><strong>Emergency Contact:</strong></p>

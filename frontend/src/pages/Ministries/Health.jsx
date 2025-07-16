@@ -39,6 +39,24 @@ const HealthClassSection = () => {
         </div>
       </section>
 
+      {/* WhatsApp CTA Section */}
+      <section className="mt-12 px-4 md:px-16">
+        <div className="max-w-4xl mx-auto bg-blue-50 border-l-4 border-green-600 p-8 rounded-xl shadow-md text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-blue-800 mb-4">Join Our Health Class Community</h2>
+          <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
+            Stay connected, get reminders, share health tips, and participate in our weekly sessions through our official WhatsApp group.
+          </p>
+          <a
+            href="https://chat.whatsapp.com/GuZTzdXXMAAHBpqFTPJrqW?mode=ac_t"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-300"
+          >
+            Join WhatsApp Group
+          </a>
+        </div>
+      </section>
+
       <Footer />
     </>
   );

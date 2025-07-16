@@ -3,6 +3,7 @@ import Header from '../../components/Layout/Header';
 import Footer from '../../components/Layout/Footer';
 
 const program = [
+  { day: 'Sunday', time: '8:00 - 10:00 AM', activity: 'Bible Class' },
   { day: 'Sunday', time: '2:00 - 5:00 PM', activity: 'Choir Practice' },
   { day: 'Monday', time: '5:00 - 6:00 PM', activity: 'Prayer Meeting' },
   { day: 'Tuesday', time: '6:30 - 8:00 PM', activity: 'Family Meeting' },
@@ -13,6 +14,15 @@ const program = [
   { day: 'Friday', time: '6:30 - 8:00 PM', activity: 'Friday Vespers' },
   { day: 'Saturday', time: '7:50 AM - 6:00 PM', activity: 'Sabbath Worship' }
 ];
+
+const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+
+// Dynamic info for weekly Bible study
+const weeklyBook = {
+  book: 'True Revival',
+  chapter: 'Chapter 7',
+  leadingFamily: 'Fountains of Life Family'
+};
 
 export default function ChurchProgram() {
   return (
@@ -30,8 +40,9 @@ export default function ChurchProgram() {
       </section>
 
       {/* Main content */}
-      <main className="px-6 py-12 mx-auto max-w-5xl min-h-screen bg-gray-100 font-sans text-gray-800">
+      <main className="px-4 sm:px-6 py-12 mx-auto max-w-5xl min-h-screen bg-gray-100 font-sans text-gray-800">
         <div className="p-6 bg-white rounded-xl shadow-lg">
+
           {/* Table Section */}
           <section className="mb-12">
             <h3 className="text-2xl font-semibold text-blue-800 mb-4 border-b pb-2">
@@ -39,7 +50,7 @@ export default function ChurchProgram() {
             </h3>
             <div className="overflow-x-auto rounded-lg">
               <table className="min-w-full border border-gray-200">
-                <thead className="bg-blue-100 text-blue-900 text-left">
+                <thead className="bg-blue-200 text-blue-900 text-md uppercase tracking-wider">
                   <tr>
                     <th className="px-6 py-3 border">Day</th>
                     <th className="px-6 py-3 border">Time</th>
@@ -48,7 +59,12 @@ export default function ChurchProgram() {
                 </thead>
                 <tbody>
                   {program.map((item, idx) => (
-                    <tr key={idx} className="even:bg-gray-50 hover:bg-blue-50 transition">
+                    <tr
+                      key={idx}
+                      className={`even:bg-gray-50 hover:bg-blue-50 transition ${
+                        item.day === today ? 'bg-yellow-100 font-semibold' : ''
+                      }`}
+                    >
                       <td className="px-6 py-3 border">{item.day}</td>
                       <td className="px-6 py-3 border">{item.time}</td>
                       <td className="px-6 py-3 border">{item.activity}</td>
@@ -60,7 +76,7 @@ export default function ChurchProgram() {
           </section>
 
           {/* Mission Section */}
-          <section className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-xl shadow-sm">
+          <section className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-xl shadow-sm mb-12">
             <h3 className="text-xl font-bold text-green-800 mb-2">
               Mission Emphasis: Evangelistic Campaign to Eldoret
             </h3>
@@ -79,6 +95,23 @@ export default function ChurchProgram() {
               Every contribution helps share the Gospel.
             </p>
           </section>
+
+          {/* Weekly Bible Study Focus */}
+          <section className="bg-white border-l-4 border-purple-600 p-6 rounded-xl shadow-md">
+            <h3 className="text-xl font-bold text-purple-800 mb-4">📖 Family Bible Study Focus</h3>
+            <div className="space-y-3 text-lg">
+              <p>
+                <strong className="text-blue-800">This Week's Book & Chapter:</strong> <span className="text-gray-700">{weeklyBook.book} – {weeklyBook.chapter}</span>
+              </p>
+              <p>
+                <strong className="text-blue-800">Leading Family Group:</strong> <span className="text-gray-700">{weeklyBook.leadingFamily}</span>
+              </p>
+              <p className="text-sm italic text-gray-600">
+                Members are encouraged to read and meditate on the passage in preparation.
+              </p>
+            </div>
+          </section>
+
         </div>
       </main>
 

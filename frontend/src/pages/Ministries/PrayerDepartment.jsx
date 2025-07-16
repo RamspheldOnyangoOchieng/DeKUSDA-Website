@@ -9,7 +9,7 @@ const PrayerDepartment = () => {
       <div className="w-full">
         <Header />
 
-        {/* Hero Section (Reduced height) */}
+        {/* Hero Section */}
         <div className="relative bg-gradient-to-r from-primaryBlue to-darkBlue text-white py-10 px-6 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">Prayer Department</h1>
           <p className="text-lg max-w-2xl mx-auto">
@@ -112,7 +112,7 @@ const PrayerDepartment = () => {
             </div>
           </div>
 
-          {/* Call to Action */}
+          {/* CTA Buttons */}
           <div className="mt-12 text-center">
             <h3 className="text-2xl font-bold text-darkBlue mb-4">Join Our Prayer Community</h3>
             <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
@@ -126,6 +126,24 @@ const PrayerDepartment = () => {
                 Request Prayer
               </button>
             </div>
+          </div>
+
+          {/* WhatsApp Group Section */}
+          <div className="mt-16 max-w-4xl mx-auto bg-green-50 border-l-4 border-green-600 p-8 rounded-xl shadow-lg text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-green-800 mb-4">
+              Join the Prayer Band WhatsApp Group
+            </h3>
+            <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
+              Stay connected with fellow prayer warriors, receive updates on prayer meetings, and share intercessory requests in real-time.
+            </p>
+            <a
+              href="https://chat.whatsapp.com/Ims8N3mHbQY6uUeOJrjp8V?mode=r_t"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition duration-300"
+            >
+              Join WhatsApp Group
+            </a>
           </div>
         </div>
 

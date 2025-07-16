@@ -7,11 +7,14 @@ const ProphecyDepartment = () => {
     <>
       <Header />
 
-      <div className="bg-gray-100 py-12 px-4 md:px-20 min-h-screen font-sans text-gray-800">
-        {/* Title with full-width background */}
-        <div className="bg-blue-900 text-white text-center py-4 w-full mb-8">
+      {/* Page wrapper with white background */}
+      <div className="bg-white py-12 px-4 md:px-20 min-h-screen font-sans text-gray-800">
+        {/* Title */}
+        <div className="bg-blue-900 text-white text-center py-6 w-full mb-10 rounded-lg shadow">
           <h1 className="text-3xl md:text-4xl font-bold">Prophecy Department</h1>
-          <p className="italic text-lg">"Surely the Lord God will do nothing, but he revealeth his secret unto his servants the prophets." – Amos 3:7</p>
+          <p className="italic text-lg mt-2">
+            "Surely the Lord God will do nothing, but he revealeth his secret unto his servants the prophets." – Amos 3:7
+          </p>
         </div>
 
         {/* About */}
@@ -35,14 +38,14 @@ const ProphecyDepartment = () => {
           </ul>
         </section>
 
-        {/* Does Prophecy Matter? */}
+        {/* Why Prophecy Matters */}
         <section className="mb-10">
           <h2 className="text-2xl font-semibold text-blue-800 mb-4">Does Prophecy Matter?</h2>
-          <p className="mb-3">
+          <p className="mb-3 text-lg">
             It is evident that the world we live in is broken. Is there hope? Yes, there is hope. Through
             Bible prophecy, we receive:
           </p>
-          <blockquote className="bg-blue-50 border-l-4 border-blue-300 px-6 py-4 rounded-md italic text-blue-900">
+          <blockquote className="bg-blue-50 border-l-4 border-blue-400 px-6 py-4 rounded-md italic text-blue-900">
             “The Revelation of Jesus Christ, which God gave unto him, to shew unto his servants things
             which must shortly come to pass...” — Revelation 1:1
             <br />
@@ -63,31 +66,30 @@ const ProphecyDepartment = () => {
           </ul>
         </section>
 
-        {/* Links */}
-        <section className="mb-10">
-          <h2 className="text-2xl font-semibold text-blue-800 mb-4">Join & Explore</h2>
-          <p className="mb-2">
-            <strong>WhatsApp Group:</strong> {" "}
+        {/* Join Section */}
+        <section className="mt-16 max-w-4xl mx-auto bg-blue-50 border-l-4 border-blue-600 p-8 rounded-xl shadow-lg text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-blue-800 mb-4">Join & Explore</h2>
+          <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
+            Stay engaged with the Prophecy Department through our active learning and communication platforms.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
             <a
               href="https://chat.whatsapp.com/De8PwoUz2zE9AhDa6dL9Fw?mode=ac_t"
-              className="text-blue-600 underline"
               target="_blank"
               rel="noopener noreferrer"
+              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300"
             >
-              Click to join
+              Join WhatsApp Group
             </a>
-          </p>
-          <p>
-            <strong>Google Classroom:</strong> {" "}
             <a
               href="https://classroom.google.com/c/NzI3MjY3ODM4MDA2?cjc=ulb5z7f"
-              className="text-blue-600 underline"
               target="_blank"
               rel="noopener noreferrer"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300"
             >
-              Access resources
+              Access Google Classroom
             </a>
-          </p>
+          </div>
         </section>
       </div>
 

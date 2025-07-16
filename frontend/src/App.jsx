@@ -20,17 +20,14 @@ import Health from './pages/Ministries/Health';
 import SabbathSchool from './pages/Ministries/SabbathSchool';
 import ProphecyDepartment from './pages/Ministries/Prophecy';
 
-
-
-
-// Evangelism
-import PCM from './pages/Evangelism/PCM';
-import Evangelism from './pages/Evangelism/Evangelism';
-
 // Music Groups
 import ChurchChoir from './pages/Music/ChurchChoir';
 import DCM from './pages/Music/DCM';
 import Blissful from './pages/Music/Blissful';
+
+// Evangelism
+import PCM from './pages/Evangelism/PCM';
+import Evangelism from './pages/Evangelism/Evangelism';
 
 // Resources
 import COE from './pages/Resources/COE';
@@ -65,16 +62,14 @@ function App() {
         <Route path="/SabbathSchool" element={<SabbathSchool />} />
         <Route path="/Prophecy" element={<ProphecyDepartment />} />
 
-
+        {/* Music */}
+        <Route path="/Music/ChurchChoir" element={<ChurchChoir />} />
+        <Route path="/Music/DCM" element={<DCM />} />
+        <Route path="/Music/Blissful" element={<Blissful />} />
 
         {/* Evangelism */}
         <Route path="/PCM" element={<PCM />} />
         <Route path="/Evangelism" element={<Evangelism />} />
-
-        {/* Music Groups */}
-        <Route path="/Churchchoir" element={<ChurchChoir />} />
-        <Route path="/DCM" element={<DCM />} />
-        <Route path="/Blissful" element={<Blissful />} />
 
         {/* Resources */}
         <Route path="/COE" element={<COE />} />
