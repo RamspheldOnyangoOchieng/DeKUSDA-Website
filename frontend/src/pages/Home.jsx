@@ -177,15 +177,15 @@ export const Home = () => {
 
                             <div className="grid items-center gap-12 lg:grid-cols-2">
                                 <div className="space-y-6">
-                                    <p className="text-lg leading-relaxed text-softGray">
-                                        <span className="font-bold text-darkBlue">DEKUSDA (Dedan Kimathi University Seventh-day Adventist Church)</span> is a vibrant, student-led church located in the heart of Dedan Kimathi University. We are more than just a place of worship—we are a family rooted in Christ, driven by mission, and empowered by love.
+                                    <p className="text-lg leading-relaxed text-softGray ml-6">
+                                        <span className="font-bold text-darkBlue">DEKUSDA (Dedan Kimathi University Seventh-Day Adventist Church)</span> is a vibrant, student-led church located in the heart of Dedan Kimathi University. We are more than just a place of worship—we are a family rooted in Christ, driven by mission, and empowered by love.
                                     </p>
                                     
-                                    <p className="text-lg leading-relaxed text-softGray">
+                                    <p className="text-lg leading-relaxed text-softGray ml-6">
                                         We exist to nurture spiritual growth, foster godly friendships, and equip students to be strong ambassadors for Christ both on and off-campus. From weekly worship services, engaging Bible studies, music ministries, and community outreach—we believe in holistic spiritual transformation.
                                     </p>
                                     
-                                    <p className="text-lg leading-relaxed text-softGray">
+                                    <p className="text-lg leading-relaxed text-softGray ml-6">
                                         Everyone is welcome at DEKUSDA: students, staff, alumni, and the surrounding community. Join us as we journey together toward eternity, walking in truth, love, and the light of the everlasting Gospel.
                                     </p>
 
@@ -232,12 +232,12 @@ export const Home = () => {
                     </div>
 
                     {/* Section 3: Weekly Schedule Snapshot */}
-                    <div className="w-full bg-gradient-to-b from-lightBlue to-primaryBlue">
+                    <div className="w-full bg-gradient-to-b from-lightBlue/50 to-primaryBlue/20">
                         <div className="max-w-6xl mx-auto">
                             <div className="mb-12 text-center">
                                 <div className="flex items-center justify-center mb-4">
-                                    <AiOutlineCalendar className="w-8 h-8 mr-3 text-primaryBlue" />
-                                    <h2 className="text-4xl font-bold text-gray-800">
+                                    <AiOutlineCalendar className="w-8 h-8 mr-3 text-primaryBlue mt-7" />
+                                    <h2 className="text-4xl font-bold text-gray-800 mt-6">
                                         Our Weekly Worship & Fellowship Schedule
                                     </h2>
                                 </div>
@@ -246,13 +246,15 @@ export const Home = () => {
                                 </p>
                             </div>
 
-                            <div className="p-4 mb-8 border-l-4 rounded-r-lg bg-lightBlue border-primaryBlue">
+                            <div className="flex justify-center items-center">
+                            <div className="p-4 mb-6 border-l-4 rounded-r-lg w-80 bg-white border-primaryBlue">
                                 <div className="flex items-center">
-                                    <AiOutlineInfoCircle className="w-6 h-6 mr-3 text-primaryBlue" />
+                                    <AiOutlineInfoCircle className="w-6 h-6 mr-3  text-primaryBlue/50" />
                                     <p className="font-medium text-darkBlue">
                                         This is a Music Sabbath week.
                                     </p>
                                 </div>
+                            </div>
                             </div>
 
                             <div className="grid gap-6 mb-8 md:grid-cols-2 lg:grid-cols-3">
@@ -265,7 +267,7 @@ export const Home = () => {
                                     href="/assets/schedule.pdf" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center font-medium underline transition-colors text-primaryBlue hover:text-darkBlue"
+                                    className="inline-flex items-center font-medium underline transition-colors text-primaryBlue hover:text-darkBlue mb-6"
                                 >
                                     <AiOutlineDownload className="w-5 h-5 mr-2" />
                                     📥 Download Full Semester Schedule (PDF)
@@ -275,11 +277,11 @@ export const Home = () => {
                     </div>
 
                     {/* Section 4: Prayer Requests */}
-                    <div className="w-full bg-gradient-to-br from-lightBlue to-white py-16 px-6">
+                    <div className="w-full bg-gradient-to-b from-white to-softGray/80 py-16 px-6">
                         <div className="max-w-6xl mx-auto">
                             <div className="text-center mb-12">
                                 <div className="flex items-center justify-center mb-4">
-                                    <AiOutlineHeart className="w-8 h-8 mr-3 text-primaryBlue" />
+                                    <AiOutlineHeart className="w-8 h-8 mr-3 mt-2 text-primaryBlue" />
                                     <h2 className="text-4xl font-bold text-darkBlue">
                                         Prayer Requests
                                     </h2>
@@ -302,7 +304,7 @@ export const Home = () => {
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-gray-700 mb-2">Prayer Request*</label>
+                                            <label className="block text-gray-700 mt-6">Prayer Request*</label>
                                             <textarea 
                                                 rows="5"
                                                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryBlue focus:border-transparent"
@@ -348,9 +350,9 @@ export const Home = () => {
                             </div>
 
                             {/* Prayer Chain Callout */}
-                            <div className="mt-12 bg-primaryBlue/10 p-6 rounded-xl text-center">
+                            <div className="mt-12 bg-primaryBlue/50 p-6 rounded-xl text-center">
                                 <h3 className="text-xl font-bold text-darkBlue mb-2">Join Our Prayer Chain</h3>
-                                <p className="text-gray-700 mb-4">Commit to praying for requests daily</p>
+                                <p className="text-gray-800/90 mb-4">Commit to praying for requests daily</p>
                                 <button className="px-6 py-2 bg-primaryBlue text-white rounded-lg hover:bg-darkBlue transition-colors">
                                     Sign Up for Prayer Chain
                                 </button>

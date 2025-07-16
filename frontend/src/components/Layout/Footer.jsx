@@ -42,32 +42,36 @@ export const Footer = () => {
                     </div>
 
                     {/* Worship Schedule */}
-                    <div>
+                    <div className='xl:-ml-20'>
                         <h4 className="text-lg font-bold text-lightBlue mb-4">Worship Hours</h4>
                         <ul className="text-sm space-y-2">
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Friday Vespers: 6:30 PM
+                                Prayers: Monday & Wednesday 5:00PM - 6:00PM
+                            </li >
+                            <li className="flex items-center">    
+                            <span className="text-lightBlue mr-2"></span>
+                            Family Meeting: Tuesday 7:00PM - 8:00PM
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Sabbath School: 8:30 AM
+                                Bible Study: Wednesday 6:30PM - 8:00PM
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Divine Service: 11:00 AM
+                                Vespers: Friday 6:30PM - 8:00PM
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Afternoon Fellowship: 2:00 PM
+                                Sabbath School: 8:30AM - 10:00AM
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Midweek Prayer: Wednesday 5:00 PM - 6:00PM
+                                Divine Service: 11:00AM - 1:00PM
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Bible Study: Wednesday 6:30 PM - 8:00PM
+                                Afternoon Fellowship: 2:00PM - 6:00PM
                             </li>
                         </ul>
                     </div>
