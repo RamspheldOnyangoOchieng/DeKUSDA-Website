@@ -1,5 +1,9 @@
+
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaFacebook, FaYoutube, FaInstagram, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 import { AiFillFacebook, AiFillInstagram, AiFillYoutube, AiOutlineMail } from 'react-icons/ai';
+
 
 
 export const Footer = () => {

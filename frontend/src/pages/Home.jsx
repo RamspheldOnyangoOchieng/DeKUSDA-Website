@@ -195,17 +195,14 @@ export const Home = () => {
                                             <div className="text-sm text-softGray">Active Members</div>
                                         </div>
                                         <div className="text-center">
-                                            <div className="mb-2 text-3xl font-bold text-primaryBlue">13</div>
+                                            <div className="mb-2 text-3xl font-bold text-primaryBlue">12</div>
                                             <div className="text-sm text-softGray">Church Families</div>
                                         </div>
                                         <div className="text-center">
                                             <div className="mb-2 text-3xl font-bold text-primaryBlue">3</div>
                                             <div className="text-sm text-softGray">Choir Groups</div>
                                         </div>
-                                        <div className="text-center">
-                                            <div className="mb-2 text-3xl font-bold text-primaryBlue">47</div>
-                                            <div className="text-sm text-softGray">Baptisms (2024)</div>
-                                        </div>
+                                       
                                     </div>
 
                                     <div className="mt-8">
@@ -253,7 +250,7 @@ export const Home = () => {
                                 <div className="flex items-center">
                                     <AiOutlineInfoCircle className="w-6 h-6 mr-3 text-primaryBlue" />
                                     <p className="font-medium text-darkBlue">
-                                        This is a High Sabbath week.
+                                        This is a Music Sabbath week.
                                     </p>
                                 </div>
                             </div>
