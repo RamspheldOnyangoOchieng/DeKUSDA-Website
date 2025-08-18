@@ -29,17 +29,19 @@ export const Footer = () => {
                     </div>
 
                     {/* Quick Links */}
-                    <div>
-                        <h4 className="text-lg font-bold text-lightBlue mb-4">Quick Links</h4>
-                        <ul className="text-sm space-y-3">
-                            <li><a href="/" className="hover:text-lightBlue transition-colors">🏠 Home</a></li>
-                            <li><a href="/About/AboutDekusda" className="hover:text-lightBlue transition-colors"> About Us</a></li>
-                            <li><a href="/Ministries/PersonalMinistries" className="hover:text-lightBlue transition-colors">Ministries</a></li>
-                            <li><a href="/Resources/Sermons" className="hover:text-lightBlue transition-colors">Sermons</a></li>
-                            <li><a href="/More/Announcements" className="hover:text-lightBlue transition-colors">Announcements</a></li>
-                            <li><a href="/Resources/Books" className="hover:text-lightBlue transition-colors">Resources</a></li>
-                        </ul>
-                    </div>
+                   {/* Quick Links */}
+<div>
+  <h4 className="text-lg font-bold text-lightBlue mb-4">Quick Links</h4>
+  <ul className="text-sm space-y-3">
+    <li><Link to="/" className="hover:text-lightBlue transition-colors">🏠 Home</Link></li>
+    <li><Link to="/About/AboutDekusda" className="hover:text-lightBlue transition-colors">About Us</Link></li>
+    <li><Link to="/Ministries/PersonalMinistries" className="hover:text-lightBlue transition-colors">Ministries</Link></li>
+    <li><Link to="/Resources/Sermons" className="hover:text-lightBlue transition-colors">Sermons</Link></li>
+    <li><Link to="/More/Announcements" className="hover:text-lightBlue transition-colors">Announcements</Link></li>
+    <li><Link to="/Resources/Books" className="hover:text-lightBlue transition-colors">Resources</Link></li>
+  </ul>
+</div>
+
 
                     {/* Worship Schedule */}
                     <div className='xl:-ml-20'>

@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../../components/Layout/Header';
 import Footer from '../../components/Layout/Footer';
 import PCMLogo from '../../assets/PCMlogo.png';
-import PCMGroup from '../../assets/PCMgroup.png';
+import PCMGroup from '../../assets/PCMgroup.png';  // ✅ Import the group photo
 
 export const PCM = () => {
   return (
@@ -20,7 +20,7 @@ export const PCM = () => {
         </div>
 
         {/* Title Block */}
-        <div className="mt-24 mb-10 pl-60 text-left"> {/* padding-left to align beside logo */}
+        <div className="mt-24 mb-10 pl-60 text-left">
           <h2 className="text-4xl font-extrabold tracking-wide text-indigo-900 uppercase">
             Public Campus Ministry
           </h2>
@@ -76,7 +76,7 @@ export const PCM = () => {
         {/* Group Photo Bottom Right */}
         <div className="mt-12 flex justify-end">
           <img
-            src={PCMGroup}
+            src={PCMGroup}   // ✅ Now loading directly from src/assets
             alt="PCM Group"
             className="w-80 h-auto rounded-xl shadow-lg"
           />

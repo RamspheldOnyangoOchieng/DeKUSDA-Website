@@ -167,7 +167,7 @@ export const Header = () => {
               </ul>
             </li>
 
-            {/* Evangelism */}
+            {/* Evangelism */}r
             <li className='relative z-50 group'>
               <div className='flex items-center justify-center my-10 xl:text-lg lg:text-[1rem] font-georgia font-normal cursor-pointer'>
                 Evangelism

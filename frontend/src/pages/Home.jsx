@@ -251,7 +251,7 @@ export const Home = () => {
                                 <div className="flex items-center">
                                     <AiOutlineInfoCircle className="w-6 h-6 mr-3  text-primaryBlue/50" />
                                     <p className="font-medium text-darkBlue">
-                                        This is a Music Sabbath week.
+                                        This Sabbath is an Open Sabbath.
                                     </p>
                                 </div>
                             </div>
@@ -353,9 +353,7 @@ export const Home = () => {
                             <div className="mt-12 bg-primaryBlue/50 p-6 rounded-xl text-center">
                                 <h3 className="text-xl font-bold text-darkBlue mb-2">Join Our Prayer Chain</h3>
                                 <p className="text-gray-800/90 mb-4">Commit to praying for requests daily</p>
-                                <button className="px-6 py-2 bg-primaryBlue text-white rounded-lg hover:bg-darkBlue transition-colors">
-                                    Sign Up for Prayer Chain
-                                </button>
+                               
                             </div>
                         </div>
                     </div>
