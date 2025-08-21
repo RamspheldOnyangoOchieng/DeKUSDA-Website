@@ -16,6 +16,9 @@ export default {
       fontFamily: {
         georgia: ['Georgia', 'serif'],
       },
+      screens: {
+        'xs': '412px'
+      },
     },
   },
   plugins: [],
