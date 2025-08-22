@@ -84,26 +84,31 @@ const HealthClassSection = () => {
         <div className='bg-lightBlue sm:h-[300px] md:h-[300px] lg:h-[350px] xl:h-[500px] mt-10 border flex items-center justify-center'>
             <div className='grid grid-cols-5'>
               <img src={Food1} alt="" className='
+              xs:h-40 xs:w-24 xs:mr-2
               sm:h-44 sm:w-28 sm:mr-2 
               md:h-44 md:w-28 md:mr-2
               lg:h-72 lg:w-40 lg:mr-2
               xl:h-80 xl:w-52 xl:mr-4'/>
               <img src={Food2} alt="" className='
+              xs:h-40 xs:w-24 xs:mr-2
               sm:h-44 sm:w-28 
               md:h-44 md:w-28 md:mr-2
               lg:h-72 lg:w-40 lg:mr-2
               xl:h-80 xl:w-52'/>
               <img src={Food3} alt="" className='
+              xs:h-40 xs:w-24 xs:mr-2
               sm:h-44 sm:w-28 
               md:h-44 md:w-28 md:mr-2
               lg:h-72 lg:w-40 lg:mr-2
               xl:h-80 xl:w-52'/>
               <img src={Food4} alt="" className='
+              xs:h-40 xs:w-24 xs:mr-2
               sm:h-44 sm:w-28 
               md:h-44 md:w-28 md:mr-2
               lg:h-72 lg:w-40 lg:mr-2
               xl:h-80 xl:w-52'/>
               <img src={Food5} alt="" className='
+              xs:h-40 xs:w-24 xs:mr-2
               sm:h-44 sm:w-28 
               md:h-44 md:w-28 md:mr-2
               lg:h-72 lg:w-40 lg:mr-2
