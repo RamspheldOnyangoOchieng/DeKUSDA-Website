@@ -33,14 +33,13 @@ export const Footer = () => {
 <div>
   <h4 className="text-lg font-bold text-lightBlue mb-4">Quick Links</h4>
   <ul className="text-sm space-y-3">
-  <li><Link to="/">🏠 Home</Link></li>
-  <li><Link to="/about/dekusda">About Us</Link></li>
-  <li><Link to="/ministries/personal">Ministries</Link></li>
-  <li><Link to="/resources/sermons">Sermons</Link></li>
-  <li><Link to="/announcements">Announcements</Link></li>
-  <li><Link to="/resources/books">Resources</Link></li>
-</ul>
-
+    <li><Link to="/" className="hover:text-lightBlue transition-colors">🏠 Home</Link></li>
+    <li><Link to="/About/AboutDekusda" className="hover:text-lightBlue transition-colors">About Us</Link></li>
+    <li><Link to="/Ministries/PersonalMinistries" className="hover:text-lightBlue transition-colors">Ministries</Link></li>
+    <li><Link to="/Resources/Sermons" className="hover:text-lightBlue transition-colors">Sermons</Link></li>
+    <li><Link to="/More/Announcements" className="hover:text-lightBlue transition-colors">Announcements</Link></li>
+    <li><Link to="/Resources/Books" className="hover:text-lightBlue transition-colors">Resources</Link></li>
+  </ul>
 </div>
 
 
