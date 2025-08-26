@@ -3,7 +3,7 @@ import Header from '../../components/Layout/Header';
 import Footer from '../../components/Layout/Footer';
 
 const program = [
-  { day: 'Sunday', time: '8:00 - 10:00 AM', activity: 'Bible Class' },
+  { day: 'Sunday', time: '8:00 - 10:00 AM', activity: 'Sunday Classes' },
   { day: 'Sunday', time: '2:00 - 5:00 PM', activity: 'Choir Practice' },
   { day: 'Monday', time: '5:00 - 6:00 PM', activity: 'Prayer Meeting' },
   { day: 'Tuesday', time: '6:30 - 8:00 PM', activity: 'Family Meeting' },

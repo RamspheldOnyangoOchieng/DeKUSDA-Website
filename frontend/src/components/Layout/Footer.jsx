@@ -65,7 +65,7 @@ export const Footer = () => {
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Sabbath School: 8:30AM - 10:00AM
+                                Sabbath School: 8:20AM - 10:00AM
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
@@ -73,7 +73,7 @@ export const Footer = () => {
                             </li>
                             <li className="flex items-center">
                                 <span className="text-lightBlue mr-2"></span>
-                                Afternoon Fellowship: 2:00PM - 6:00PM
+                                Afternoon Fellowship: 2:00PM - 5:00PM
                             </li>
                         </ul>
                     </div>

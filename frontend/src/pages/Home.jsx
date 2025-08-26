@@ -191,7 +191,7 @@ export const Home = () => {
 
                                     <div className="grid grid-cols-2 gap-6 mt-8 md:grid-cols-4">
                                         <div className="text-center">
-                                            <div className="mb-2 text-3xl font-bold text-primaryBlue">350+</div>
+                                            <div className="mb-2 text-3xl font-bold text-primaryBlue">200+</div>
                                             <div className="text-sm text-softGray">Active Members</div>
                                         </div>
                                         <div className="text-center">

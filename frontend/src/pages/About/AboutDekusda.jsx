@@ -67,7 +67,7 @@ export const AboutDekusda = () => {
             <section id="who-we-are" className="section-container">
               <h2>ABOUT US!</h2>
               <p>
-                Dedan Kimathi SDA Church is a vibrant Seventh-day Adventist congregation based in Kimathi.
+                SDA Church Dedan Kimathi University  is a vibrant Seventh-day Adventist congregation based in Kimathi.
                 We are passionate about faith, fellowship, and community service.
               </p>
             </section>
