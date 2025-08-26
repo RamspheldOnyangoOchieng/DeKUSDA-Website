@@ -3,23 +3,29 @@ import Header from '../../components/Layout/Header';
 import Footer from '../../components/Layout/Footer';
 
 const sabbathEvents = [
-  { date: 'May 10', sabbathSchool: '', divineService: '', event: 'Nature Sabbath' },
-  { date: 'May 17', sabbathSchool: 'Sentinels Family', divineService: 'Echoes of Truth', event: 'E.O.T Launch' },
-  { date: 'May 24', sabbathSchool: 'Fountain of Life', divineService: 'BEREANS', event: 'Stewardship Sabbath' },
-  { date: 'May 31', sabbathSchool: 'Sabbath School Dept.', divineService: 'Sabbath School Dept.', event: 'Sabbath School Sabbath' },
-  { date: 'June 7', sabbathSchool: 'WoSE committee', divineService: 'WoSE committee', event: 'WOSE (AMO/ALO) Sabbath' },
-  { date: 'June 14', sabbathSchool: 'Doves Family', divineService: 'Media Committee', event: 'Communication Sabbath' },
-  { date: 'June 21', sabbathSchool: 'COLLETS', divineService: 'Evangelism committee', event: 'Evangelism Sabbath' },
-  { date: 'June 28', sabbathSchool: 'House of Bread', divineService: 'AMO/ALO Department', event: 'PCM Sabbath' },
-  { date: 'July 5', sabbathSchool: 'Deaconry Department', divineService: 'Deaconry Department', event: 'High Sabbath' },
-  { date: 'July 12', sabbathSchool: 'Heralds Family', divineService: 'Health Class', event: 'Health Sabbath' },
-  { date: 'July 19', sabbathSchool: 'Music Department', divineService: 'Music committee', event: 'Music Sabbath' },
-  { date: 'July 26', sabbathSchool: 'Pillars of Truth', divineService: 'Elders’ Council', event: 'Elders’ Sabbath' },
-  { date: 'Aug 2', sabbathSchool: 'Royals Family', divineService: 'Lit. Evangelism Committee', event: 'Lit. Evangelism Sabbath' },
-  { date: 'Aug 9', sabbathSchool: 'House of Bread Family', divineService: 'PILGRIMS', event: 'Staff Sabbath' },
-  { date: 'Aug 16', sabbathSchool: 'Peniel Family', divineService: 'Prophecy Class', event: 'Prophecy Sabbath' },
-  { date: 'Aug 23', sabbathSchool: 'Pearls & Goshen Family', divineService: 'FOFANA', event: 'Pastoral Sabbath' },
-  { date: 'Aug 30', sabbathSchool: 'Town Estate', divineService: 'Prayer Department', event: 'Open Sabbath' },
+  { date: '06/09/2025', sabbathSchool: '', divineService: '', event: 'Open Sabbath' },
+  { date: '13/09/2025', sabbathSchool: '', divineService: '', event: 'Handing Over' },
+  { date: '20/09/2025', sabbathSchool: '', divineService: '', event: 'Communication Sabbath' },
+  { date: '27/09/2025', sabbathSchool: '', divineService: '', event: 'High Sabbath' },
+
+  { date: '04/10/2025', sabbathSchool: '', divineService: '', event: '-' },
+  { date: '11/10/2025', sabbathSchool: '', divineService: '', event: 'Week Of Spiritual Emphasis Sabbath, Prayer Night' },
+  { date: '18/10/2025', sabbathSchool: '', divineService: '', event: 'AMO / ALO Sabbath' },
+  { date: '25/10/2025', sabbathSchool: '', divineService: '', event: 'Music Sabbath' },
+
+  { date: '01/11/2025', sabbathSchool: '', divineService: '', event: 'Literature Evangelism' },
+  { date: '08/11/2025', sabbathSchool: '', divineService: '', event: 'Associates Sabbath' },
+  { date: '15/11/2025', sabbathSchool: '', divineService: '', event: 'Health Sabbath' },
+  { date: '22/11/2025', sabbathSchool: '', divineService: '', event: '-' },
+  { date: '29/11/2025', sabbathSchool: '', divineService: '', event: '-' },
+  { date: '30/11/2025', sabbathSchool: '', divineService: '', event: 'Prayer and Fasting' },
+
+  { date: '06/12/2025', sabbathSchool: '', divineService: '', event: '-' },
+  { date: '13/12/2025', sabbathSchool: '', divineService: '', event: '-' },
+  { date: '20/12/2025', sabbathSchool: '', divineService: '', event: '-' },
+  { date: '27/12/2025', sabbathSchool: '', divineService: '', event: 'Mission Sabbath' },
+
+  { date: '03/01/2026', sabbathSchool: '', divineService: '', event: 'Mission Sabbath' },
 ];
 
 export default function SabbathCalendar() {
@@ -30,7 +36,7 @@ export default function SabbathCalendar() {
       {/* Full-width blue title header */}
       <div className="w-full bg-blue-900 text-white py-8 text-center">
         <h1 className="text-3xl md:text-4xl font-bold">
-          May–August 2025 Sabbath Program
+          Calendar of Events Draft (Tentative)
         </h1>
       </div>
 
