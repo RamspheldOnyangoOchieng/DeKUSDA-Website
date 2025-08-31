@@ -3,29 +3,29 @@ import Header from '../../components/Layout/Header';
 import Footer from '../../components/Layout/Footer';
 
 const sabbathEvents = [
-  { date: '06/09/2025', sabbathSchool: '', divineService: '', event: 'Open Sabbath' },
+  { date: '06/09/2025', sabbathSchool: '', divineService: '', event: 'OPEN SABBATH' },
   { date: '13/09/2025', sabbathSchool: '', divineService: '', event: 'Handing Over' },
   { date: '20/09/2025', sabbathSchool: '', divineService: '', event: 'Communication Sabbath' },
   { date: '27/09/2025', sabbathSchool: '', divineService: '', event: 'High Sabbath' },
 
-  { date: '04/10/2025', sabbathSchool: '', divineService: '', event: '-' },
+  { date: '04/10/2025', sabbathSchool: '', divineService: '', event: 'First Years Sabbath' },
   { date: '11/10/2025', sabbathSchool: '', divineService: '', event: 'Week Of Spiritual Emphasis Sabbath, Prayer Night' },
   { date: '18/10/2025', sabbathSchool: '', divineService: '', event: 'AMO / ALO Sabbath' },
   { date: '25/10/2025', sabbathSchool: '', divineService: '', event: 'Music Sabbath' },
 
   { date: '01/11/2025', sabbathSchool: '', divineService: '', event: 'Literature Evangelism' },
   { date: '08/11/2025', sabbathSchool: '', divineService: '', event: 'Associates Sabbath' },
-  { date: '15/11/2025', sabbathSchool: '', divineService: '', event: 'Health Sabbath' },
-  { date: '22/11/2025', sabbathSchool: '', divineService: '', event: '-' },
-  { date: '29/11/2025', sabbathSchool: '', divineService: '', event: '-' },
-  { date: '30/11/2025', sabbathSchool: '', divineService: '', event: 'Prayer and Fasting' },
+  { date: '15/11/2025', sabbathSchool: '', divineService: '', event: 'Prophecy Sabbath' },
+  { date: '22/11/2025', sabbathSchool: '', divineService: '', event: 'Finalist Sabbath' },
+  { date: '29/11/2025', sabbathSchool: '', divineService: '', event: 'Personal Ministries Sabbath' },
+  { date: '30/11/2025', sabbathSchool: '', divineService: '', event: 'Prayer and Fasting Day' },
 
-  { date: '06/12/2025', sabbathSchool: '', divineService: '', event: '-' },
-  { date: '13/12/2025', sabbathSchool: '', divineService: '', event: '-' },
-  { date: '20/12/2025', sabbathSchool: '', divineService: '', event: '-' },
-  { date: '27/12/2025', sabbathSchool: '', divineService: '', event: 'Mission Sabbath' },
+  { date: '06/12/2025', sabbathSchool: '', divineService: '', event: 'Health Sabbath' },
+  { date: '13/12/2025', sabbathSchool: '', divineService: '', event: 'Sabbath School Sabbath' },
+  { date: '20/12/2025', sabbathSchool: '', divineService: '', event: 'Stewardship Sabbath' },
+  { date: '27/12/2025', sabbathSchool: '', divineService: '', event: 'MISSION SABBATH' },
 
-  { date: '03/01/2026', sabbathSchool: '', divineService: '', event: 'Mission Sabbath' },
+  { date: '03/01/2026', sabbathSchool: '', divineService: '', event: 'MISSION SABBATH' },
 ];
 
 export default function SabbathCalendar() {
@@ -56,8 +56,8 @@ export default function SabbathCalendar() {
               {sabbathEvents.map((item, idx) => (
                 <tr key={idx} className="even:bg-gray-50 hover:bg-blue-50 transition">
                   <td className="px-6 py-3 border">{item.date}</td>
-                  <td className="px-6 py-3 border">{item.sabbathSchool || '-'}</td>
-                  <td className="px-6 py-3 border">{item.divineService || '-'}</td>
+                  <td className="px-6 py-3 border">{item.sabbathSchool || ''}</td>
+                  <td className="px-6 py-3 border">{item.divineService || ''}</td>
                   <td className="px-6 py-3 border">{item.event}</td>
                 </tr>
               ))}
