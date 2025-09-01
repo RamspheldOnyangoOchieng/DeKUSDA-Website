@@ -41,9 +41,7 @@ export const ElderMessage = () => {
             </p>
 
             <p>
-              Guided by our vision: <span className="font-bold text-blue-800">"To empower the Seventh-day Adventist students, professionals, the Church, and to heal the nation"</span>,
-              we are committed to fostering a mission-focused culture through public campus ministries, personal ministry, and
-              evangelistic outreach.
+              Guided by our vision: "To empower the Seventh-day Adventist students, professionals and the Church, to heal the nation", we are committed to fostering a mission-focused culture through public campus ministries, personal ministry, and evangelistic outreach.
             </p>
 
             <p>
