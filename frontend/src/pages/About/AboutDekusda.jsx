@@ -139,9 +139,12 @@ export const AboutDekusda = () => {
                   <a href="https://www.instagram.com/dekusda_church" target="_blank" rel="noopener noreferrer">
                     <img src={instagramIcon} alt="Instagram" className="icon" />
                   </a>
-                  <a href="https://www.youtube.com/@your_channel" target="_blank" rel="noopener noreferrer">
-                    <img src={youtubeIcon} alt="YouTube" className="icon" />
-                  </a>
+               <img
+  src={youtubeIcon}
+  alt="YouTube"
+  className="icon"
+/>
+
                 </div>
               </div>
 
