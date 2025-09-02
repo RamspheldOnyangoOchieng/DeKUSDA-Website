@@ -9,7 +9,7 @@ import choirImg from '../../assets/harmonization.jpg';
 import instagramIcon from '../../assets/instagram.png';
 import missionsImg from '../../assets/mission.jpg';
 import youtubeIcon from '../../assets/youtube.png';
-import './aboutDekusda.css';
+import './AboutDekusda.css';
 
 const useTypingEffect = (text, speed = 100) => {
   const [displayedText, setDisplayedText] = useState('');
@@ -30,7 +30,7 @@ export const AboutDekusda = () => {
   const typedWelcome = useTypingEffect(welcomeText, 120);
 
   return (
-    <div className="page-container">
+    <div className="page-container about-dekusda-page">
       <Header />
 
       <div className="main-content">
@@ -47,7 +47,7 @@ export const AboutDekusda = () => {
           </ul>
         </aside>
 
-        {/* Content */}
+        {/* Main Content */}
         <div className="content-container">
           <div className="header-container">
             <div className="welcome-image-container">
@@ -136,7 +136,7 @@ export const AboutDekusda = () => {
                 <h3>Contact Us</h3>
                 <p>Email: <a href="mailto:dekutsda@students.dkut.ac.ke">dekutsda@students.dkut.ac.ke</a></p>
                 <div className="social-icons">
-                  <a href="https://www.instagram.com/dekusda_church" target="_blank" rel="noopener noreferrer">
+                  <a href="" target="_blank" rel="noopener noreferrer">
                     <img src={instagramIcon} alt="Instagram" className="icon" />
                   </a>
                <img

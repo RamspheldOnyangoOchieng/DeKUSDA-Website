@@ -1,419 +1,314 @@
-/* AboutSDA.css */
-
-/* Base Styles */
-.page-container {
+.about-sda-page {
   display: flex;
-  min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
-  line-height: 1.6;
+  background-color: #f7f9fc;
+  color: #1a1a1a;
 }
 
-.main-content {
-  flex: 1;
-  background-color: white;
-}
-
-/* Hero Section */
-.hero-section {
-  height: 60vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  transition: background-image 1s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+/* Sidebar */
+.about-sda-page .sidebar {
+  width: 220px;
+  background-color: #003366;
   color: white;
-}
-
-.hero-section::before {
-  content: '';
-  position: absolute;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100vh;
+  position: sticky;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 60, 120, 0.6);
+  overflow-y: auto;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 800px;
-  padding: 0 20px;
-}
-
-.hero-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.church-motto {
-  font-size: 1.5rem;
-  font-style: italic;
-  margin-bottom: 0.5rem;
-}
-
-.student-call {
+.about-sda-page .sidebar h2 {
   font-size: 1.2rem;
-  font-weight: 500;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #b0c4de;
+  padding-bottom: 5px;
 }
 
-/* History Section */
-.history-section {
-  display: flex;
-  padding: 3rem 2rem;
-  gap: 2rem;
-  background-color: white;
-}
-
-.history-image-container {
-  flex: 1;
-  position: relative;
-}
-
-.history-image-container img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.year-badge {
-  position: absolute;
-  top: -15px;
-  left: -15px;
-  background-color: #0056b3;
-  color: white;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.history-video-container {
-  margin-top: 2rem;
-  background-color: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-}
-
-.history-video-container h3 {
-  margin-top: 0;
-  color: #0056b3;
-  text-align: center;
-}
-
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
-  margin-top: 1rem;
-}
-
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 4px;
-}
-
-.history-text {
-  flex: 1;
-  padding: 0 1rem;
-}
-
-.history-text h2 {
-  color: #0056b3;
-  margin-top: 0;
-  font-size: 2rem;
-}
-
-/* Q&A Section */
-.controversial-qa {
-  margin-top: 2rem;
-}
-
-.controversial-qa h3 {
-  color: #0056b3;
-  border-bottom: 2px solid #0056b3;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.qa-item {
-  margin-bottom: 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.qa-item button {
-  width: 100%;
-  padding: 1rem;
-  background-color: #f0f7ff;
-  border: none;
-  text-align: left;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  font-weight: 600;
-  color: #003366;
-  transition: background-color 0.3s;
-}
-
-.qa-item button:hover {
-  background-color: #d8e9ff;
-}
-
-.qa-item button span:last-child {
-  font-size: 1.5rem;
-}
-
-.qa-answer {
-  padding: 1rem;
-  background-color: white;
-  border-top: 1px solid #e0e0e0;
-}
-
-.qa-answer ul, .qa-answer ol {
-  padding-left: 1.5rem;
-  margin: 0.5rem 0;
-}
-
-/* Global Impact Section */
-.global-impact {
-  padding: 3rem 2rem;
-  background-color: #f0f7ff;
-  text-align: center;
-}
-
-.global-impact h2 {
-  color: #0056b3;
-  margin-top: 0;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-
-.impact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.impact-card {
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-}
-
-.impact-card:hover {
-  transform: translateY(-5px);
-}
-
-.impact-card h3 {
-  color: #0056b3;
-  margin-top: 0;
-}
-
-.impact-card p {
-  margin: 0.5rem 0;
-}
-
-.impact-card strong {
-  color: #003366;
-  font-size: 1.2rem;
-}
-
-/* Ellen White Section */
-.white-section {
-  display: flex;
-  padding: 3rem 2rem;
-  gap: 2rem;
-  background-color: white;
-}
-
-.white-portrait {
-  flex: 1;
-}
-
-.white-portrait img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.white-content {
-  flex: 1;
-}
-
-.white-content h2 {
-  color: #0056b3;
-  margin-top: 0;
-  font-size: 2rem;
-}
-
-.white-bio {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: #f0f7ff;
-  border-radius: 6px;
-}
-
-.white-bio em {
-  font-style: italic;
-  color: #003366;
-}
-
-.white-downloads {
-  margin-top: 1.5rem;
-}
-
-.download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #0056b3;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: 500;
-  transition: background-color 0.3s;
-}
-
-.download-btn:hover {
-  background-color: #003d82;
-}
-
-.download-note {
-  font-size: 0.9rem;
-  color: #666;
-  margin-top: 0.5rem;
-}
-
-.white-content button {
-  margin-top: 1rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #0056b3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.3s;
-}
-
-.white-content button:hover {
-  background-color: #003d82;
-}
-
-/* Blue Sidebar */
-.blue-sidebar {
-  width: 300px;
-  background-color: #2865a5;
-  color: white;
-  padding: 2rem;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.sda-logo-container {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.sda-logo {
-  max-width: 150px;
-  height: auto;
-  border-radius: 50%;
-  border: 3px solid white;
-}
-
-.sidebar-content h3 {
-  color: white;
-  border-bottom: 2px solid white;
-  padding-bottom: 0.5rem;
-  margin-top: 1.5rem;
-}
-
-.sidebar-facts, .sidebar-beliefs {
-  list-style-type: none;
+.about-sda-page .sidebar ul {
+  list-style: none;
   padding-left: 0;
 }
 
-.sidebar-facts li, .sidebar-beliefs li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.about-sda-page .sidebar li {
+  margin-bottom: 12px;
 }
 
-.sidebar-quote {
-  margin-top: 2rem;
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.1);
+.about-sda-page .sidebar a {
+  color: #dbe9ff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.about-sda-page .sidebar a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.about-sda-page .sidebar-note {
+  margin-top: 30px;
+  background-color: #1a3e5d;
+  padding: 10px;
   border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Main Content */
+.about-sda-page .main-content {
+  flex: 1;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+/* Hero Section */
+.about-sda-page .hero-section {
+  text-align: center;
+  background-color: #eaf3fc;
+  padding: 40px 20px;
+  margin-bottom: 30px;
+  border-radius: 6px;
+}
+
+.about-sda-page .hero-section h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.about-sda-page .church-motto {
   font-style: italic;
+  color: #555;
 }
 
-.quote-author {
-  text-align: right;
-  font-weight: 500;
-  margin-top: 0.5rem;
+.about-sda-page .student-call {
+  font-size: 1.05rem;
+  color: #2c3e50;
+  margin-top: 10px;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .page-container {
-    flex-direction: column;
-  }
-  
-  .blue-sidebar {
-    width: 100%;
-    order: -1;
-  }
-  
-  .history-section, .white-section {
-    flex-direction: column;
-  }
-  
-  .hero-content h1 {
-    font-size: 2rem;
-  }
+/* History Section */
+.about-sda-page .history-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 40px;
 }
 
+.about-sda-page .history-image-container {
+  flex: 1 1 300px;
+  position: relative;
+}
+
+.about-sda-page .history-image {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.about-sda-page .year-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #003366;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.about-sda-page .history-video-container {
+  margin-top: 15px;
+}
+
+.about-sda-page .video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.about-sda-page .video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Text content */
+.about-sda-page .history-text {
+  flex: 1 1 300px;
+}
+
+.about-sda-page .history-text h2 {
+  font-size: 1.4rem;
+  color: #003366;
+  margin-bottom: 10px;
+}
+
+/* Q&A */
+.about-sda-page .controversial-qa {
+  margin-top: 30px;
+}
+
+.about-sda-page .controversial-qa h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.about-sda-page .qa-item {
+  margin-bottom: 15px;
+}
+
+.about-sda-page .qa-question-button {
+  background-color: #f0f4f8;
+  border: 1px solid #ccc;
+  padding: 10px 12px;
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+}
+
+.about-sda-page .qa-question-button:hover {
+  background-color: #e1ecf7;
+}
+
+.about-sda-page .qa-answer {
+  background-color: #ffffff;
+  border-left: 3px solid #003366;
+  padding: 10px 15px;
+  margin-top: 5px;
+  border-radius: 4px;
+}
+
+/* Global Impact */
+.about-sda-page .global-impact {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.about-sda-page .global-impact h2 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+.about-sda-page .impact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.about-sda-page .impact-card {
+  flex: 1 1 220px;
+  background-color: #d6eaf8;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Ellen White Section */
+.about-sda-page .white-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.about-sda-page .white-portrait {
+  flex: 1 1 250px;
+}
+
+.about-sda-page .ellen-white-img {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.about-sda-page .white-content {
+  flex: 2 1 400px;
+}
+
+.about-sda-page .white-content h2 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.about-sda-page .white-bio {
+  font-size: 0.95rem;
+  color: #2e4053;
+}
+
+.about-sda-page .download-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #003366;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.about-sda-page .download-btn:hover {
+  background-color: #1a4d8f;
+}
+
+.about-sda-page .download-note {
+  font-size: 0.85rem;
+  margin-top: 5px;
+  color: #444;
+}
+
+.about-sda-page .white-extra-bio {
+  margin-top: 10px;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-left: 3px solid #003366;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+/* Mission & Structure */
+.about-sda-page .mission-structure {
+  margin-bottom: 40px;
+}
+
+.about-sda-page .mission-structure h2 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.about-sda-page .mission-structure ul {
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 1.8rem;
+  .about-sda-page {
+    flex-direction: column;
   }
-  
-  .church-motto {
-    font-size: 1.2rem;
+
+  .about-sda-page .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
   }
-  
-  .student-call {
-    font-size: 1rem;
+
+  .about-sda-page .main-content {
+    padding: 15px;
   }
-  
-  .impact-grid {
-    grid-template-columns: 1fr;
+
+  .about-sda-page .history-section,
+  .about-sda-page .white-section {
+    flex-direction: column;
+  }
+
+  .about-sda-page .impact-grid {
+    flex-direction: column;
   }
 }

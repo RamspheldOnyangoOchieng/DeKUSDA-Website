@@ -1,23 +1,18 @@
-/* Page Layout */
-.page-container {
-  display: flex;
-  flex-direction: column; /* Vertical layout */
-  min-height: 100vh;
+.about-dekusda-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #e7f0fc;
   color: #0d1b2a;
 }
 
-/* Main content (Sidebar + Content area) */
-.main-content {
+/* Layout */
+.about-dekusda-page .main-content {
   display: flex;
-  flex: 1; /* Fills available space between header and footer */
 }
 
 /* Sidebar */
-.sidebar {
+.about-dekusda-page .sidebar {
   width: 200px;
-  background-color: #0f172a; /* updated dark blue */
+  background-color: #0f172a;
   color: white;
   padding: 15px;
   position: sticky;
@@ -27,53 +22,42 @@
   border-radius: 6px;
 }
 
-.sidebar h3 {
+.about-dekusda-page .sidebar h3 {
   font-size: 1.1rem;
   margin-bottom: 10px;
   border-bottom: 1px solid #82c0ff;
   padding-bottom: 5px;
 }
 
-.sidebar ul {
+.about-dekusda-page .sidebar ul {
   list-style: none;
   padding-left: 0;
-  margin: 0;
 }
 
-.sidebar li {
+.about-dekusda-page .sidebar li {
   margin-bottom: 10px;
 }
 
-.sidebar a {
+.about-dekusda-page .sidebar a {
   color: #a9cce3;
   text-decoration: none;
   font-size: 0.95rem;
   transition: color 0.3s;
 }
 
-.sidebar a:hover {
+.about-dekusda-page .sidebar a:hover {
   color: #82c0ff;
 }
 
-/* Content Area */
-.content-container {
+/* Content */
+.about-dekusda-page .content-container {
   flex: 1;
   max-width: 800px;
   padding: 15px 20px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
 }
 
-/* Header (local content welcome banner) */
-.header-container {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-/* Updated welcome image container with full width */
-.welcome-image-container {
-  max-width: 100%;
+.about-dekusda-page .welcome-image-container {
   width: 100%;
   margin-bottom: 15px;
   border-radius: 6px;
@@ -81,31 +65,26 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* Welcome church image full width and wide aspect */
-.church-image {
+.about-dekusda-page .church-image {
   width: 100%;
-  height: auto;
-  display: block;
   object-fit: cover;
-  aspect-ratio: 3 / 1; /* wide banner look */
+  aspect-ratio: 3 / 1;
 }
 
-/* Welcome message styling */
-.welcome-message {
+.about-dekusda-page .welcome-message {
   font-size: 1.8rem;
   font-weight: bold;
   color: #154360;
   margin: 10px 0;
 }
 
-.invitation-message {
+.about-dekusda-page .invitation-message {
   font-style: italic;
   font-size: 1rem;
   color: #2e4053;
-  margin-bottom: 10px;
 }
 
-.bible-verse {
+.about-dekusda-page .bible-verse {
   font-size: 0.95rem;
   color: #1b4f72;
   border-left: 4px solid #2980b9;
@@ -114,38 +93,30 @@
   margin: 0 auto;
 }
 
-/* Learn More */
-.learn-more-container {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Section Box */
-.section-container {
-  background-color: #ffffff;
+.about-dekusda-page .section-container {
+  background-color: #fff;
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 6px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.section-container h2 {
+.about-dekusda-page .section-container h2 {
   font-size: 1.3rem;
   color: #154360;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-/* Activities Grid */
-.activities-container {
+.about-dekusda-page .activities-container {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
   justify-content: space-between;
 }
 
-.activity-card {
+.about-dekusda-page .activity-card {
   background: #d6eaf8;
-  flex: 1 1 calc(33.333% - 10px); /* 3 per row */
+  flex: 1 1 calc(33.333% - 10px);
   min-width: 220px;
   padding: 15px;
   border-radius: 6px;
@@ -153,116 +124,78 @@
   transition: transform 0.2s;
 }
 
-.activity-card:hover {
+.about-dekusda-page .activity-card:hover {
   transform: translateY(-4px);
 }
 
-.activity-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: #154360;
-}
-
-.activity-card p {
-  font-size: 0.95rem;
-  margin-bottom: 10px;
-  color: #1b2631;
-}
-
-.activity-img {
+.about-dekusda-page .activity-img {
   width: 100%;
   border-radius: 4px;
   margin-bottom: 10px;
 }
 
-/* Missions link inside activity card */
-.missions-link {
+.about-dekusda-page .missions-link {
   color: blue;
   text-decoration: underline;
   font-size: 0.95rem;
-  display: inline-block;
-  margin-top: 8px;
 }
 
-/* Map Section */
-.map-container {
+.about-dekusda-page .contact-us {
+  margin-top: 20px;
+}
+
+.about-dekusda-page .contact-us a {
+  color: #333;
+  text-decoration: none;
+}
+
+.about-dekusda-page .social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.about-dekusda-page .icon {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease;
+}
+
+.about-dekusda-page .icon:hover {
+  transform: scale(1.1);
+}
+
+.about-dekusda-page .map-container {
   margin-top: 10px;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(21, 67, 96, 0.15);
 }
 
-/* Contact Us */
-.contact-us {
-  margin-top: 20px;
-}
-
-.contact-us h3 {
-  margin-bottom: 10px;
-}
-
-.contact-us a {
-  color: #333;
-  text-decoration: none;
-}
-
-/* Social Icons */
-.social-icons {
-  display: flex;
-  gap: 15px;
-  margin-top: 10px;
-}
-
-.icon {
-  width: 30px;
-  height: 30px;
-  transition: transform 0.2s ease;
-}
-
-.icon:hover {
-  transform: scale(1.1);
-}
-
-/* Footer */
-.footer-container {
-  background-color: #154360;
-  color: white;
-  text-align: center;
-  padding: 12px 0;
-  font-size: 0.9rem;
-  border-top: 1px solid #0e2a40;
-  border-radius: 6px 6px 0 0;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
-  .sidebar {
+  .about-dekusda-page .sidebar {
     display: none;
   }
 
-  .content-container {
+  .about-dekusda-page .content-container {
     max-width: 100%;
     padding: 10px;
   }
 
-  .activities-container {
+  .about-dekusda-page .activities-container {
     flex-direction: column;
-    gap: 15px;
   }
 
-  .activity-card {
+  .about-dekusda-page .activity-card {
     width: 100%;
   }
 
-  .welcome-message {
+  .about-dekusda-page .welcome-message {
     font-size: 1.4rem;
   }
 
-  .section-container {
+  .about-dekusda-page .section-container {
     padding: 10px;
-  }
-
-  .missions-link {
-    font-size: 0.9rem;
   }
 }

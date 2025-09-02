@@ -61,7 +61,7 @@ const AboutSDA = () => {
   return (
     <>
       <Header />
-      <div className="page-container">
+      <div className="page-container about-sda-page">
         <aside className="sidebar blue-sidebar">
           <nav>
             <h2>Quick Links</h2>
