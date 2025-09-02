@@ -4,11 +4,9 @@ import './AboutSDA.css';
 import { Header } from '../../components/Layout/Header';
 import { Footer } from '../../components/Layout/Footer';
 
-import ellenWhite from '../../assets/HELLEN G WHITE.jpg';
 import logo from '../../assets/logo.jpg';
 
 const AboutSDA = () => {
-  const [showWhiteBio, setShowWhiteBio] = useState(false);
   const [activeQa, setActiveQa] = useState(null);
 
   const qaItems = [
@@ -69,7 +67,6 @@ const AboutSDA = () => {
               <li><a href="#history-section">History</a></li>
               <li><a href="#qa-section">Frequent Q&A</a></li>
               <li><a href="#global-impact">Global Impact</a></li>
-              <li><a href="#white-section">Ellen G. White</a></li>
               <li><a href="#mission-section">Mission & Structure</a></li>
             </ul>
           </nav>
@@ -156,46 +153,6 @@ const AboutSDA = () => {
                 <p>ADRA in <strong>118</strong> countries</p>
                 <p><strong>10M+</strong> served annually</p>
               </div>
-            </div>
-          </section>
-
-          <section id="white-section" className="white-section">
-            <div className="white-portrait">
-              <img src={ellenWhite} alt="Ellen G. White" className="ellen-white-img" />
-            </div>
-            <div className="white-content">
-              <h2>Ellen G. White</h2>
-              <div className="white-bio">
-                <p><em>
-                  Ellen G. White (1827-1915) was a founder of the SDA Church and is considered a prophet by
-                  the community. Her writings shape SDA beliefs and lifestyle.
-                </em></p>
-              </div>
-
-              <div className="white-downloads">
-                <a
-                  href="https://egwwritings.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="download-btn"
-                >
-                  Download Writings
-                </a>
-                <p className="download-note">Thousands of documents and books freely available.</p>
-              </div>
-
-              <button onClick={() => setShowWhiteBio(!showWhiteBio)}>
-                {showWhiteBio ? 'Hide' : 'Show'} More About Ellen White
-              </button>
-
-              {showWhiteBio && (
-                <div className="white-extra-bio">
-                  <p>
-                    Ellen White's ministry spanned over 70 years and emphasized health, education, and
-                    spiritual revival. Her legacy continues to influence millions worldwide.
-                  </p>
-                </div>
-              )}
             </div>
           </section>
 

@@ -17,7 +17,7 @@ const LiteratureMinistry = () => {
         </p>
       </div>
 
-      {/* Main Content with white background */}
+      {/* Main Content */}
       <div className="w-full bg-white">
         <main className="max-w-6xl mx-auto py-12 px-6 md:px-20 text-gray-800 font-sans">
           {/* Vision */}
@@ -93,6 +93,24 @@ const LiteratureMinistry = () => {
             <blockquote className="bg-blue-50 border-l-4 border-blue-400 px-6 py-4 rounded-lg italic text-blue-900">
               “If there is one work more important than another, it is that of getting our publications before the people.” — Ellen G. White, <em>The Publishing Ministry</em>, p. 385
             </blockquote>
+          </section>
+
+          {/* Ellen G. White Books Link Section */}
+          <section className="mb-10 text-center">
+            <h2 className="text-2xl font-semibold text-blue-800 mb-6">
+              Ellen G. White Books – Full Online Library
+            </h2>
+            <p className="max-w-2xl mx-auto mb-6 text-lg leading-relaxed">
+              Access the complete collection of Ellen G. White’s writings, books, letters, and manuscripts online through the official EGW Writings website.
+            </p>
+            <a
+              href="https://egwwritings.org/titles/books"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
+            >
+              📚 Browse All EGW Books
+            </a>
           </section>
 
           {/* How to Get Involved */}
