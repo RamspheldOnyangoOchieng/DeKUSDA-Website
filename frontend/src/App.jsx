@@ -31,7 +31,14 @@ import Evangelism from './pages/Evangelism/Evangelism';
 
 // Resources
 import COE from './pages/Resources/COE';
-import Sermons from './pages/Resources/Sermons';
+// Remove the old import
+// import TithesOfferings from './pages/Resources/TithesOfferings';
+
+// Add the new import (adjust path if your component is in a different folder)
+import TithesOfferings from './pages/Resources/TithesOfferings';
+
+
+
 import Books from './pages/Resources/Books';
 
 // More Pages
@@ -73,7 +80,9 @@ function App() {
 
         {/* Resources */}
         <Route path="/COE" element={<COE />} />
-        <Route path="/Sermons" element={<Sermons />} />
+      <Route path="/tithes-offerings" element={<TithesOfferings />} />
+
+
         <Route path="/Books" element={<Books />} />
 
         {/* More */}

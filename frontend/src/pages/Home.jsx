@@ -237,42 +237,34 @@ export const Home = () => {
                             <div className="mb-12 text-center">
                                 <div className="flex items-center justify-center mb-4">
                                     <AiOutlineCalendar className="w-8 h-8 mr-3 text-primaryBlue mt-7" />
-                                    <h2 className="text-4xl font-bold text-gray-800 mt-6">
-                                        Our Weekly Worship & Fellowship Schedule
-                                    </h2>
+                                  <div className="flex justify-center my-8">
+  <div className="bg-gradient-to-r from-primaryBlue via-darkBlue to-primaryBlue rounded-2xl shadow-lg px-8 py-6 max-w-2xl text-center">
+    <h2 className="text-3xl font-bold text-white tracking-wide mb-3">
+      This Sabbath is a Communication Sabbath
+    </h2>
+    <p className="text-white/80 font-medium mb-4">
+      Join us for a special time of worship and fellowship — see you there!
+    </p>
+<span className="inline-flex items-center gap-2 bg-white text-primaryBlue font-semibold px-5 py-2 rounded-full shadow hover:shadow-lg transition">
+  <HiOutlineLocationMarker className="w-5 h-5 text-primaryBlue" />
+  Food Science Workshop • 7:50 AM
+</span>
+
+  </div>
+</div>
+
                                 </div>
-                                <p className="text-xl text-gray-600">
-                                    "Consistent fellowship is key to spiritual growth. Come join us."
-                                </p>
+                               
                             </div>
 
-                            <div className="flex justify-center items-center">
-                            <div className="p-4 mb-6 border-l-4 rounded-r-lg w-80 bg-white border-primaryBlue">
-                                <div className="flex items-center">
-                                    <AiOutlineInfoCircle className="w-6 h-6 mr-3  text-primaryBlue/50" />
-                                    <p className="font-medium text-darkBlue">
-                                        This Sabbath is an Open Sabbath.
-                                    </p>
-                                </div>
-                            </div>
-                            </div>
+                         
 
                             <div className="grid gap-6 mb-8 md:grid-cols-2 lg:grid-cols-3">
                                 {/* Schedule cards remain the same as before */}
                                 {/* ... */}
                             </div>
 
-                            <div className="text-center">
-                                <a 
-                                    href="/assets/schedule.pdf" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center font-medium underline transition-colors text-primaryBlue hover:text-darkBlue mb-6"
-                                >
-                                    <AiOutlineDownload className="w-5 h-5 mr-2" />
-                                    📥 Download Full Semester Schedule (PDF)
-                                </a>
-                            </div>
+                            
                         </div>
                     </div>
 

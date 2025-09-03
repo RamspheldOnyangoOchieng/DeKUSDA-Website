@@ -101,7 +101,7 @@ export const Header = () => {
               <ul className="pl-4 space-y-2">
                 <li><Link to="/Books" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">Books</Link></li>
                 <li><Link to="/COE" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">COE</Link></li>
-                <li><Link to="/Sermons" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">Sermons</Link></li>
+                <li><Link to="/tithes-offerings" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">Tithes &amp; Offerings</Link></li>
               </ul>
             </details>
           </li>
@@ -167,7 +167,7 @@ export const Header = () => {
               </ul>
             </li>
 
-            {/* Evangelism */}r
+            {/* Evangelism */}
             <li className='relative z-50 group'>
               <div className='flex items-center justify-center my-10 xl:text-lg lg:text-[1rem] font-georgia font-normal cursor-pointer'>
                 Evangelism
@@ -188,7 +188,7 @@ export const Header = () => {
               <ul className='absolute left-0 -mt-6 lg:w-44 bg-neutral-100 shadow-lg hidden group-hover:block space-y-4 pt-2 border border-neutral-200'>
                 <li className='pl-2 hover:underline'><Link to="/Books">Books</Link></li>
                 <li className='pl-2 hover:underline'><Link to="/COE">COE</Link></li>
-                <li className='pl-2 hover:underline'><Link to="/Sermons">Sermons</Link></li>
+                <li className='pl-2 hover:underline'><Link to="/tithes-offerings">Tithes &amp; Offerings</Link></li>
               </ul>
             </li>
 
