@@ -8,11 +8,11 @@ export default function TithesOfferings() {
   return (
     <>
       <Header />
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 p-4">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-6 text-center border border-green-200">
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 p-4">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-6 text-center border border-blue-200">
           {/* Verse Section */}
           <div className="mb-6">
-            <h2 className="text-xl font-semibold text-green-700 mb-2">
+            <h2 className="text-xl font-semibold text-blue-700 mb-2">
               "And my God will meet all your needs according to the riches of his glory in Christ Jesus."
             </h2>
             <p className="text-sm text-gray-600 italic">— Philippians 4:19</p>
@@ -23,15 +23,17 @@ export default function TithesOfferings() {
 
           {/* Icon */}
           <div className="flex justify-center mb-4">
-            <HeartHandshake className="w-12 h-12 text-green-600" />
+            <HeartHandshake className="w-12 h-12 text-blue-600" />
           </div>
 
           {/* M-Pesa Giving Info */}
           <div className="space-y-2">
             <p className="text-lg font-bold text-gray-800">Church Tithes & Offerings</p>
-            <div className="bg-green-100 rounded-xl p-3">
-              <p className="text-sm text-gray-600">M-Pesa Number (use <span className="font-semibold">Send Money</span>):</p>
-              <p className="text-2xl font-extrabold text-green-700">0748260864</p>
+            <div className="bg-blue-100 rounded-xl p-3">
+              <p className="text-sm text-gray-600">
+                M-Pesa Number (use <span className="font-semibold">Send Money</span>):
+              </p>
+              <p className="text-2xl font-extrabold text-blue-700">0748260864</p>
               <p className="text-sm text-gray-600"> Name:</p>
               <p className="text-lg font-semibold text-gray-800">Erick Ocharo</p>
             </div>
