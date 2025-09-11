@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import {
     AiFillFacebook,
     AiFillInstagram,
@@ -17,9 +17,13 @@ import {
 } from 'react-icons/ai';
 import { FiBookOpen, FiHeart, FiMusic, FiUsers } from "react-icons/fi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
+
+// Swiper imports with all required CSS
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Autoplay, Navigation } from 'swiper/modules';
+import 'swiper/css/autoplay';
+import 'swiper/css/effect-fade';
+import { Autoplay, Navigation, EffectFade } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Bereans from '../assets/Bereans.jpg';
@@ -28,6 +32,16 @@ import Dekusdamain from '../assets/Dekusdamain.jpg';
 import Fofanas from '../assets/Fofanas.jpg';
 import Pilgrims from '../assets/Pilgrims.jpg';
 import Church from '../assets/church.jpeg';
+
+// Import Professional Section Components
+import FeaturedMinistries from '../components/sections/FeaturedMinistries';
+import UpcomingEvents from '../components/sections/UpcomingEvents';
+import WorshipServices from '../components/sections/WorshipServices';
+import LeadershipDirectory from '../components/sections/LeadershipDirectory';
+import PrayerForm from '../components/Prayer/PrayerForm';
+import OnlineGiving from '../components/sections/OnlineGiving';
+import QuickAccess from '../components/sections/QuickAccess';
+import NewsletterSignup from '../components/sections/NewsletterSignup';
 import Mission from '../assets/mission2.jpeg';
 
 import { Footer } from '../components/Layout/Footer';
@@ -68,9 +82,16 @@ export const Home = () => {
         }
     ];
     
-
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+    const swiperRef = useRef(null);
+
+    // Ensure autoplay starts properly
+    useEffect(() => {
+        if (swiperRef.current && swiperRef.current.swiper) {
+            swiperRef.current.swiper.autoplay.start();
+        }
+    }, []);
 
     return (
         <>
@@ -81,23 +102,44 @@ export const Home = () => {
                     {/* Enhanced Hero Slider Section */}
                     <div className="relative -mt-2 overflow-hidden">
                         <Swiper
+                            ref={swiperRef}
                             modules={[Autoplay, Navigation]}
-                            autoplay={{ delay: 6000, disableOnInteraction: false }}
-                            loop
+                            autoplay={{ 
+                                delay: 1500,
+                                disableOnInteraction: false,
+                                pauseOnMouseEnter: true,
+                                waitForTransition: true,
+                                stopOnLastSlide: false
+                            }}
+                            speed={1200}
+                            loop={true}
+                            loopAdditionalSlides={1}
+                            spaceBetween={0}
+                            slidesPerView={1}
+                            grabCursor={true}
+                            watchSlidesProgress={true}
+                            preloadImages={true}
+                            updateOnImagesReady={true}
+                            lazy={false}
+                            navigation={{
+                                nextEl: nextRef.current,
+                                prevEl: prevRef.current,
+                            }}
                             onSwiper={(swiper) => {
+                                // Delay navigation initialization to ensure refs are ready
                                 setTimeout(() => {
-                                    if (
-                                        prevRef.current &&
-                                        nextRef.current &&
-                                        swiper.params?.navigation
-                                    ) {
+                                    if (prevRef.current && nextRef.current) {
                                         swiper.params.navigation.prevEl = prevRef.current;
                                         swiper.params.navigation.nextEl = nextRef.current;
                                         swiper.navigation.destroy();
                                         swiper.navigation.init();
                                         swiper.navigation.update();
                                     }
-                                }, 0);
+                                }, 100);
+                            }}
+                            onInit={(swiper) => {
+                                // Ensure autoplay is active
+                                swiper.autoplay.start();
                             }}
                             className="xs:w-full sm: md: lg: xl:w-full xl:h-svh"
                         >
@@ -105,7 +147,7 @@ export const Home = () => {
                              <SwiperSlide key={index}>
                              <div className="w-full flex flex-col items-center justify-center px-4">
                                <div
-                                 className={`w-full h-[70vh] mb-4 rounded-xl shadow-xl relative overflow-hidden ${
+                                 className={`w-full h-[70vh] mb-4 rounded-xl shadow-xl relative overflow-hidden transform transition-all duration-500 ${
                                    slide.image === Mission
                                      ? 'bg-[url("/textures/dots.svg")] bg-repeat bg-cover bg-blend-overlay bg-white/60'
                                      : ''
@@ -113,22 +155,32 @@ export const Home = () => {
                                >
                                  <img
                                    src={slide.image}
-                                   alt={`Slide ${index + 1}`}
-                                   className={`w-full h-full rounded-xl transition-all duration-500 ${
+                                   alt={`${slide.title} - DeKUSDA Church`}
+                                   loading={index === 0 ? "eager" : "lazy"}
+                                   decoding="async"
+                                   fetchpriority={index === 0 ? "high" : "auto"}
+                                   className={`w-full h-full rounded-xl transition-all duration-700 ease-in-out transform hover:scale-105 ${
                                      slide.image === Mission ? 'object-contain' : 'object-cover'
                                    }`}
+                                   style={{
+                                     willChange: 'transform',
+                                     backfaceVisibility: 'hidden',
+                                     WebkitBackfaceVisibility: 'hidden'
+                                   }}
                                  />
+                                 {/* Overlay for better text visibility */}
+                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-xl"></div>
                                </div>
                            
                                {/* Title */}
                                <div className="text-center w-full flex flex-col items-center space-y-2">
-                                 <h2 className="text-xl sm:text-2xl font-semibold text-white bg-gradient-to-r from-primaryBlue to-darkBlue px-6 py-2 rounded-full shadow-md">
+                                 <h2 className="text-xl sm:text-2xl font-semibold text-white bg-gradient-to-r from-primaryBlue to-darkBlue px-6 py-2 rounded-full shadow-md transform transition-all duration-300 hover:shadow-lg hover:scale-105">
                                    {slide.title}
                                  </h2>
                            
                                  {slide.title === "DEKUSDA Family" && (
                                    <button
-                                     className="px-5 py-1.5 text-sm font-medium text-white bg-primaryBlue rounded-full hover:bg-darkBlue transition duration-300"
+                                     className="px-5 py-1.5 text-sm font-medium text-white bg-primaryBlue rounded-full hover:bg-darkBlue transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                                      onClick={() => window.location.href = slide.ctaLink}
                                    >
                                      Learn More
@@ -145,19 +197,34 @@ export const Home = () => {
                             ))}
                         </Swiper>
                         
-
+                        {/* Enhanced Navigation Buttons */}
                         <button
                             ref={prevRef}
-                            className="absolute z-10 p-3 text-white transition-all duration-300 transform -translate-y-1/2 rounded-full top-1/2 left-4 bg-darkBlue/60 hover:bg-darkBlue/80 hover:scale-110 backdrop-blur-sm"
+                            className="absolute z-20 p-4 text-white transition-all duration-300 transform -translate-y-1/2 rounded-full top-1/2 left-4 bg-darkBlue/70 hover:bg-darkBlue/90 hover:scale-110 backdrop-blur-sm shadow-lg hover:shadow-xl group"
+                            aria-label="Previous slide"
                         >
-                            &lt;
+                            <svg className="w-6 h-6 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                            </svg>
                         </button>
                         <button
                             ref={nextRef}
-                            className="absolute z-10 p-3 text-white transition-all duration-300 transform -translate-y-1/2 rounded-full top-1/2 right-4 bg-darkBlue/60 hover:bg-darkBlue/80 hover:scale-110 backdrop-blur-sm"
+                            className="absolute z-20 p-4 text-white transition-all duration-300 transform -translate-y-1/2 rounded-full top-1/2 right-4 bg-darkBlue/70 hover:bg-darkBlue/90 hover:scale-110 backdrop-blur-sm shadow-lg hover:shadow-xl group"
+                            aria-label="Next slide"
                         >
-                            &gt;
+                            <svg className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
                         </button>
+
+                        {/* Progress indicator */}
+                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20">
+                            <div className="flex space-x-2">
+                                {slides.map((_, index) => (
+                                    <div key={index} className="w-2 h-2 bg-white/50 rounded-full transition-all duration-300 hover:bg-white/80"></div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
                     {/* Section 2: About Us Snapshot */}
@@ -231,33 +298,37 @@ export const Home = () => {
                         </div>
                     </div>
 
-                    {/* Section 3: Weekly Schedule Snapshot */}
+
+
+                    {/* Section 3: Communication Sabbath */}
+                    <div className="w-full bg-gradient-to-b from-lightBlue/50 to-primaryBlue/20 py-16 px-6">
+                        <div className="max-w-6xl mx-auto">
+                            {/* Communication Sabbath Banner */}
+                            <div className="mb-12 text-center">
+                                <div className="flex justify-center mb-8">
+                                    <div className="bg-gradient-to-r from-primaryBlue via-darkBlue to-primaryBlue rounded-2xl shadow-lg px-8 py-6 max-w-2xl text-center">
+                                        <h2 className="text-3xl font-bold text-white tracking-wide mb-3">
+                                            This Sabbath is a Communication Sabbath
+                                        </h2>
+                                        <p className="text-white/80 font-medium mb-4">
+                                            Join us for a special time of worship and fellowship — see you there!
+                                        </p>
+                                        <span className="inline-flex items-center gap-2 bg-white text-primaryBlue font-semibold px-5 py-2 rounded-full shadow hover:shadow-lg transition">
+                                            <HiOutlineLocationMarker className="w-5 h-5 text-primaryBlue" />
+                                            Food Science Workshop • 7:50 AM
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Upcoming Events - Beautiful Original Component */}
+                    <UpcomingEvents />
+
+                    {/* Weekly Schedule Snapshot */}
                     <div className="w-full bg-gradient-to-b from-lightBlue/50 to-primaryBlue/20">
                         <div className="max-w-6xl mx-auto">
-                            <div className="mb-12 text-center">
-                                <div className="flex items-center justify-center mb-4">
-                                    <AiOutlineCalendar className="w-8 h-8 mr-3 text-primaryBlue mt-7" />
-                                  <div className="flex justify-center my-8">
-  <div className="bg-gradient-to-r from-primaryBlue via-darkBlue to-primaryBlue rounded-2xl shadow-lg px-8 py-6 max-w-2xl text-center">
-    <h2 className="text-3xl font-bold text-white tracking-wide mb-3">
-      This Sabbath is a Communication Sabbath
-    </h2>
-    <p className="text-white/80 font-medium mb-4">
-      Join us for a special time of worship and fellowship — see you there!
-    </p>
-<span className="inline-flex items-center gap-2 bg-white text-primaryBlue font-semibold px-5 py-2 rounded-full shadow hover:shadow-lg transition">
-  <HiOutlineLocationMarker className="w-5 h-5 text-primaryBlue" />
-  Food Science Workshop • 7:50 AM
-</span>
-
-  </div>
-</div>
-
-                                </div>
-                               
-                            </div>
-
-                         
 
                             <div className="grid gap-6 mb-8 md:grid-cols-2 lg:grid-cols-3">
                                 {/* Schedule cards remain the same as before */}
@@ -287,35 +358,12 @@ export const Home = () => {
                                 {/* Prayer Form */}
                                 <div className="bg-white p-8 rounded-xl shadow-lg border-l-4 border-primaryBlue">
                                     <h3 className="text-2xl font-bold text-darkBlue mb-6">Submit Your Request</h3>
-                                    <form className="space-y-4">
-                                        <div>
-                                            <label className="block text-gray-700 mb-2">Your Name (Optional)</label>
-                                            <input 
-                                                type="text" 
-                                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryBlue focus:border-transparent"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-gray-700 mt-6">Prayer Request*</label>
-                                            <textarea 
-                                                rows="5"
-                                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryBlue focus:border-transparent"
-                                                required
-                                            ></textarea>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input type="checkbox" id="public-request" className="mr-2" />
-                                            <label htmlFor="public-request" className="text-gray-700">
-                                                Share this request publicly on our prayer wall
-                                            </label>
-                                        </div>
-                                        <button 
-                                            type="submit"
-                                            className="w-full py-3 bg-primaryBlue text-white rounded-lg hover:bg-darkBlue transition-colors font-semibold"
-                                        >
-                                            Submit Prayer Request
-                                        </button>
-                                    </form>
+                                    <div className="[&_.bg-white]:!bg-transparent [&_.border-l-4]:!border-l-0 [&_.rounded-xl]:!rounded-none [&_.shadow-lg]:!shadow-none [&_.p-8]:!p-0 [&_h3]:!hidden">
+                                        <PrayerForm onSubmitSuccess={() => {
+                                            // Optional: You can add success handling here
+                                            console.log('Prayer request submitted successfully from home page');
+                                        }} />
+                                    </div>
                                 </div>
 
                                 {/* Recent Prayers */}
@@ -349,6 +397,14 @@ export const Home = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Professional Website Sections */}
+                    <QuickAccess />
+                    <FeaturedMinistries />
+                    <WorshipServices />
+                    <OnlineGiving />
+                    <LeadershipDirectory />
+                    <NewsletterSignup />
 
                     <Footer />
                 </div>

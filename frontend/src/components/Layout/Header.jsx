@@ -12,8 +12,8 @@ export const Header = () => {
   return (
     <>
       {/* Top Bar */}
-      <div className="bg-blue-900 h-14 -mt-6 flex items-center justify-between px-4 lg:px-0">
-        <p className="mt-5 ml-10 bg-gradient-to-r from-blue-300 to-red-300 text-transparent bg-clip-text">
+      <div className="bg-blue-900 h-14 -mt-6 flex items-center justify-center px-4 lg:px-0">
+        <p className="mt-5 bg-gradient-to-r from-blue-300 to-red-300 text-transparent bg-clip-text">
           Dedan Kimathi University SDA Church
         </p>
       </div>
@@ -64,6 +64,7 @@ export const Header = () => {
             <details>
               <summary className="cursor-pointer hover:underline underline-offset-2">Ministries/Departments</summary>
               <ul className="pl-4 space-y-2">
+                <li><Link to="/DeconaryDepartment" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">Deconary Department</Link></li>
                 <li><Link to="/Personalministries" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">Personal ministries</Link></li>
                 <li><Link to="/PrayerDepartment" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">Prayer Department</Link></li>
                 <li><Link to="/AMO_ALO" onClick={() => setIsOpen(false)} className="hover:underline underline-offset-2">AMO / ALO</Link></li>
@@ -145,6 +146,7 @@ export const Header = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className='h-4 w-4'><path d="M6 9l6 6 6-6" /></svg>
               </div>
               <ul className='absolute left-0 -mt-6 lg:w-52 bg-neutral-100 shadow-lg hidden group-hover:block space-y-4 pt-2 border border-neutral-200'>
+                <li className='pl-2 hover:underline'><Link to="/DeconaryDepartment">Deconary Department</Link></li>
                 <li className='pl-2 hover:underline'><Link to="/Personalministries">Personal ministries</Link></li>
                 <li className='pl-2 hover:underline'><Link to="/PrayerDepartment">Prayer Department</Link></li>
                 <li className='pl-2 hover:underline'><Link to="/AMO_ALO">AMO / ALO</Link></li>

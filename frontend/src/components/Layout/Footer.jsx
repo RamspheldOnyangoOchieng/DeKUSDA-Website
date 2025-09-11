@@ -39,11 +39,11 @@ export const Footer = () => {
             <h4 className="text-lg font-bold text-lightBlue mb-4">Quick Links</h4>
             <ul className="text-sm space-y-3">
               <li><Link to="/" className="hover:text-lightBlue transition-colors">🏠 Home</Link></li>
-              <li><Link to="/About/AboutDekusda" className="hover:text-lightBlue transition-colors">About Us</Link></li>
-              <li><Link to="/Ministries/PersonalMinistries" className="hover:text-lightBlue transition-colors">Ministries</Link></li>
-              <li><Link to="/Resources/TithesOfferings" className="hover:text-lightBlue transition-colors">TithesOfferings</Link></li>
-              <li><Link to="/More/Announcements" className="hover:text-lightBlue transition-colors">Announcements</Link></li>
-              <li><Link to="/Resources/Books" className="hover:text-lightBlue transition-colors">Resources</Link></li>
+              <li><Link to="/Aboutdekusda" className="hover:text-lightBlue transition-colors">About Us</Link></li>
+              <li><Link to="/Personalministries" className="hover:text-lightBlue transition-colors">Ministries</Link></li>
+              <li><Link to="/tithes-offerings" className="hover:text-lightBlue transition-colors">Tithes & Offerings</Link></li>
+              <li><Link to="/Announcements" className="hover:text-lightBlue transition-colors">Announcements</Link></li>
+              <li><Link to="/Books" className="hover:text-lightBlue transition-colors">Resources</Link></li>
             </ul>
           </div>
 
@@ -85,7 +85,7 @@ export const Footer = () => {
               <h4 className="text-sm font-semibold">Stay Connected:</h4>
               <div className="flex space-x-4 text-2xl mt-2">
                 <a href="https://chat.whatsapp.com/ILydxcM2OmlDT4Z0egZhNu?mode=ac_c" className="hover:text-lightBlue transition-colors" title="WhatsApp Group" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
-                <a href="https://www.instagram.com/dekusda_church/profilecard/?igsh=MWh3NXJtcHNhM3FybA==" className="hover:text-lightBlue transition-colors" title="Instagram"><AiFillInstagram /></a>
+                <a href="https://www.instagram.com/dekusda_church/profilecard/?igsh=MWh3NXJtcHNhM3FybA==" className="hover:text-lightBlue transition-colors" title="Instagram" target="_blank" rel="noopener noreferrer"><AiFillInstagram /></a>
                 <a href="#" className="hover:text-lightBlue transition-colors" title="YouTube"><AiFillYoutube /></a>
                 <a href="mailto:dekusda@students.dkut.ac.ke" className="hover:text-lightBlue transition-colors" title="Email"><AiOutlineMail /></a>
               </div>
@@ -107,9 +107,12 @@ export const Footer = () => {
             </p>
           </div>
           <div className="flex space-x-6 text-sm">
-            <a href="/About/AboutDekusda" className="text-gray-400 hover:text-lightBlue transition-colors">Privacy Policy</a>
-            <a href="/About/AboutDekusda" className="text-gray-400 hover:text-lightBlue transition-colors">Terms of Service</a>
-            <a href="/About/AboutDekusda" className="text-gray-400 hover:text-lightBlue transition-colors">Accessibility</a>
+            <Link to="/privacy" className="text-gray-400 hover:text-lightBlue transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="text-gray-400 hover:text-lightBlue transition-colors">Terms of Service</Link>
+            <Link to="/accessibility" className="text-gray-400 hover:text-lightBlue transition-colors">Accessibility</Link>
+            <span className="text-gray-500">|</span>
+            <Link to="/members" className="text-gray-400 hover:text-lightBlue transition-colors">Members</Link>
+            <Link to="/leaders" className="text-gray-400 hover:text-lightBlue transition-colors">Leaders</Link>
           </div>
         </div>
       </div>
