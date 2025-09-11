@@ -130,38 +130,38 @@ const OnlineGiving = ({ projects = [] }) => {
   };
 
   return (
-    <div className="w-full bg-gradient-to-b from-white to-gray-50 py-16 px-6">
+    <div className="w-full bg-gradient-to-b from-white to-gray-50 py-8 sm:py-12 lg:py-16 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
             Tithes & Offerings
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
             "Bring the whole tithe into the storehouse, that there may be food in my house" (Malachi 3:10). 
             Your faithful stewardship supports God's work at DeKUSDA and around the world.
           </p>
-          <div className="mt-6 h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+          <div className="mt-4 sm:mt-6 h-1 w-16 sm:w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Giving Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <div className="flex items-center space-x-3 mb-8">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <FaGift className="text-blue-600 text-xl" />
+            <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8">
+              <div className="flex items-center space-x-2 sm:space-x-3 mb-6 sm:mb-8">
+                <div className="bg-blue-100 p-2 sm:p-3 rounded-full">
+                  <FaGift className="text-blue-600 text-lg sm:text-xl" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-800">Give Your Tithes & Offerings</h3>
-                  <p className="text-gray-600">Support God's work through faithful stewardship</p>
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800">Give Your Tithes & Offerings</h3>
+                  <p className="text-gray-600 text-sm sm:text-base">Support God's work through faithful stewardship</p>
                 </div>
               </div>
 
               {/* Giving Fund Selection */}
-              <div className="mb-8">
-                <h4 className="text-lg font-semibold text-gray-800 mb-4">Choose a Fund</h4>
-                <div className="grid md:grid-cols-2 gap-4">
+              <div className="mb-6 sm:mb-8">
+                <h4 className="text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4">Choose a Fund</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   {givingFunds.map((fund) => {
                     const IconComponent = fund.icon;
                     
@@ -198,14 +198,14 @@ const OnlineGiving = ({ projects = [] }) => {
               </div>
 
               {/* Amount Selection */}
-              <div className="mb-8">
-                <h4 className="text-lg font-semibold text-gray-800 mb-4">Select Amount</h4>
-                <div className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-4">
+              <div className="mb-6 sm:mb-8">
+                <h4 className="text-base sm:text-lg font-semibold text-gray-800 mb-3 sm:mb-4">Select Amount</h4>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 sm:gap-3 mb-3 sm:mb-4">
                   {predefinedAmounts.map((amount) => (
                     <button
                       key={amount}
                       onClick={() => handleAmountSelect(amount)}
-                      className={`p-3 rounded-lg border-2 font-semibold transition-all ${
+                      className={`p-2 sm:p-3 rounded-lg border-2 font-semibold transition-all text-sm sm:text-base ${
                         selectedAmount === amount
                           ? 'border-blue-500 bg-blue-50 text-blue-600'
                           : 'border-gray-200 hover:border-blue-300 text-gray-700'

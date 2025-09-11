@@ -145,7 +145,7 @@ export const Home = () => {
     return (
         <>
             <div className='flex'>
-                <div className='w-[85%]'>
+                <div className='w-full lg:w-[85%]'>
                     <Header />
                     
                     {/* Enhanced Hero Slider Section */}
@@ -194,9 +194,9 @@ export const Home = () => {
                         >
                             {slides.map((slide, index) => (
                              <SwiperSlide key={slide.id || index}>
-                             <div className="w-full flex flex-col items-center justify-center px-4">
+                             <div className="w-full flex flex-col items-center justify-center px-2 sm:px-4">
                                <div
-                                 className={`w-full h-[70vh] mb-4 rounded-xl shadow-xl relative overflow-hidden transform transition-all duration-500 ${
+                                 className={`w-full h-[50vh] sm:h-[60vh] lg:h-[70vh] mb-4 rounded-xl shadow-xl relative overflow-hidden transform transition-all duration-500 ${
                                    slide.title === "Mission Emphasis"
                                      ? 'bg-[url("/textures/dots.svg")] bg-repeat bg-cover bg-blend-overlay bg-white/60'
                                      : ''
@@ -237,13 +237,13 @@ export const Home = () => {
                            
                                {/* Title */}
                                <div className="text-center w-full flex flex-col items-center space-y-2">
-                                 <h2 className="text-xl sm:text-2xl font-semibold text-white bg-gradient-to-r from-primaryBlue to-darkBlue px-6 py-2 rounded-full shadow-md transform transition-all duration-300 hover:shadow-lg hover:scale-105">
+                                 <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white bg-gradient-to-r from-primaryBlue to-darkBlue px-4 sm:px-6 py-2 rounded-full shadow-md transform transition-all duration-300 hover:shadow-lg hover:scale-105">
                                    {slide.title}
                                  </h2>
                            
                                  {slide.cta_text && (
                                    <button
-                                     className="px-5 py-1.5 text-sm font-medium text-white bg-primaryBlue rounded-full hover:bg-darkBlue transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                                     className="px-4 sm:px-5 py-1.5 text-xs sm:text-sm font-medium text-white bg-primaryBlue rounded-full hover:bg-darkBlue transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
                                      onClick={() => window.location.href = slide.cta_link || slide.ctaLink}
                                    >
                                      {slide.cta_text || 'Learn More'}
@@ -263,28 +263,28 @@ export const Home = () => {
                         {/* Enhanced Navigation Buttons */}
                         <button
                             ref={prevRef}
-                            className="absolute z-20 p-4 text-white transition-all duration-300 transform -translate-y-1/2 rounded-full top-1/2 left-4 bg-darkBlue/70 hover:bg-darkBlue/90 hover:scale-110 backdrop-blur-sm shadow-lg hover:shadow-xl group"
+                            className="absolute z-20 p-2 sm:p-3 lg:p-4 text-white transition-all duration-300 transform -translate-y-1/2 rounded-full top-1/2 left-2 sm:left-4 bg-darkBlue/70 hover:bg-darkBlue/90 hover:scale-110 backdrop-blur-sm shadow-lg hover:shadow-xl group"
                             aria-label="Previous slide"
                         >
-                            <svg className="w-6 h-6 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 transition-transform duration-300 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                             </svg>
                         </button>
                         <button
                             ref={nextRef}
-                            className="absolute z-20 p-4 text-white transition-all duration-300 transform -translate-y-1/2 rounded-full top-1/2 right-4 bg-darkBlue/70 hover:bg-darkBlue/90 hover:scale-110 backdrop-blur-sm shadow-lg hover:shadow-xl group"
+                            className="absolute z-20 p-2 sm:p-3 lg:p-4 text-white transition-all duration-300 transform -translate-y-1/2 rounded-full top-1/2 right-2 sm:right-4 bg-darkBlue/70 hover:bg-darkBlue/90 hover:scale-110 backdrop-blur-sm shadow-lg hover:shadow-xl group"
                             aria-label="Next slide"
                         >
-                            <svg className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
                         </button>
 
                         {/* Progress indicator */}
-                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20">
-                            <div className="flex space-x-2">
+                        <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 z-20">
+                            <div className="flex space-x-1 sm:space-x-2">
                                 {slides.map((_, index) => (
-                                    <div key={index} className="w-2 h-2 bg-white/50 rounded-full transition-all duration-300 hover:bg-white/80"></div>
+                                    <div key={index} className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/50 rounded-full transition-all duration-300 hover:bg-white/80"></div>
                                 ))}
                             </div>
                         </div>
@@ -292,52 +292,56 @@ export const Home = () => {
 
                     {/* Section 2: About Us Snapshot */}
                     <div className="w-full bg-white">
-                        <div className="max-w-6xl mx-auto">
-                            <div className="mb-12 text-center">
-                                <div className="flex items-center justify-center mb-4">
-                                    <AiOutlineCheckCircle className="w-8 h-8 mr-3 text-primaryBlue" />
-                                    <h2 className="text-4xl font-bold text-darkBlue">
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+                            <div className="mb-8 sm:mb-12 text-center">
+                                <div className="flex flex-col sm:flex-row items-center justify-center mb-4">
+                                    <AiOutlineCheckCircle className="w-6 h-6 sm:w-8 sm:h-8 mb-2 sm:mb-0 sm:mr-3 text-primaryBlue" />
+                                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-darkBlue">
                                         {getContent('about_us', 'Who We Are – A Christ-Centered Family at DeKUT').title}
                                     </h2>
                                 </div>
-                                <p className="text-xl italic text-softGray">
+                                <p className="text-lg sm:text-xl italic text-softGray px-4">
                                     "You are the light of the world. A city on a hill cannot be hidden." – Matthew 5:14
                                 </p>
                             </div>
 
-                            <div className="grid items-center gap-12 lg:grid-cols-2">
-                                <div className="space-y-6">
-                                    <p className="text-lg leading-relaxed text-softGray ml-6">
+                            <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2">
+                                <div className="space-y-4 sm:space-y-6">
+                                    <p className="text-base sm:text-lg leading-relaxed text-softGray px-4 sm:ml-6">
                                         {getContent('about_us', 'DEKUSDA (Dedan Kimathi University Seventh-Day Adventist Church) is a vibrant, student-led church located in the heart of Dedan Kimathi University. We are more than just a place of worship—we are a family rooted in Christ, driven by mission, and empowered by love.').content}
                                     </p>
                                     
-                                    <p className="text-lg leading-relaxed text-softGray ml-6">
+                                    <p className="text-base sm:text-lg leading-relaxed text-softGray px-4 sm:ml-6">
                                         We exist to nurture spiritual growth, foster godly friendships, and equip students to be strong ambassadors for Christ both on and off-campus. From weekly worship services, engaging Bible studies, music ministries, and community outreach—we believe in holistic spiritual transformation.
                                     </p>
                                     
-                                    <p className="text-lg leading-relaxed text-softGray ml-6">
+                                    <p className="text-base sm:text-lg leading-relaxed text-softGray px-4 sm:ml-6">
                                         {getContent('welcome_message', 'Everyone is welcome at DEKUSDA: students, staff, alumni, and the surrounding community. Join us as we journey together toward eternity, walking in truth, love, and the light of the everlasting Gospel.').content}
                                     </p>
 
-                                    <div className="grid grid-cols-2 gap-6 mt-8 md:grid-cols-4">
+                                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-6 sm:mt-8 px-4 sm:px-0">
                                         <div className="text-center">
-                                            <div className="mb-2 text-3xl font-bold text-primaryBlue">200+</div>
-                                            <div className="text-sm text-softGray">Active Members</div>
+                                            <div className="mb-1 sm:mb-2 text-2xl sm:text-3xl font-bold text-primaryBlue">200+</div>
+                                            <div className="text-xs sm:text-sm text-softGray">Active Members</div>
                                         </div>
                                         <div className="text-center">
-                                            <div className="mb-2 text-3xl font-bold text-primaryBlue">12</div>
-                                            <div className="text-sm text-softGray">Church Families</div>
+                                            <div className="mb-1 sm:mb-2 text-2xl sm:text-3xl font-bold text-primaryBlue">12</div>
+                                            <div className="text-xs sm:text-sm text-softGray">Church Families</div>
                                         </div>
                                         <div className="text-center">
-                                            <div className="mb-2 text-3xl font-bold text-primaryBlue">3</div>
-                                            <div className="text-sm text-softGray">Choir Groups</div>
+                                            <div className="mb-1 sm:mb-2 text-2xl sm:text-3xl font-bold text-primaryBlue">3</div>
+                                            <div className="text-xs sm:text-sm text-softGray">Choir Groups</div>
+                                        </div>
+                                        <div className="text-center">
+                                            <div className="mb-1 sm:mb-2 text-2xl sm:text-3xl font-bold text-primaryBlue">15+</div>
+                                            <div className="text-xs sm:text-sm text-softGray">Ministries</div>
                                         </div>
                                        
                                     </div>
 
-                                    <div className="mt-8">
+                                    <div className="mt-6 sm:mt-8 text-center sm:text-left px-4 sm:px-0">
                                         <button 
-                                            className="px-8 py-3 font-semibold text-white transition-all duration-300 transform rounded-lg shadow-lg bg-primaryBlue hover:bg-darkBlue hover:scale-105"
+                                            className="px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white transition-all duration-300 transform rounded-lg shadow-lg bg-primaryBlue hover:bg-darkBlue hover:scale-105"
                                             onClick={() => window.location.href = getContent('about_us').button_link || '/Aboutdekusda'}
                                         >
                                             {getContent('about_us').button_text || 'Learn More About Our Church'}
@@ -345,14 +349,14 @@ export const Home = () => {
                                     </div>
                                 </div>
 
-                                <div className="flex justify-center">
+                                <div className="flex justify-center mt-8 lg:mt-0">
                                     <div className="relative">
                                         <img 
                                             src={Church} 
                                             alt="DEKUSDA Church Family" 
-                                            className="object-cover border-4 border-white rounded-full shadow-2xl w-80 h-80"
+                                            className="object-cover border-4 border-white rounded-full shadow-2xl w-64 h-64 sm:w-80 sm:h-80"
                                         />
-                                        <div className="absolute px-4 py-2 text-sm font-bold text-white rounded-full -bottom-4 -right-4 bg-primaryBlue">
+                                        <div className="absolute px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm font-bold text-white rounded-full -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 bg-primaryBlue">
                                             Join Our Family
                                         </div>
                                     </div>
@@ -364,19 +368,19 @@ export const Home = () => {
 
 
                     {/* Section 3: Communication Sabbath */}
-                    <div className="w-full bg-gradient-to-b from-lightBlue/50 to-primaryBlue/20 py-16 px-6">
+                    <div className="w-full bg-gradient-to-b from-lightBlue/50 to-primaryBlue/20 py-8 sm:py-12 lg:py-16 px-4 sm:px-6">
                         <div className="max-w-6xl mx-auto">
                             {/* Communication Sabbath Banner */}
-                            <div className="mb-12 text-center">
-                                <div className="flex justify-center mb-8">
-                                    <div className="bg-gradient-to-r from-primaryBlue via-darkBlue to-primaryBlue rounded-2xl shadow-lg px-8 py-6 max-w-2xl text-center">
-                                        <h2 className="text-3xl font-bold text-white tracking-wide mb-3">
+                            <div className="mb-8 sm:mb-12 text-center">
+                                <div className="flex justify-center mb-6 sm:mb-8">
+                                    <div className="bg-gradient-to-r from-primaryBlue via-darkBlue to-primaryBlue rounded-2xl shadow-lg px-4 sm:px-6 lg:px-8 py-4 sm:py-6 max-w-2xl text-center">
+                                        <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-wide mb-2 sm:mb-3">
                                             This Sabbath is a Communication Sabbath
                                         </h2>
-                                        <p className="text-white/80 font-medium mb-4">
+                                        <p className="text-white/80 font-medium mb-3 sm:mb-4 text-sm sm:text-base">
                                             Join us for a special time of worship and fellowship — see you there!
                                         </p>
-                                        <span className="inline-flex items-center gap-2 bg-white text-primaryBlue font-semibold px-5 py-2 rounded-full shadow hover:shadow-lg transition">
+                                        <span className="inline-flex items-center gap-2 bg-white text-primaryBlue font-semibold px-3 sm:px-5 py-1 sm:py-2 rounded-full shadow hover:shadow-lg transition text-sm sm:text-base">
                                             <HiOutlineLocationMarker className="w-5 h-5 text-primaryBlue" />
                                             Food Science Workshop • 7:50 AM
                                         </span>
@@ -471,7 +475,9 @@ export const Home = () => {
 
                     <Footer />
                 </div>
-                <Sidebar />
+                <div className="hidden lg:block">
+                    <Sidebar />
+                </div>
             </div>
         </>
     );

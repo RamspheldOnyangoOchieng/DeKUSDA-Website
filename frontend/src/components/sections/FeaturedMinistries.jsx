@@ -82,48 +82,48 @@ const FeaturedMinistries = () => {
   ];
 
   return (
-    <div className="w-full bg-gradient-to-b from-gray-50 to-white py-16 px-6">
+    <div className="w-full bg-gradient-to-b from-gray-50 to-white py-8 sm:py-12 lg:py-16 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-darkBlue mb-4">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-darkBlue mb-3 sm:mb-4">
             Our Active Ministries & Departments
           </h2>
-          <p className="text-xl text-softGray max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-softGray max-w-3xl mx-auto px-4">
             Discover ways to serve, grow, and connect through our diverse ministry opportunities at 
             Dedan Kimathi University SDA Church. Every student and member has a place to use their gifts for God's glory.
           </p>
-          <div className="mt-6 h-1 w-24 bg-primaryBlue mx-auto rounded-full"></div>
+          <div className="mt-4 sm:mt-6 h-1 w-16 sm:w-24 bg-primaryBlue mx-auto rounded-full"></div>
         </div>
 
         {/* Ministries Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
           {ministries.map((ministry, index) => (
             <div
               key={index}
               className="group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100"
             >
               {/* Ministry Card Header */}
-              <div className="bg-primaryBlue p-6 text-white">
-                <div className="flex items-center justify-between mb-4">
-                  <ministry.icon className="text-4xl text-lightBlue" />
+              <div className="bg-primaryBlue p-4 sm:p-6 text-white">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
+                  <ministry.icon className="text-3xl sm:text-4xl text-lightBlue" />
                   <div className="text-right">
-                    <div className="text-sm opacity-90">{ministry.members}</div>
+                    <div className="text-xs sm:text-sm opacity-90">{ministry.members}</div>
                     <div className="text-xs opacity-75">{ministry.meetingTime}</div>
                   </div>
                 </div>
-                <h3 className="text-xl font-bold">{ministry.title}</h3>
+                <h3 className="text-lg sm:text-xl font-bold">{ministry.title}</h3>
               </div>
 
               {/* Ministry Card Body */}
-              <div className="p-6">
-                <p className="text-softGray leading-relaxed mb-6">
+              <div className="p-4 sm:p-6">
+                <p className="text-softGray leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
                   {ministry.description}
                 </p>
                 
                 <button 
                   onClick={() => window.location.href = ministry.link}
-                  className="group flex items-center justify-between w-full px-4 py-3 bg-gray-50 hover:bg-lightBlue/20 text-darkBlue hover:text-primaryBlue rounded-lg transition-all duration-200"
+                  className="group flex items-center justify-between w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-50 hover:bg-lightBlue/20 text-darkBlue hover:text-primaryBlue rounded-lg transition-all duration-200 text-sm sm:text-base"
                 >
                   <span className="font-medium">Learn More</span>
                   <AiOutlineArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -134,9 +134,9 @@ const FeaturedMinistries = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center bg-primaryBlue text-white p-8 rounded-2xl">
-          <h3 className="text-2xl font-bold mb-4">Ready to Get Involved?</h3>
-          <p className="text-lightBlue mb-6 max-w-2xl mx-auto">
+        <div className="text-center bg-primaryBlue text-white p-4 sm:p-6 lg:p-8 rounded-2xl">
+          <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Ready to Get Involved?</h3>
+          <p className="text-lightBlue mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base px-4">
             Join one of our ministries and discover your purpose in God's kingdom. 
             Every gift, every talent, every heart matters in our university church family.
           </p>

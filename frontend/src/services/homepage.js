@@ -1,4 +1,4 @@
-import { API } from './api';
+import API from './api';
 
 const homepageService = {
   // Get all homepage data in one request

@@ -167,25 +167,25 @@ const UpcomingEvents = () => {
   };
 
   return (
-    <div className="w-full bg-white py-16 px-6">
+    <div className="w-full bg-white py-8 sm:py-12 lg:py-16 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4">
             Upcoming Events & Programs
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
             Stay connected with our church family through our exciting upcoming events, 
             programs, and fellowship opportunities.
           </p>
-          <div className="mt-6 h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+          <div className="mt-4 sm:mt-6 h-1 w-16 sm:w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
 
         {/* Featured Events Slider */}
-        <div className="mb-16">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl font-bold text-gray-800">Featured Events</h3>
-            <div className="flex items-center space-x-4">
+        <div className="mb-12 sm:mb-16">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4 sm:gap-0">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-800">Featured Events</h3>
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <button 
                 onClick={prevSlide}
                 className="p-2 bg-blue-100 hover:bg-blue-200 text-blue-600 rounded-full transition-colors"
@@ -202,7 +202,7 @@ const UpcomingEvents = () => {
           </div>
 
           <div 
-            className="relative overflow-hidden rounded-2xl"
+            className="relative overflow-hidden rounded-xl sm:rounded-2xl"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
@@ -212,7 +212,7 @@ const UpcomingEvents = () => {
             >
               {featuredEvents.map((event, index) => (
                 <div key={index} className="w-full flex-shrink-0">
-                  <div className="relative h-96 bg-gradient-to-r from-gray-900 to-gray-700 overflow-hidden">
+                  <div className="relative h-64 sm:h-80 lg:h-96 bg-gradient-to-r from-gray-900 to-gray-700 overflow-hidden">
                     <img 
                       src={event.image} 
                       alt={event.title}
@@ -222,37 +222,37 @@ const UpcomingEvents = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     
-                    <div className="relative h-full flex items-end p-8">
-                      <div className="text-white max-w-2xl">
-                        <div className="flex items-center space-x-4 mb-4">
-                          <span className={`px-3 py-1 ${getCategoryColor(event.category)} text-white text-sm font-medium rounded-full`}>
+                    <div className="relative h-full flex items-end p-4 sm:p-6 lg:p-8">
+                      <div className="text-white max-w-full sm:max-w-2xl">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-3 sm:mb-4">
+                          <span className={`px-2 sm:px-3 py-1 ${getCategoryColor(event.category)} text-white text-xs sm:text-sm font-medium rounded-full`}>
                             {event.category}
                           </span>
-                          <span className="text-blue-200 text-sm">
+                          <span className="text-blue-200 text-xs sm:text-sm">
                             {event.attendees}
                           </span>
                         </div>
                         
-                        <h4 className="text-3xl font-bold mb-3">{event.title}</h4>
-                        <p className="text-gray-200 text-lg mb-4">{event.description}</p>
+                        <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3">{event.title}</h4>
+                        <p className="text-gray-200 text-sm sm:text-base lg:text-lg mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-none">{event.description}</p>
                         
-                        <div className="flex flex-wrap items-center gap-6 mb-6">
+                        <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-3 sm:gap-6 mb-4 sm:mb-6">
                           <div className="flex items-center space-x-2">
-                            <FaCalendarAlt className="text-blue-400" />
-                            <span>{formatDate(event.date)}</span>
+                            <FaCalendarAlt className="text-blue-400 text-sm" />
+                            <span className="text-sm sm:text-base">{formatDate(event.date)}</span>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <FaClock className="text-blue-400" />
-                            <span>{event.time}</span>
+                            <FaClock className="text-blue-400 text-sm" />
+                            <span className="text-sm sm:text-base">{event.time}</span>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <FaMapMarkerAlt className="text-blue-400" />
-                            <span>{event.location}</span>
+                            <FaMapMarkerAlt className="text-blue-400 text-sm" />
+                            <span className="text-sm sm:text-base truncate">{event.location}</span>
                           </div>
                         </div>
 
                         {event.register && (
-                          <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-semibold transition-colors">
                             Register Now
                           </button>
                         )}
@@ -265,12 +265,12 @@ const UpcomingEvents = () => {
             
             {/* Slide Indicators */}
             {featuredEvents.length > 1 && (
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-1 sm:space-x-2">
                 {featuredEvents.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                       index === currentSlide 
                         ? 'bg-white scale-110' 
                         : 'bg-white/50 hover:bg-white/75'
@@ -283,19 +283,19 @@ const UpcomingEvents = () => {
         </div>
 
         {/* All Events Grid */}
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl font-bold text-gray-800">All Upcoming Events</h3>
-            <button className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium">
+        <div className="mb-8 sm:mb-12">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-800">All Upcoming Events</h3>
+            <button className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium text-sm sm:text-base">
               <span>View Full Calendar</span>
               <AiOutlineArrowRight />
             </button>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {events.slice(0, 6).map((event, index) => (
               <div key={index} className="bg-white border border-gray-200 rounded-xl hover:shadow-lg transition-shadow overflow-hidden">
-                <div className="h-48 bg-gray-200 overflow-hidden">
+                <div className="h-40 sm:h-48 bg-gray-200 overflow-hidden">
                   <img 
                     src={event.image} 
                     alt={event.title}
@@ -303,38 +303,38 @@ const UpcomingEvents = () => {
                   />
                 </div>
                 
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <div className="flex items-center justify-between mb-3">
                     <span className={`px-2 py-1 ${getCategoryColor(event.category)} text-white text-xs font-medium rounded`}>
                       {event.category}
                     </span>
-                    <span className="text-gray-500 text-sm">{event.attendees}</span>
+                    <span className="text-gray-500 text-xs sm:text-sm">{event.attendees}</span>
                   </div>
                   
-                  <h4 className="text-lg font-bold text-gray-800 mb-2">{event.title}</h4>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">{event.description}</p>
+                  <h4 className="text-base sm:text-lg font-bold text-gray-800 mb-2">{event.title}</h4>
+                  <p className="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">{event.description}</p>
                   
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <FaCalendarAlt className="mr-2 text-blue-500" />
+                  <div className="space-y-1 sm:space-y-2 mb-3 sm:mb-4">
+                    <div className="flex items-center text-gray-600 text-xs sm:text-sm">
+                      <FaCalendarAlt className="mr-2 text-blue-500 text-xs" />
                       {formatDate(event.date)}
                     </div>
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <FaClock className="mr-2 text-blue-500" />
+                    <div className="flex items-center text-gray-600 text-xs sm:text-sm">
+                      <FaClock className="mr-2 text-blue-500 text-xs" />
                       {event.time}
                     </div>
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <FaMapMarkerAlt className="mr-2 text-blue-500" />
-                      {event.location}
+                    <div className="flex items-center text-gray-600 text-xs sm:text-sm">
+                      <FaMapMarkerAlt className="mr-2 text-blue-500 text-xs" />
+                      <span className="truncate">{event.location}</span>
                     </div>
                   </div>
 
-                  <div className="flex space-x-2">
-                    <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors">
+                  <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                    <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-colors">
                       Learn More
                     </button>
                     {event.register && (
-                      <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors">
+                      <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-colors">
                         Register
                       </button>
                     )}

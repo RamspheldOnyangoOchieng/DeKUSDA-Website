@@ -19,12 +19,12 @@ export const Header = () => {
       </div>
 
       {/* MENU label and hamburger */}
-      <div className="flex xs:mb-2 sm:mb-2 md:mb-2">
-        <div className="xs:block sm:block md:block lg:hidden xl:hidden p-4 font-georgia text-neutral-500 xs:ml-[250px] sm:ml-[420px] md:ml-[520px]">
+      <div className="flex justify-between items-center px-4 mb-2 lg:hidden">
+        <div className="text-neutral-500 font-georgia">
           MENU
         </div>
         <button
-          className="block lg:hidden z-50 focus:outline-none"
+          className="z-50 focus:outline-none p-2"
           onClick={() => setIsOpen(!isOpen)}
         >
           <div className="w-8 h-6 flex flex-col justify-between">
@@ -120,7 +120,7 @@ export const Header = () => {
 
       {/* Desktop Navbar */}
       <nav className="hidden lg:block">
-        <div className="xl:ml-80 lg:ml-40">
+        <div className="lg:ml-40 xl:ml-80">
           <ul className="text-sm text-blue-900 space-x-4 flex">
             {/* Home */}
             <li className='my-10 xl:text-lg lg:text-[1rem] font-georgia font-normal'><Link to="/">Home</Link></li>
