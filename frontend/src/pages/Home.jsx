@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import {
     AiFillFacebook,
     AiFillInstagram,
@@ -26,12 +26,17 @@ import 'swiper/css/effect-fade';
 import { Autoplay, Navigation, EffectFade } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+// Import services
+import { homepageService } from '../services/homepage';
+
+// Import fallback images
 import Bereans from '../assets/Bereans.jpg';
 import Collettes from '../assets/Collettes.jpg';
 import Dekusdamain from '../assets/Dekusdamain.jpg';
 import Fofanas from '../assets/Fofanas.jpg';
 import Pilgrims from '../assets/Pilgrims.jpg';
 import Church from '../assets/church.jpeg';
+import Mission from '../assets/mission2.jpeg';
 
 // Import Professional Section Components
 import FeaturedMinistries from '../components/sections/FeaturedMinistries';
@@ -42,43 +47,56 @@ import PrayerForm from '../components/Prayer/PrayerForm';
 import OnlineGiving from '../components/sections/OnlineGiving';
 import QuickAccess from '../components/sections/QuickAccess';
 import NewsletterSignup from '../components/sections/NewsletterSignup';
-import Mission from '../assets/mission2.jpeg';
 
 import { Footer } from '../components/Layout/Footer';
 import { Header } from '../components/Layout/Header';
 import { Sidebar } from '../components/Layout/Sidebar';
 
 export const Home = () => {
-    const slides = [
+    // State for dynamic content
+    const [homepageData, setHomepageData] = useState({
+        slides: [],
+        contents: {},
+        worship_services: [],
+        featured_projects: [],
+        about_content: null,
+        welcome_message: null,
+        prayer_verse: null
+    });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // Fallback slides for when API fails
+    const fallbackSlides = [
         {
             image: Dekusdamain,
             title: "DEKUSDA Family",
-            ctaLink: "/Aboutdekusda"
+            cta_link: "/Aboutdekusda"
         },
         {
             image: Collettes,
             title: "Collettes",
-            ctaLink: "/Music/ChurchChoir"
+            cta_link: "/Music/ChurchChoir"
         },
         {
             image: Bereans,
             title: "Bereans",
-            ctaLink: "/Ministries/PersonalMinistries"
+            cta_link: "/Ministries/PersonalMinistries"
         },
         {
             image: Pilgrims,
             title: "Pilgrims",
-            ctaLink: "/Evangelism/PCM"
+            cta_link: "/Evangelism/PCM"
         },
         {
             image: Fofanas,
             title: "Fofana",
-            ctaLink: "/About/AboutSDA"
+            cta_link: "/About/AboutSDA"
         },
         {
             image: Mission,
             title: "Mission Emphasis",
-            ctaLink: "/About/Mission"
+            cta_link: "/About/Mission"
         }
     ];
     
@@ -86,12 +104,43 @@ export const Home = () => {
     const nextRef = useRef(null);
     const swiperRef = useRef(null);
 
+    // Fetch homepage data on component mount
+    useEffect(() => {
+        const fetchHomepageData = async () => {
+            try {
+                setLoading(true);
+                const response = await homepageService.getHomepageData();
+                if (response.status === 'success') {
+                    setHomepageData(response.data);
+                } else {
+                    console.warn('Failed to fetch homepage data, using fallback');
+                    setError('Using fallback content');
+                }
+            } catch (error) {
+                console.error('Error fetching homepage data:', error);
+                setError('Failed to load dynamic content, using fallback');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchHomepageData();
+    }, []);
+
     // Ensure autoplay starts properly
     useEffect(() => {
         if (swiperRef.current && swiperRef.current.swiper) {
             swiperRef.current.swiper.autoplay.start();
         }
     }, []);
+
+    // Use dynamic slides or fallback
+    const slides = homepageData.slides.length > 0 ? homepageData.slides : fallbackSlides;
+
+    // Get content with fallback
+    const getContent = (sectionKey, fallback = '') => {
+        return homepageData.contents[sectionKey] || { content: fallback, title: '', subtitle: '' };
+    };
 
     return (
         <>
@@ -144,28 +193,42 @@ export const Home = () => {
                             className="xs:w-full sm: md: lg: xl:w-full xl:h-svh"
                         >
                             {slides.map((slide, index) => (
-                             <SwiperSlide key={index}>
+                             <SwiperSlide key={slide.id || index}>
                              <div className="w-full flex flex-col items-center justify-center px-4">
                                <div
                                  className={`w-full h-[70vh] mb-4 rounded-xl shadow-xl relative overflow-hidden transform transition-all duration-500 ${
-                                   slide.image === Mission
+                                   slide.title === "Mission Emphasis"
                                      ? 'bg-[url("/textures/dots.svg")] bg-repeat bg-cover bg-blend-overlay bg-white/60'
                                      : ''
                                  }`}
                                >
                                  <img
-                                   src={slide.image}
+                                   src={slide.image_url || slide.image}
                                    alt={`${slide.title} - DeKUSDA Church`}
                                    loading={index === 0 ? "eager" : "lazy"}
                                    decoding="async"
                                    fetchpriority={index === 0 ? "high" : "auto"}
                                    className={`w-full h-full rounded-xl transition-all duration-700 ease-in-out transform hover:scale-105 ${
-                                     slide.image === Mission ? 'object-contain' : 'object-cover'
+                                     slide.title === "Mission Emphasis" ? 'object-contain' : 'object-cover'
                                    }`}
                                    style={{
                                      willChange: 'transform',
                                      backfaceVisibility: 'hidden',
                                      WebkitBackfaceVisibility: 'hidden'
+                                   }}
+                                   onError={(e) => {
+                                     // Fallback to static images if dynamic ones fail
+                                     const fallbackImages = {
+                                       "DEKUSDA Family": Dekusdamain,
+                                       "Collettes": Collettes,
+                                       "Bereans": Bereans,
+                                       "Pilgrims": Pilgrims,
+                                       "Fofana": Fofanas,
+                                       "Mission Emphasis": Mission
+                                     };
+                                     if (fallbackImages[slide.title]) {
+                                       e.target.src = fallbackImages[slide.title];
+                                     }
                                    }}
                                  />
                                  {/* Overlay for better text visibility */}
@@ -178,12 +241,12 @@ export const Home = () => {
                                    {slide.title}
                                  </h2>
                            
-                                 {slide.title === "DEKUSDA Family" && (
+                                 {slide.cta_text && (
                                    <button
                                      className="px-5 py-1.5 text-sm font-medium text-white bg-primaryBlue rounded-full hover:bg-darkBlue transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-                                     onClick={() => window.location.href = slide.ctaLink}
+                                     onClick={() => window.location.href = slide.cta_link || slide.ctaLink}
                                    >
-                                     Learn More
+                                     {slide.cta_text || 'Learn More'}
                                    </button>
                                  )}
                                </div>
@@ -234,7 +297,7 @@ export const Home = () => {
                                 <div className="flex items-center justify-center mb-4">
                                     <AiOutlineCheckCircle className="w-8 h-8 mr-3 text-primaryBlue" />
                                     <h2 className="text-4xl font-bold text-darkBlue">
-                                        Who We Are – A Christ-Centered Family at DeKUT
+                                        {getContent('about_us', 'Who We Are – A Christ-Centered Family at DeKUT').title}
                                     </h2>
                                 </div>
                                 <p className="text-xl italic text-softGray">
@@ -245,7 +308,7 @@ export const Home = () => {
                             <div className="grid items-center gap-12 lg:grid-cols-2">
                                 <div className="space-y-6">
                                     <p className="text-lg leading-relaxed text-softGray ml-6">
-                                        <span className="font-bold text-darkBlue">DEKUSDA (Dedan Kimathi University Seventh-Day Adventist Church)</span> is a vibrant, student-led church located in the heart of Dedan Kimathi University. We are more than just a place of worship—we are a family rooted in Christ, driven by mission, and empowered by love.
+                                        {getContent('about_us', 'DEKUSDA (Dedan Kimathi University Seventh-Day Adventist Church) is a vibrant, student-led church located in the heart of Dedan Kimathi University. We are more than just a place of worship—we are a family rooted in Christ, driven by mission, and empowered by love.').content}
                                     </p>
                                     
                                     <p className="text-lg leading-relaxed text-softGray ml-6">
@@ -253,7 +316,7 @@ export const Home = () => {
                                     </p>
                                     
                                     <p className="text-lg leading-relaxed text-softGray ml-6">
-                                        Everyone is welcome at DEKUSDA: students, staff, alumni, and the surrounding community. Join us as we journey together toward eternity, walking in truth, love, and the light of the everlasting Gospel.
+                                        {getContent('welcome_message', 'Everyone is welcome at DEKUSDA: students, staff, alumni, and the surrounding community. Join us as we journey together toward eternity, walking in truth, love, and the light of the everlasting Gospel.').content}
                                     </p>
 
                                     <div className="grid grid-cols-2 gap-6 mt-8 md:grid-cols-4">
@@ -275,9 +338,9 @@ export const Home = () => {
                                     <div className="mt-8">
                                         <button 
                                             className="px-8 py-3 font-semibold text-white transition-all duration-300 transform rounded-lg shadow-lg bg-primaryBlue hover:bg-darkBlue hover:scale-105"
-                                            onClick={() => window.location.href = '/Aboutdekusda'}
+                                            onClick={() => window.location.href = getContent('about_us').button_link || '/Aboutdekusda'}
                                         >
-                                            Learn More About Our Church
+                                            {getContent('about_us').button_text || 'Learn More About Our Church'}
                                         </button>
                                     </div>
                                 </div>
@@ -346,11 +409,11 @@ export const Home = () => {
                                 <div className="flex items-center justify-center mb-4">
                                     <AiOutlineHeart className="w-8 h-8 mr-3 mt-2 text-primaryBlue" />
                                     <h2 className="text-4xl font-bold text-darkBlue">
-                                        Prayer Requests
+                                        {getContent('prayer_verse', 'Prayer Requests').title}
                                     </h2>
                                 </div>
                                 <p className="text-xl text-softGray">
-                                    "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God." - Philippians 4:6
+                                    {getContent('prayer_verse', '"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God." - Philippians 4:6').content}
                                 </p>
                             </div>
 
@@ -402,7 +465,7 @@ export const Home = () => {
                     <QuickAccess />
                     <FeaturedMinistries />
                     <WorshipServices />
-                    <OnlineGiving />
+                    <OnlineGiving projects={homepageData.featured_projects || []} />
                     <LeadershipDirectory />
                     <NewsletterSignup />
 

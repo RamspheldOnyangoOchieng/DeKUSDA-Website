@@ -12,7 +12,9 @@ use App\Http\Controllers\Api\MinistryController;
 use App\Http\Controllers\Api\AnnouncementController;
 use App\Http\Controllers\Api\DonationController;
 use App\Http\Controllers\Api\GalleryController;
-use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\HomepageController;
+use App\Http\Controllers\Api\ChurchProjectController;
+use App\Http\Controllers\Api\WorshipServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +69,18 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Public API Routes (no authentication required)
 Route::prefix('v1')->group(function () {
+    
+    // Homepage Content Management
+    Route::get('/homepage', [App\Http\Controllers\Api\HomepageController::class, 'index']);
+    Route::get('/homepage/slides', [App\Http\Controllers\Api\HomepageController::class, 'getSlides']);
+    Route::get('/homepage/content/{section}', [App\Http\Controllers\Api\HomepageController::class, 'getContentBySection']);
+    
+    // Church Projects (public viewing)
+    Route::get('/church-projects', [App\Http\Controllers\Api\ChurchProjectController::class, 'index']);
+    Route::get('/church-projects/featured', [App\Http\Controllers\Api\ChurchProjectController::class, 'featured']);
+    
+    // Worship Services (public viewing)
+    Route::get('/worship-services', [App\Http\Controllers\Api\WorshipServiceController::class, 'index']);
     
     // Events (public viewing)
     Route::get('/events', [EventController::class, 'index']);
@@ -147,6 +161,22 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::put('/prayer-requests/{prayerRequest}', [PrayerRequestController::class, 'update']);
     Route::delete('/prayer-requests/{prayerRequest}', [PrayerRequestController::class, 'destroy']);
     Route::post('/prayer-requests/{prayerRequest}/approve', [PrayerRequestController::class, 'approve']);
+    
+    // Homepage Content Management (Admin only)
+    Route::put('/homepage/content/{section}', [App\Http\Controllers\Api\HomepageController::class, 'updateContentBySection']);
+    Route::post('/homepage/slides', [App\Http\Controllers\Api\HomepageController::class, 'createSlide']);
+    Route::put('/homepage/slides/{id}', [App\Http\Controllers\Api\HomepageController::class, 'updateSlide']);
+    Route::delete('/homepage/slides/{id}', [App\Http\Controllers\Api\HomepageController::class, 'deleteSlide']);
+    
+    // Church Projects Management (Admin only)
+    Route::post('/church-projects', [App\Http\Controllers\Api\ChurchProjectController::class, 'store']);
+    Route::put('/church-projects/{id}', [App\Http\Controllers\Api\ChurchProjectController::class, 'update']);
+    Route::delete('/church-projects/{id}', [App\Http\Controllers\Api\ChurchProjectController::class, 'destroy']);
+    
+    // Worship Services Management (Admin only)
+    Route::post('/worship-services', [App\Http\Controllers\Api\WorshipServiceController::class, 'store']);
+    Route::put('/worship-services/{id}', [App\Http\Controllers\Api\WorshipServiceController::class, 'update']);
+    Route::delete('/worship-services/{id}', [App\Http\Controllers\Api\WorshipServiceController::class, 'destroy']);
     
     // Donations Management
     Route::get('/donations', [DonationController::class, 'index']);

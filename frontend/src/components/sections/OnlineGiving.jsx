@@ -6,7 +6,43 @@ import {
   FaGift, FaUsers, FaShieldAlt, FaChurch, FaBus, FaBook
 } from 'react-icons/fa';
 
-const OnlineGiving = () => {
+// Helper functions for dynamic project rendering
+const getProjectIcon = (category) => {
+  const iconClass = "text-white text-4xl";
+  switch (category.toLowerCase()) {
+    case 'construction':
+      return <FaChurch className={iconClass} />;
+    case 'education':
+      return <FaGraduationCap className={iconClass} />;
+    case 'healthcare':
+      return <FaHeart className={iconClass} />;
+    case 'youth':
+      return <FaUsers className={iconClass} />;
+    case 'evangelism':
+      return <FaBus className={iconClass} />;
+    default:
+      return <FaBuilding className={iconClass} />;
+  }
+};
+
+const getProjectColor = (category) => {
+  switch (category.toLowerCase()) {
+    case 'construction':
+      return 'from-blue-500 to-blue-600';
+    case 'education':
+      return 'from-green-500 to-green-600';
+    case 'healthcare':
+      return 'from-red-500 to-red-600';
+    case 'youth':
+      return 'from-purple-500 to-purple-600';
+    case 'evangelism':
+      return 'from-orange-500 to-orange-600';
+    default:
+      return 'from-gray-500 to-gray-600';
+  }
+};
+
+const OnlineGiving = ({ projects = [] }) => {
   const [selectedAmount, setSelectedAmount] = useState('');
   const [customAmount, setCustomAmount] = useState('');
   const [selectedFund, setSelectedFund] = useState('tithe');
@@ -414,63 +450,108 @@ const OnlineGiving = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Church Sanctuary Renovation */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 h-40 flex items-center justify-center">
-                <FaChurch className="text-white text-4xl" />
+            {/* Dynamic Church Projects */}
+            {projects.length > 0 ? projects.map((project) => (
+              <div key={project.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div className={`bg-gradient-to-br ${getProjectColor(project.category)} h-40 flex items-center justify-center`}>
+                  {getProjectIcon(project.category)}
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-bold text-gray-800 mb-3">{project.title}</h4>
+                  <p className="text-gray-600 mb-4 text-sm">
+                    {project.description.length > 120 
+                      ? `${project.description.substring(0, 120)}...` 
+                      : project.description}
+                  </p>
+                  <div className="space-y-2 mb-4">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Progress</span>
+                      <span className="font-medium text-blue-600">{project.progress_percentage}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-blue-600 h-2 rounded-full" 
+                        style={{width: `${project.progress_percentage}%`}}
+                      ></div>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">
+                        {project.target_amount ? 'Target' : 'Status'}
+                      </span>
+                      <span className="font-medium">
+                        {project.target_amount 
+                          ? `KSh ${project.target_amount.toLocaleString()}` 
+                          : project.updates || 'In Progress'}
+                      </span>
+                    </div>
+                  </div>
+                  <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium">
+                    Support This Project
+                  </button>
+                </div>
               </div>
-              <div className="p-6">
-                <h4 className="text-xl font-bold text-gray-800 mb-3">Sanctuary Renovation Project</h4>
-                <p className="text-gray-600 mb-4 text-sm">
-                  Upgrading our worship space with modern audio-visual equipment, improved acoustics, and accessibility features to enhance worship experience.
-                </p>
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Progress</span>
-                    <span className="font-medium text-blue-600">65%</span>
+            )) : (
+              // Fallback static projects if no dynamic data
+              <>
+                {/* Church Sanctuary Renovation */}
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                  <div className="bg-gradient-to-br from-blue-500 to-blue-600 h-40 flex items-center justify-center">
+                    <FaChurch className="text-white text-4xl" />
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-blue-600 h-2 rounded-full" style={{width: '65%'}}></div>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Target</span>
-                    <span className="font-medium">KSh 2,500,000</span>
+                  <div className="p-6">
+                    <h4 className="text-xl font-bold text-gray-800 mb-3">Sanctuary Renovation Project</h4>
+                    <p className="text-gray-600 mb-4 text-sm">
+                      Upgrading our worship space with modern audio-visual equipment, improved acoustics, and accessibility features to enhance worship experience.
+                    </p>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Progress</span>
+                        <span className="font-medium text-blue-600">65%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div className="bg-blue-600 h-2 rounded-full" style={{width: '65%'}}></div>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Target</span>
+                        <span className="font-medium">KSh 2,500,000</span>
+                      </div>
+                    </div>
+                    <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium">
+                      Support This Project
+                    </button>
                   </div>
                 </div>
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium">
-                  Support This Project
-                </button>
-              </div>
-            </div>
 
-            {/* Student Scholarship Fund */}
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="bg-gradient-to-br from-green-500 to-green-600 h-40 flex items-center justify-center">
-                <FaGraduationCap className="text-white text-4xl" />
-              </div>
-              <div className="p-6">
-                <h4 className="text-xl font-bold text-gray-800 mb-3">Student Scholarship Program</h4>
-                <p className="text-gray-600 mb-4 text-sm">
-                  Supporting DeKUSDA students with financial assistance for tuition, books, and living expenses to ensure education accessibility.
-                </p>
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Students Supported</span>
-                    <span className="font-medium text-green-600">28 of 50</span>
+                {/* Student Scholarship Fund */}
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                  <div className="bg-gradient-to-br from-green-500 to-green-600 h-40 flex items-center justify-center">
+                    <FaGraduationCap className="text-white text-4xl" />
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-green-600 h-2 rounded-full" style={{width: '56%'}}></div>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Annual Goal</span>
-                    <span className="font-medium">KSh 1,800,000</span>
+                  <div className="p-6">
+                    <h4 className="text-xl font-bold text-gray-800 mb-3">Student Scholarship Program</h4>
+                    <p className="text-gray-600 mb-4 text-sm">
+                      Supporting DeKUSDA students with financial assistance for tuition, books, and living expenses to ensure education accessibility.
+                    </p>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Students Supported</span>
+                        <span className="font-medium text-green-600">28 of 50</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div className="bg-green-600 h-2 rounded-full" style={{width: '56%'}}></div>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-600">Annual Goal</span>
+                        <span className="font-medium">KSh 1,800,000</span>
+                      </div>
+                    </div>
+                    <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium">
+                      Support Students
+                    </button>
                   </div>
                 </div>
-                <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg transition-colors text-sm font-medium">
-                  Support Students
-                </button>
-              </div>
-            </div>
+              </>
+            )}
 
             {/* Community Health Clinic */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
