@@ -50,8 +50,9 @@ const MembersPortal = () => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
         
-        // Redirect based on user role
-        if (data.user.role === 'admin') {
+        // Redirect based on user role (check both role and member_type)
+        const userRole = data.role || data.member_type || 'regular';
+        if (userRole === 'admin' || userRole === 'pastor' || userRole === 'elder') {
           navigate('/admin-dashboard');
         } else {
           navigate('/member-dashboard');

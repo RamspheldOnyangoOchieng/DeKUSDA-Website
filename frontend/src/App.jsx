@@ -23,6 +23,8 @@ import ElderMessage from './pages/About/ElderMessage';
 import Leaders2022 from './pages/About/Leadership/Leaders2022';
 import Leaders2023 from './pages/About/Leadership/Leaders2023';
 import Leaders2024 from './pages/About/Leadership/Leaders2024';
+import AboutContentManager from './pages/Admin/AboutContentManager';
+import AboutContentTest from './pages/AboutContentTest';
 
 // Ministries / Departments
 import DeconaryDepartment from './pages/Ministries/DeconaryDepartment';
@@ -121,6 +123,16 @@ function App() {
             <Route path="/Leaders2024" element={<Leaders2024 />} />
             <Route path="/Leaders2023" element={<Leaders2023 />} />
             <Route path="/Leaders2022" element={<Leaders2022 />} />
+
+            {/* Admin */}
+            <Route path="/admin/about-content" element={
+              <AdminRoute>
+                <AboutContentManager />
+              </AdminRoute>
+            } />
+
+            {/* Test */}
+            <Route path="/test/about-content" element={<AboutContentTest />} />
 
             {/* Ministries / Departments */}
             <Route path="/DeconaryDepartment" element={<DeconaryDepartment />} />

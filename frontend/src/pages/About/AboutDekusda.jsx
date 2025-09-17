@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../../components/Layout/Header';
 import { Footer } from '../../components/Layout/Footer';
+import { Sidebar } from '../../components/Layout/Sidebar';
+import aboutService from '../../services/aboutService';
 import bibleStudyImg from '../../assets/BIBLESTUDY.jpg';
 import churchImage from '../../assets/church.jpeg';
 import sdaLogo from '../../assets/dekusdalogo.jpg';
@@ -26,26 +28,102 @@ const useTypingEffect = (text, speed = 100) => {
 };
 
 export const AboutDekusda = () => {
-  const welcomeText = 'WELCOME TO DEDAN KIMATHI UNIVERSITY(DeKUSDA)';
+  const [pageContent, setPageContent] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fallback content
+  const fallbackContent = {
+    welcome: { 
+      title: 'WELCOME TO DEDAN KIMATHI UNIVERSITY(DeKUSDA)',
+      content: '' 
+    },
+    about_us: {
+      title: 'ABOUT US!',
+      content: 'SDA Church Dedan Kimathi University is a vibrant Seventh-day Adventist congregation based in Kimathi. We are passionate about faith, fellowship, and community service.'
+    },
+    mission: {
+      title: 'Mission',
+      content: 'To make disciples of all people by proclaiming the everlasting gospel in the context of the three angel messages of <b>Revelation 14:6–12</b>, leading them to accept Jesus as their personal Savior, unite with the remnant church, nurturing them to serve Him as Lord, and preparing them for His soon return.'
+    },
+    vision: {
+      title: 'Our Vision',
+      content: 'Empowering Seventh-day Adventist students, professionals, the church, and healing the nation.'
+    },
+    purpose: {
+      title: 'Our Purpose',
+      content: '<ol type="A"><li>To assist students studying in Dedan Kimathi University of Technology (DEKUT) to resolve problems that negatively impact their Christian principles and lifestyles.</li><li>To promote a culture of continued learning in the Adventist church and community at large, embracing the principle of Christian education.</li><li>To create mechanisms for integrating and inducting students into the world of work.</li><li>To mobilize Adventist professionals for professional input to Adventist students in DEKUT, the church, and the community.</li></ol>'
+    },
+    activities: {
+      title: 'Our Activities',
+      content: '' // Will use the card layout as fallback
+    },
+    worship: {
+      title: 'Worship with Us',
+      content: 'Join us every <strong>Saturday (Sabbath)</strong> in KIMATHI UNIVERSITY around Student\'s Mess. Services begin at <strong>7:50 AM</strong>.'
+    },
+    location: {
+      title: 'Where to Find Us',
+      content: 'Dekusda church is located in DEDAN KIMATHI UNIVERSITY OF TECHNOLOGY in Nyeri County.'
+    },
+    contact: {
+      title: 'Contact Us',
+      content: '' // Will use the original layout as fallback
+    }
+  };
+
+  useEffect(() => {
+    const fetchPageContent = async () => {
+      try {
+        setLoading(true);
+        const response = await aboutService.getPageContent('about_dekusda');
+        
+        if (response.status === 'success') {
+          setPageContent(response.data);
+        } else {
+          console.warn('Failed to fetch about dekusda content, using fallback');
+          setPageContent(fallbackContent);
+        }
+      } catch (error) {
+        console.error('Error fetching about dekusda content:', error);
+        setPageContent(fallbackContent);
+        setError('Using fallback content');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPageContent();
+  }, []);
+
+  // Get content with fallback
+  const getContent = (sectionKey) => {
+    return pageContent[sectionKey] || fallbackContent[sectionKey] || { title: '', content: '' };
+  };
+
+  const welcomeText = getContent('welcome').title || 'WELCOME TO DEDAN KIMATHI UNIVERSITY(DeKUSDA)';
   const typedWelcome = useTypingEffect(welcomeText, 120);
 
   return (
-    <div className="page-container about-dekusda-page">
-      <Header />
-
-      <div className="main-content">
-        {/* Sidebar */}
-        <aside className="sidebar">
-          <img src={sdaLogo} alt="SDA Logo" className="sda-logo" />
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="#who-we-are">Who We Are</a></li>
-            <li><a href="#vision">MISSION & VISION</a></li>
-            <li><a href="#activities">Activities</a></li>
-            <li><a href="#worship">Worship</a></li>
-            <li><a href="#where-to-find-us">Where to Find Us</a></li>
-          </ul>
-        </aside>
+    <div>
+      <div className='flex'>
+        <div className='w-full lg:w-[85%]'>
+          <Header />
+          
+          <div className="page-container about-dekusda-page">
+            <div className="main-content">
+              {/* Sidebar */}
+              <aside className="sidebar">
+                <img src={sdaLogo} alt="SDA Logo" className="sda-logo" />
+                <h3>Quick Links</h3>
+                <ul>
+                  <li><a href="#who-we-are">Who We Are</a></li>
+                  <li><a href="#vision">MISSION & VISION</a></li>
+                  <li><a href="#activities">Activities</a></li>
+                  <li><a href="#worship">Worship</a></li>
+                  <li><a href="#where-to-find-us">Where to Find Us</a></li>
+                </ul>
+              </aside>
 
         {/* Main Content */}
         <div className="content-container">
@@ -65,87 +143,90 @@ export const AboutDekusda = () => {
          
           <main className="main-container">
             <section id="who-we-are" className="section-container">
-              <h2>ABOUT US!</h2>
-              <p>
-                SDA Church Dedan Kimathi University  is a vibrant Seventh-day Adventist congregation based in Kimathi.
-                We are passionate about faith, fellowship, and community service.
-              </p>
+              <h2>{getContent('about_us').title || 'ABOUT US!'}</h2>
+              <div dangerouslySetInnerHTML={{ __html: getContent('about_us').content || 
+                'SDA Church Dedan Kimathi University is a vibrant Seventh-day Adventist congregation based in Kimathi. We are passionate about faith, fellowship, and community service.' 
+              }} />
             </section>
 
             <section id="vision" className="section-container">
-              <h2>Mission</h2>
-              <p>
-                To make disciples of all people by proclaiming the everlasting gospel in the context of the three
-                angel messages of <b>Revelation 14:6–12</b>, leading them to accept Jesus as their personal Savior,
-                unite with the remnant church, nurturing them to serve Him as Lord, and preparing them for His soon return.
-              </p>
+              <h2>{getContent('mission').title || 'Mission'}</h2>
+              <div dangerouslySetInnerHTML={{ __html: getContent('mission').content || 
+                'To make disciples of all people by proclaiming the everlasting gospel in the context of the three angel messages of <b>Revelation 14:6–12</b>, leading them to accept Jesus as their personal Savior, unite with the remnant church, nurturing them to serve Him as Lord, and preparing them for His soon return.' 
+              }} />
 
-              <h2>Our Vision</h2>
-              <p>
-                Empowering Seventh-day Adventist students, professionals, the church, and healing the nation.
-              </p>
+              <h2>{getContent('vision').title || 'Our Vision'}</h2>
+              <div dangerouslySetInnerHTML={{ __html: getContent('vision').content || 
+                'Empowering Seventh-day Adventist students, professionals, the church, and healing the nation.' 
+              }} />
 
-              <h2>Our Purpose</h2>
-              <ol type="A">
-                <li>To assist students studying in Dedan Kimathi University of Technology (DEKUT) to 
-                  resolve problems that negatively impact their Christian principles and lifestyles.</li>
-                <li>To promote a culture of continued learning in the Adventist church and community at
-                  large, embracing the principle of Christian education.</li>
-                <li>To create mechanisms for integrating and inducting students into the world of work.</li>
-                <li>To mobilize Adventist professionals for professional input to Adventist students in DEKUT,
-                  the church, and the community.</li>
-              </ol>
+              <h2>{getContent('purpose').title || 'Our Purpose'}</h2>
+              <div dangerouslySetInnerHTML={{ __html: getContent('purpose').content || 
+                '<ol type="A"><li>To assist students studying in Dedan Kimathi University of Technology (DEKUT) to resolve problems that negatively impact their Christian principles and lifestyles.</li><li>To promote a culture of continued learning in the Adventist church and community at large, embracing the principle of Christian education.</li><li>To create mechanisms for integrating and inducting students into the world of work.</li><li>To mobilize Adventist professionals for professional input to Adventist students in DEKUT, the church, and the community.</li></ol>' 
+              }} />
             </section>
 
             <section id="activities" className="section-container">
-              <h2>Our Activities</h2>
-              <div className="activities-container">
-                <div className="activity-card">
-                  <img src={bibleStudyImg} alt="Bible Study" className="activity-img" />
-                  <h3>Bible Study</h3>
-                  <p>Join us for deep, interactive study of the Bible every Wednesday from 6pm.</p>
+              <h2>{getContent('activities').title || 'Our Activities'}</h2>
+              <div dangerouslySetInnerHTML={{ __html: getContent('activities').content }} />
+              
+              {/* Fallback to original cards if no dynamic content */}
+              {!getContent('activities').content && (
+                <div className="activities-container">
+                  <div className="activity-card">
+                    <img src={bibleStudyImg} alt="Bible Study" className="activity-img" />
+                    <h3>Bible Study</h3>
+                    <p>Join us for deep, interactive study of the Bible every Wednesday from 6pm.</p>
+                  </div>
+                  <div className="activity-card">
+                    <img src={choirImg} alt="Choir Ministry" className="activity-img" />
+                    <h3>HARMONIZATION</h3>
+                    <p>Join us every Thursday for a powerful harmonization session as we prepare for Sabbath!</p>
+                  </div>
+                  <div className="activity-card">
+                    <img src={missionsImg} alt="Missions" className="activity-img" />
+                    <h3>Missions</h3>
+                    <p>We serve the community — helping the needy, sharing hope and love. We also have missions
+                      every year. Want to know about our upcoming mission?
+                    </p>
+                  </div>
                 </div>
-                <div className="activity-card">
-                  <img src={choirImg} alt="Choir Ministry" className="activity-img" />
-                  <h3>HARMONIZATION</h3>
-                  <p>Join us every Thursday for a powerful harmonization session as we prepare for Sabbath!</p>
-                </div>
-                <div className="activity-card">
-                  <img src={missionsImg} alt="Missions" className="activity-img" />
-                  <h3>Missions</h3>
-                  <p>We serve the community — helping the needy, sharing hope and love. We also have missions
-                    every year. Want to know about our upcoming mission?
-                  </p>
-                </div>
-              </div>
+              )}
             </section>
 
             <section id="worship" className="section-container">
-              <h2>Worship with Us</h2>
-              <p>
-                Join us every <strong>Saturday (Sabbath)</strong> in KIMATHI UNIVERSITY around Student's Mess.
-                Services begin at <strong>7:50 AM</strong>.
-              </p>
+              <h2>{getContent('worship').title || 'Worship with Us'}</h2>
+              <div dangerouslySetInnerHTML={{ __html: getContent('worship').content || 
+                'Join us every <strong>Saturday (Sabbath)</strong> in KIMATHI UNIVERSITY around Student\'s Mess. Services begin at <strong>7:50 AM</strong>.' 
+              }} />
             </section>
 
             <section id="where-to-find-us" className="section-container">
-              <h2>Where to Find Us</h2>
-              <p>Dekusda church is located in DEDAN KIMATHI UNIVERSITY OF TECHNOLOGY in Nyeri County.</p>
+              <h2>{getContent('location').title || 'Where to Find Us'}</h2>
+              <div dangerouslySetInnerHTML={{ __html: getContent('location').content || 
+                'Dekusda church is located in DEDAN KIMATHI UNIVERSITY OF TECHNOLOGY in Nyeri County.' 
+              }} />
 
               <div className="contact-us">
-                <h3>Contact Us</h3>
-                <p>Email: <a href="mailto:dekutsda@students.dkut.ac.ke">dekutsda@students.dkut.ac.ke</a></p>
-                <div className="social-icons">
-                  <a href="" target="_blank" rel="noopener noreferrer">
-                    <img src={instagramIcon} alt="Instagram" className="icon" />
-                  </a>
-               <img
-  src={youtubeIcon}
-  alt="YouTube"
-  className="icon"
-/>
-
-                </div>
+                <h3>{getContent('contact').title || 'Contact Us'}</h3>
+                <div dangerouslySetInnerHTML={{ __html: getContent('contact').content }} />
+                
+                {/* Fallback if no dynamic contact content */}
+                {!getContent('contact').content && (
+                  <>
+                    <p>Email: <a href="mailto:dekutsda@students.dkut.ac.ke">dekutsda@students.dkut.ac.ke</a></p>
+                    <div className="social-icons">
+                      <a href="" target="_blank" rel="noopener noreferrer">
+                        <img src={instagramIcon} alt="Instagram" className="icon" />
+                      </a>
+                      <img
+                        src={youtubeIcon}
+                        alt="YouTube"
+                        className="icon"
+                      />
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="map-container">
@@ -166,7 +247,10 @@ export const AboutDekusda = () => {
 
       <Footer />
     </div>
-  );
+    <Sidebar />
+  </div>
+  </div>
+);
 };
 
 export default AboutDekusda;

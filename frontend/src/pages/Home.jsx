@@ -139,7 +139,18 @@ export const Home = () => {
 
     // Get content with fallback
     const getContent = (sectionKey, fallback = '') => {
-        return homepageData.contents[sectionKey] || { content: fallback, title: '', subtitle: '' };
+        const content = homepageData.contents[sectionKey];
+        if (content) {
+            return content;
+        }
+        // Return fallback structure
+        return { 
+            content: fallback, 
+            title: fallback, 
+            subtitle: '',
+            button_text: '',
+            button_link: ''
+        };
     };
 
     return (
@@ -292,56 +303,52 @@ export const Home = () => {
 
                     {/* Section 2: About Us Snapshot */}
                     <div className="w-full bg-white">
-                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
-                            <div className="mb-8 sm:mb-12 text-center">
-                                <div className="flex flex-col sm:flex-row items-center justify-center mb-4">
-                                    <AiOutlineCheckCircle className="w-6 h-6 sm:w-8 sm:h-8 mb-2 sm:mb-0 sm:mr-3 text-primaryBlue" />
-                                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-darkBlue">
+                        <div className="max-w-6xl mx-auto">
+                            <div className="mb-12 text-center">
+                                <div className="flex items-center justify-center mb-4">
+                                    <AiOutlineCheckCircle className="w-8 h-8 mr-3 text-primaryBlue" />
+                                    <h2 className="text-4xl font-bold text-darkBlue">
                                         {getContent('about_us', 'Who We Are – A Christ-Centered Family at DeKUT').title}
                                     </h2>
                                 </div>
-                                <p className="text-lg sm:text-xl italic text-softGray px-4">
+                                <p className="text-xl italic text-softGray">
                                     "You are the light of the world. A city on a hill cannot be hidden." – Matthew 5:14
                                 </p>
                             </div>
 
-                            <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2">
-                                <div className="space-y-4 sm:space-y-6">
-                                    <p className="text-base sm:text-lg leading-relaxed text-softGray px-4 sm:ml-6">
+                            <div className="grid items-center gap-12 lg:grid-cols-2">
+                                <div className="space-y-6">
+                                    <p className="text-lg leading-relaxed text-softGray ml-6">
                                         {getContent('about_us', 'DEKUSDA (Dedan Kimathi University Seventh-Day Adventist Church) is a vibrant, student-led church located in the heart of Dedan Kimathi University. We are more than just a place of worship—we are a family rooted in Christ, driven by mission, and empowered by love.').content}
                                     </p>
                                     
-                                    <p className="text-base sm:text-lg leading-relaxed text-softGray px-4 sm:ml-6">
+                                    <p className="text-lg leading-relaxed text-softGray ml-6">
                                         We exist to nurture spiritual growth, foster godly friendships, and equip students to be strong ambassadors for Christ both on and off-campus. From weekly worship services, engaging Bible studies, music ministries, and community outreach—we believe in holistic spiritual transformation.
                                     </p>
                                     
-                                    <p className="text-base sm:text-lg leading-relaxed text-softGray px-4 sm:ml-6">
+                                    <p className="text-lg leading-relaxed text-softGray ml-6">
                                         {getContent('welcome_message', 'Everyone is welcome at DEKUSDA: students, staff, alumni, and the surrounding community. Join us as we journey together toward eternity, walking in truth, love, and the light of the everlasting Gospel.').content}
                                     </p>
 
-                                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-6 sm:mt-8 px-4 sm:px-0">
+                                    <div className="grid grid-cols-2 gap-6 mt-8 md:grid-cols-4">
                                         <div className="text-center">
-                                            <div className="mb-1 sm:mb-2 text-2xl sm:text-3xl font-bold text-primaryBlue">200+</div>
-                                            <div className="text-xs sm:text-sm text-softGray">Active Members</div>
+                                            <div className="mb-2 text-5xl font-bold text-primaryBlue">200+</div>
+                                            <div className="text-sm text-softGray">Active Members</div>
                                         </div>
                                         <div className="text-center">
-                                            <div className="mb-1 sm:mb-2 text-2xl sm:text-3xl font-bold text-primaryBlue">12</div>
-                                            <div className="text-xs sm:text-sm text-softGray">Church Families</div>
+                                            <div className="mb-2 text-5xl font-bold text-primaryBlue">12</div>
+                                            <div className="text-sm text-softGray">Church Families</div>
                                         </div>
                                         <div className="text-center">
-                                            <div className="mb-1 sm:mb-2 text-2xl sm:text-3xl font-bold text-primaryBlue">3</div>
-                                            <div className="text-xs sm:text-sm text-softGray">Choir Groups</div>
-                                        </div>
-                                        <div className="text-center">
-                                            <div className="mb-1 sm:mb-2 text-2xl sm:text-3xl font-bold text-primaryBlue">15+</div>
-                                            <div className="text-xs sm:text-sm text-softGray">Ministries</div>
+                                            <div className="mb-2 text-5xl font-bold text-primaryBlue">3</div>
+                                            <div className="text-sm text-softGray">Choir Groups</div>
                                         </div>
                                        
                                     </div>
 
-                                    <div className="mt-6 sm:mt-8 text-center sm:text-left px-4 sm:px-0">
+                                    <div className="mt-8">
                                         <button 
-                                            className="px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white transition-all duration-300 transform rounded-lg shadow-lg bg-primaryBlue hover:bg-darkBlue hover:scale-105"
+                                            className="px-8 py-3 font-semibold text-white transition-all duration-300 transform rounded-lg shadow-lg bg-primaryBlue hover:bg-darkBlue hover:scale-105"
                                             onClick={() => window.location.href = getContent('about_us').button_link || '/Aboutdekusda'}
                                         >
                                             {getContent('about_us').button_text || 'Learn More About Our Church'}
@@ -349,14 +356,14 @@ export const Home = () => {
                                     </div>
                                 </div>
 
-                                <div className="flex justify-center mt-8 lg:mt-0">
+                                <div className="flex justify-center">
                                     <div className="relative">
                                         <img 
                                             src={Church} 
                                             alt="DEKUSDA Church Family" 
-                                            className="object-cover border-4 border-white rounded-full shadow-2xl w-64 h-64 sm:w-80 sm:h-80"
+                                            className="object-cover border-4 border-white rounded-full shadow-2xl w-96 h-96"
                                         />
-                                        <div className="absolute px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm font-bold text-white rounded-full -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 bg-primaryBlue">
+                                        <div className="absolute px-4 py-2 text-sm font-bold text-white rounded-full -bottom-4 -right-4 bg-primaryBlue">
                                             Join Our Family
                                         </div>
                                     </div>
@@ -368,19 +375,19 @@ export const Home = () => {
 
 
                     {/* Section 3: Communication Sabbath */}
-                    <div className="w-full bg-gradient-to-b from-lightBlue/50 to-primaryBlue/20 py-8 sm:py-12 lg:py-16 px-4 sm:px-6">
+                    <div className="w-full bg-gradient-to-b from-lightBlue/50 to-primaryBlue/20 py-16 px-6">
                         <div className="max-w-6xl mx-auto">
                             {/* Communication Sabbath Banner */}
-                            <div className="mb-8 sm:mb-12 text-center">
-                                <div className="flex justify-center mb-6 sm:mb-8">
-                                    <div className="bg-gradient-to-r from-primaryBlue via-darkBlue to-primaryBlue rounded-2xl shadow-lg px-4 sm:px-6 lg:px-8 py-4 sm:py-6 max-w-2xl text-center">
-                                        <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-wide mb-2 sm:mb-3">
+                            <div className="mb-12 text-center">
+                                <div className="flex justify-center mb-8">
+                                    <div className="bg-gradient-to-r from-primaryBlue via-darkBlue to-primaryBlue rounded-2xl shadow-lg px-8 py-6 max-w-2xl text-center">
+                                        <h2 className="text-3xl font-bold text-white tracking-wide mb-3">
                                             This Sabbath is a Communication Sabbath
                                         </h2>
-                                        <p className="text-white/80 font-medium mb-3 sm:mb-4 text-sm sm:text-base">
+                                        <p className="text-white/80 font-medium mb-4">
                                             Join us for a special time of worship and fellowship — see you there!
                                         </p>
-                                        <span className="inline-flex items-center gap-2 bg-white text-primaryBlue font-semibold px-3 sm:px-5 py-1 sm:py-2 rounded-full shadow hover:shadow-lg transition text-sm sm:text-base">
+                                        <span className="inline-flex items-center gap-2 bg-white text-primaryBlue font-semibold px-5 py-2 rounded-full shadow hover:shadow-lg transition">
                                             <HiOutlineLocationMarker className="w-5 h-5 text-primaryBlue" />
                                             Food Science Workshop • 7:50 AM
                                         </span>
@@ -475,9 +482,7 @@ export const Home = () => {
 
                     <Footer />
                 </div>
-                <div className="hidden lg:block">
-                    <Sidebar />
-                </div>
+                <Sidebar />
             </div>
         </>
     );

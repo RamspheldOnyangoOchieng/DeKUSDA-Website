@@ -52,9 +52,8 @@ class AuthController extends Controller
                 'phone' => $request->phone,
                 'date_of_birth' => $request->date_of_birth,
                 'address' => $request->address,
-                'membership_date' => now(),
-                'status' => 'active',
-                'role' => 'member'
+                'membership_status' => 'active',
+                'member_type' => 'regular'
             ]);
 
             // Create token
@@ -67,7 +66,7 @@ class AuthController extends Controller
                     'user' => $user,
                     'member' => $member,
                     'token' => $token,
-                    'role' => 'member'
+                    'member_type' => 'regular'
                 ]
             ], 201);
 
@@ -109,7 +108,7 @@ class AuthController extends Controller
 
         // Get church member record
         $member = ChurchMember::where('user_id', $user->id)->first();
-        $role = $member ? $member->role : 'member';
+        $role = $member ? $member->member_type : 'regular';
 
         // Create token
         $token = $user->createToken('auth_token')->plainTextToken;

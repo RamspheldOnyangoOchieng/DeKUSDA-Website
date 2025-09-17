@@ -1,13 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AboutSDA.css';
 
 import { Header } from '../../components/Layout/Header';
 import { Footer } from '../../components/Layout/Footer';
+import { Sidebar } from '../../components/Layout/Sidebar';
+import aboutService from '../../services/aboutService';
 
 import logo from '../../assets/logo.jpg';
 
 const AboutSDA = () => {
   const [activeQa, setActiveQa] = useState(null);
+  const [pageContent, setPageContent] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Load dynamic content
+  useEffect(() => {
+    const loadPageContent = async () => {
+      try {
+        setIsLoading(true);
+        const content = await aboutService.getPageContent('about_sda');
+        setPageContent(content.data || {});
+      } catch (error) {
+        console.error('Error loading AboutSDA content:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadPageContent();
+  }, []);
+
+  const fallbackContent = {
+    title: {
+      title: 'ABOUT SEVENTH DAY ADVENTIST CHURCH (SDA)',
+      content: ''
+    },
+    motto: {
+      title: '"Come now, let us reason together" - Isaiah 1:18',
+      content: 'A faith that welcomes intellectual inquiry'
+    },
+    history_title: {
+      title: 'SMALL HISTORY ABOUT SDA',
+      content: 'The Seventh-day Adventist Church emerged from the Great Awakening movements of the 19th century, when young Bible students began questioning mainstream interpretations of Scripture.'
+    },
+    qa_title: {
+      title: 'FREQUENT Q&A',
+      content: ''
+    },
+    global_impact_title: {
+      title: 'Adventist Global Impact',
+      content: ''
+    },
+    mission_title: {
+      title: 'Mission & Church Structure',
+      content: 'The mission of the SDA Church is to proclaim the everlasting gospel of Jesus Christ to all people, teaching biblical principles and promoting a healthy, balanced lifestyle.'
+    },
+    mission_content: {
+      title: '',
+      content: '<ul><li>Global organizational structure</li><li>Emphasis on youth and community programs</li><li>Active missionary work worldwide</li></ul>'
+    }
+  };
+
+  const getContent = (sectionKey) => {
+    return pageContent[sectionKey] || fallbackContent[sectionKey] || { title: '', content: '' };
+  };
 
   const qaItems = [
     {
@@ -58,20 +114,23 @@ const AboutSDA = () => {
 
   return (
     <>
-      <Header />
-      <div className="page-container about-sda-page">
-        <aside className="sidebar blue-sidebar">
-          <nav>
-            <h2>Quick Links</h2>
-            <ul>
-              <li><a href="#history-section">History</a></li>
-              <li><a href="#qa-section">Frequent Q&A</a></li>
-              <li><a href="#global-impact">Global Impact</a></li>
-              <li><a href="#mission-section">Mission & Structure</a></li>
-            </ul>
-          </nav>
-          <div className="sidebar-note">
-            <h3>Did You Know?</h3>
+      <div className='flex'>
+        <div className='w-full lg:w-[85%]'>
+          <Header />
+          
+          <div className="page-container about-sda-page">
+            <aside className="sidebar blue-sidebar">
+              <nav>
+                <h2>Quick Links</h2>
+                <ul>
+                  <li><a href="#history-section">History</a></li>
+                  <li><a href="#qa-section">Frequent Q&A</a></li>
+                  <li><a href="#global-impact">Global Impact</a></li>
+                  <li><a href="#mission-section">Mission & Structure</a></li>
+                </ul>
+              </nav>
+              <div className="sidebar-note">
+                <h3>Did You Know?</h3>
             <p>Seventh-day Adventists observe the Sabbath on Saturday, emphasizing rest, worship, and family.</p>
           </div>
         </aside>
@@ -79,9 +138,9 @@ const AboutSDA = () => {
         <main className="main-content">
           <div className="hero-section plain-hero">
             <div className="hero-content">
-              <h1>ABOUT SEVENTH DAY ADVENTIST CHURCH (SDA)</h1>
-              <p className="church-motto">"Come now, let us reason together" - Isaiah 1:18</p>
-              <p className="student-call">A faith that welcomes intellectual inquiry</p>
+              <h1>{getContent('title').title || 'ABOUT SEVENTH DAY ADVENTIST CHURCH (SDA)'}</h1>
+              <p className="church-motto">{getContent('motto').title || '"Come now, let us reason together" - Isaiah 1:18'}</p>
+              <p className="student-call">{getContent('motto').content || 'A faith that welcomes intellectual inquiry'}</p>
             </div>
           </div>
 
@@ -103,15 +162,13 @@ const AboutSDA = () => {
             </div>
 
             <div className="history-text">
-              <h2>SMALL HISTORY ABOUT SDA</h2>
-              <p>
-                The Seventh-day Adventist Church emerged from the Great Awakening movements of the
-                19th century, when young Bible students began questioning mainstream interpretations
-                of Scripture.
-              </p>
+              <h2>{getContent('history_title').title || 'SMALL HISTORY ABOUT SDA'}</h2>
+              <div dangerouslySetInnerHTML={{ __html: getContent('history_title').content || 
+                'The Seventh-day Adventist Church emerged from the Great Awakening movements of the 19th century, when young Bible students began questioning mainstream interpretations of Scripture.' 
+              }} />
 
               <section id="qa-section" className="controversial-qa">
-                <h3>FREQUENT Q&A</h3>
+                <h3>{getContent('qa_title').title || 'FREQUENT Q&A'}</h3>
 
                 {qaItems.map((item) => (
                   <div className="qa-item" key={item.id}>
@@ -136,42 +193,47 @@ const AboutSDA = () => {
           </section>
 
           <section id="global-impact" className="global-impact">
-            <h2>Adventist Global Impact</h2>
-            <div className="impact-grid">
-              <div className="impact-card">
-                <h3>Education</h3>
-                <p><strong>118</strong> universities worldwide</p>
-                <p>Education in <strong>150+</strong> languages</p>
+            <h2>{getContent('global_impact_title').title || 'Adventist Global Impact'}</h2>
+            <div dangerouslySetInnerHTML={{ __html: getContent('global_impact_content').content }} />
+            
+            {/* Fallback to original cards if no dynamic content */}
+            {!getContent('global_impact_content').content && (
+              <div className="impact-grid">
+                <div className="impact-card">
+                  <h3>Education</h3>
+                  <p><strong>118</strong> universities worldwide</p>
+                  <p>Education in <strong>150+</strong> languages</p>
+                </div>
+                <div className="impact-card">
+                  <h3>Healthcare</h3>
+                  <p><strong>175</strong> hospitals</p>
+                  <p>Loma Linda ranked top hospital in CA</p>
+                </div>
+                <div className="impact-card">
+                  <h3>Humanitarian</h3>
+                  <p>ADRA in <strong>118</strong> countries</p>
+                  <p><strong>10M+</strong> served annually</p>
+                </div>
               </div>
-              <div className="impact-card">
-                <h3>Healthcare</h3>
-                <p><strong>175</strong> hospitals</p>
-                <p>Loma Linda ranked top hospital in CA</p>
-              </div>
-              <div className="impact-card">
-                <h3>Humanitarian</h3>
-                <p>ADRA in <strong>118</strong> countries</p>
-                <p><strong>10M+</strong> served annually</p>
-              </div>
-            </div>
+            )}
           </section>
 
           <section id="mission-section" className="mission-structure">
-            <h2>Mission & Church Structure</h2>
-            <p>
-              The mission of the SDA Church is to proclaim the everlasting gospel of Jesus Christ to all
-              people, teaching biblical principles and promoting a healthy, balanced lifestyle.
-            </p>
-            <ul>
-              <li>Global organizational structure</li>
-              <li>Emphasis on youth and community programs</li>
-              <li>Active missionary work worldwide</li>
-            </ul>
+            <h2>{getContent('mission_title').title || 'Mission & Church Structure'}</h2>
+            <div dangerouslySetInnerHTML={{ __html: getContent('mission_title').content || 
+              'The mission of the SDA Church is to proclaim the everlasting gospel of Jesus Christ to all people, teaching biblical principles and promoting a healthy, balanced lifestyle.' 
+            }} />
+            <div dangerouslySetInnerHTML={{ __html: getContent('mission_content').content || 
+              '<ul><li>Global organizational structure</li><li>Emphasis on youth and community programs</li><li>Active missionary work worldwide</li></ul>' 
+            }} />
           </section>
         </main>
       </div>
       <Footer />
-    </>
+    </div>
+    <Sidebar />
+  </div>
+  </>
   );
 };
 

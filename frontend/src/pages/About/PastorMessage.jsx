@@ -1,25 +1,75 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from '../../components/Layout/Header';
 import { Footer } from '../../components/Layout/Footer';
+import { Sidebar } from '../../components/Layout/Sidebar';
+import aboutService from '../../services/aboutService';
 import pastorImage from '../../assets/pastor-frank.png';
 
 export const PastorMessage = () => {
+  const [pageContent, setPageContent] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Load dynamic content
+  useEffect(() => {
+    const loadPageContent = async () => {
+      try {
+        setIsLoading(true);
+        const content = await aboutService.getPageContent('pastor_message');
+        setPageContent(content.data || {});
+      } catch (error) {
+        console.error('Error loading Pastor Message content:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadPageContent();
+  }, []);
+
+  const fallbackContent = {
+    title: {
+      title: 'Chaplain',
+      content: ''
+    },
+    heading: {
+      title: 'Message from the Chaplain',
+      content: ''
+    },
+    pastor_name: {
+      title: 'Pastor Frank Maina',
+      content: ''
+    },
+    quote: {
+      title: '"The fear of the Lord is the beginning of wisdom."',
+      content: ''
+    },
+    message: {
+      title: '',
+      content: '<p>Hello there.</p><p>Welcome to <span class="font-semibold text-blue-600">Dedan Kimathi University Seventh-Day Adventist Church</span>. We\'re here to support Adventist students in finding space for spiritual exploration and nourishment — reminding you that, <span class="italic"> "The fear of the Lord is the beginning of wisdom."</span></p><p>Here, we are nurturing <span class="font-semibold">spirit</span>, <span class="font-semibold">soul</span>, and <span class="font-semibold">service</span>. Our Chaplaincy department offers pastoral care, spiritual programs, and opportunities for service — embracing diversity and fostering well-being.</p><p>May the good Lord bless you for visiting this site.</p><div class="text-right mt-6"><p class="text-xl font-medium text-gray-800">Pastor Frank Maina,</p><p class="text-gray-700">Chaplain</p></div>'
+    }
+  };
+
+  const getContent = (sectionKey) => {
+    return pageContent[sectionKey] || fallbackContent[sectionKey] || { title: '', content: '' };
+  };
   return (
     <>
-      <Header />
+      <div className='flex'>
+        <div className='w-full lg:w-[85%]'>
+          <Header />
 
-      <section className="min-h-screen px-6 py-12 font-sans text-gray-800 bg-gray-100 lg:px-24">
-        <div className="p-6 mx-auto max-w-5xl bg-white rounded-xl shadow-md md:p-10">
-          {/* Top section: Image on the left, text on the right */}
-          <div className="flex flex-col gap-6 items-start mb-8 md:flex-row">
-            <img
-              src={pastorImage}
-              alt="Pastor Frank Maina"
-              className="w-48 h-auto rounded-lg shadow-sm"
-            />
-            <div>
-              <h1 className="text-xl text-gray-500 uppercase font-semibold">Chaplain</h1>
-              <h2 className="text-3xl font-bold text-blue-800 mb-2">Message from the Chaplain</h2>
+          <section className="min-h-screen px-6 py-12 font-sans text-gray-800 bg-gray-100 lg:px-24">
+            <div className="p-6 mx-auto max-w-5xl bg-white rounded-xl shadow-md md:p-10">
+              {/* Top section: Image on the left, text on the right */}
+              <div className="flex flex-col gap-6 items-start mb-8 md:flex-row">
+                <img
+                  src={pastorImage}
+                  alt="Pastor Frank Maina"
+                  className="w-48 h-auto rounded-lg shadow-sm"
+                />
+                <div>
+                  <h1 className="text-xl text-gray-500 uppercase font-semibold">Chaplain</h1>
+                  <h2 className="text-3xl font-bold text-blue-800 mb-2">Message from the Chaplain</h2>
               <h3 className="text-lg font-semibold text-gray-600">Pastor Frank Maina</h3>
               <p className="mt-2 italic text-gray-500">
                 “The fear of the Lord is the beginning of wisdom.”
@@ -55,7 +105,10 @@ export const PastorMessage = () => {
       </section>
 
       <Footer />
-    </>
+    </div>
+    <Sidebar />
+  </div>
+  </>
   );
 };
 

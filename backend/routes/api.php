@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\HomepageController;
 use App\Http\Controllers\Api\ChurchProjectController;
 use App\Http\Controllers\Api\WorshipServiceController;
+use App\Http\Controllers\Api\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,27 @@ Route::get('/test', function () {
         'message' => 'API is working',
         'timestamp' => now()->toISOString()
     ]);
+});
+
+// Test About route
+Route::get('/about-test', function () {
+    return response()->json([
+        'status' => 'success',
+        'message' => 'About test route is working'
+    ]);
+});
+
+// Debug about controller
+Route::get('/about-debug/{pageType}', function ($pageType) {
+    try {
+        $controller = new App\Http\Controllers\Api\AboutController();
+        return $controller->getPageContent($pageType);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+    }
 });
 
 // Authentication Routes (no auth required)
@@ -78,6 +100,44 @@ Route::prefix('v1')->group(function () {
     // Church Projects (public viewing)
     Route::get('/church-projects', [App\Http\Controllers\Api\ChurchProjectController::class, 'index']);
     Route::get('/church-projects/featured', [App\Http\Controllers\Api\ChurchProjectController::class, 'featured']);
+});
+
+// About Pages Content - Simple Routes (outside v1 group)
+Route::get('/about/{pageType}', function ($pageType) {
+    try {
+        $content = \App\Models\AboutContent::getPageContent($pageType);
+        return response()->json([
+            'status' => 'success',
+            'data' => $content
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Failed to fetch page content',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+});
+
+Route::get('/about/{pageType}/{sectionKey}', function ($pageType, $sectionKey) {
+    try {
+        $content = \App\Models\AboutContent::getSectionContent($pageType, $sectionKey);
+        return response()->json([
+            'status' => 'success',
+            'data' => $content
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Failed to fetch section content',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+});
+    
+    // Church Projects (public viewing)
+    Route::get('/church-projects', [App\Http\Controllers\Api\ChurchProjectController::class, 'index']);
+    Route::get('/church-projects/featured', [App\Http\Controllers\Api\ChurchProjectController::class, 'featured']);
     
     // Worship Services (public viewing)
     Route::get('/worship-services', [App\Http\Controllers\Api\WorshipServiceController::class, 'index']);
@@ -110,8 +170,6 @@ Route::prefix('v1')->group(function () {
     
     // Donations (public submissions)
     Route::post('/donations', [DonationController::class, 'store']);
-    
-});
 
 // Protected API Routes (authentication required)
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
@@ -121,6 +179,12 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard']);
         Route::get('/statistics', [AdminController::class, 'statistics']);
         Route::get('/recent-activities', [AdminController::class, 'recentActivities']);
+    });
+    
+    // About Pages Management (Admin only)
+    Route::prefix('about')->group(function () {
+        Route::post('/content', [AboutController::class, 'updateContent']);
+        Route::delete('/content/{id}', [AboutController::class, 'deleteContent']);
     });
     
     // Church Members Management
