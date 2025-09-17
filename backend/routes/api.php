@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\MemberController;
 use App\Http\Controllers\Api\ChurchMemberController;
 use App\Http\Controllers\Api\EventController;
@@ -28,6 +28,15 @@ use App\Http\Controllers\Api\AboutController;
 |
 */
 
+// Auth routes
+Route::prefix('auth')->group(function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::get('/user', [AuthController::class, 'user']);
+    });
+});
+
 // Test route for API connectivity
 Route::get('/test', function () {
     return response()->json([
@@ -37,12 +46,10 @@ Route::get('/test', function () {
     ]);
 });
 
-// Test About route
-Route::get('/about-test', function () {
-    return response()->json([
-        'status' => 'success',
-        'message' => 'About test route is working'
-    ]);
+// Ministry routes
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResource('ministries', MinistryController::class);
+    Route::get('ministries/category/{category}', [MinistryController::class, 'getByCategory']);
 });
 
 // Debug about controller

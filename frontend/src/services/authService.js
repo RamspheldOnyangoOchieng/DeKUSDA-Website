@@ -45,7 +45,7 @@ class AuthService {
         this.saveUserToStorage(response.data.user, response.data.role);
         return response;
       }
-      throw new Error(response.message);
+      throw new Error(response.message || 'Login failed');
     } catch (error) {
       throw error;
     }
@@ -61,7 +61,7 @@ class AuthService {
         this.saveUserToStorage(response.data.user, response.data.role);
         return response;
       }
-      throw new Error(response.message);
+      throw new Error(response.message || 'Registration failed');
     } catch (error) {
       throw error;
     }
@@ -98,12 +98,40 @@ class AuthService {
     return this.userRole === 'admin';
   }
 
+  // Fetch current user from API
+  async fetchCurrentUser() {
+    try {
+      const response = await apiService.get('/auth/user', true);
+      if (response.success) {
+        this.saveUserToStorage(response.data.user, response.data.role);
+        return response.data;
+      }
+      throw new Error(response.message || 'Failed to fetch user data');
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // Initialize auth state from token
+  async initializeAuth() {
+    if (apiService.token && this.currentUser) {
+      try {
+        await this.fetchCurrentUser();
+        return true;
+      } catch (error) {
+        this.clearUserStorage();
+        return false;
+      }
+    }
+    return false;
+  }
+
   // Check if user is member
   isMember() {
     return this.userRole === 'member' || this.userRole === 'admin';
   }
 
-  // Check if user is visitor (not authenticated)
+  // Check if user is visitor
   isVisitor() {
     return !this.isAuthenticated();
   }
@@ -123,4 +151,6 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+// Create and export a singleton instance
+const authService = new AuthService();
+export default authService;

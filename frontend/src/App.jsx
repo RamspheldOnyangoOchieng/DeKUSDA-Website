@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Context and Components
 import { AuthProvider } from './contexts/AuthContext';
@@ -23,7 +25,7 @@ import ElderMessage from './pages/About/ElderMessage';
 import Leaders2022 from './pages/About/Leadership/Leaders2022';
 import Leaders2023 from './pages/About/Leadership/Leaders2023';
 import Leaders2024 from './pages/About/Leadership/Leaders2024';
-import AboutContentManager from './pages/Admin/AboutContentManager';
+import AboutContentManager from './pages/admin/AboutContentManager';
 import AboutContentTest from './pages/AboutContentTest';
 
 // Ministries / Departments
@@ -34,6 +36,11 @@ import AMO_ALO from './pages/Ministries/AMO_ALO';
 import Health from './pages/Ministries/Health';
 import SabbathSchool from './pages/Ministries/SabbathSchool';
 import ProphecyDepartment from './pages/Ministries/Prophecy';
+
+// Admin
+import AdminLogin from './pages/admin/AdminLogin';
+import MinistryList from './pages/admin/ministries/MinistryList';
+import MinistryForm from './pages/admin/ministries/MinistryForm';
 
 // Music Groups
 import ChurchChoir from './pages/Music/ChurchChoir';
@@ -65,11 +72,11 @@ import Terms from './pages/Legal/Terms';
 import Accessibility from './pages/Legal/Accessibility';
 
 // Admin Pages
-import AdminDashboard from './pages/Admin/AdminDashboard';
-import ManageEvents from './pages/Admin/ManageEvents';
-import ManageSermons from './pages/Admin/ManageSermons';
-import ManageMembers from './pages/Admin/ManageMembers';
-import ManageGallery from './pages/Admin/ManageGallery';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import ManageEvents from './pages/admin/ManageEvents';
+import ManageSermons from './pages/admin/ManageSermons';
+import ManageMembers from './pages/admin/ManageMembers';
+import ManageGallery from './pages/admin/ManageGallery';
 
 // Member Pages
 import MemberDashboard from './pages/Member/MemberDashboard';
@@ -78,12 +85,36 @@ import MyProfile from './pages/Member/MyProfile';
 function App() {
   return (
     <ErrorBoundary>
+      <ToastContainer position="top-right" />
       <AuthProvider>
         <BrowserRouter>
           <Routes>
             {/* Home */}
             <Route path="/" element={<Home />} />
 
+            {/* Admin Access */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
+            } />
+            <Route path="/admin/ministries" element={
+              <AdminRoute>
+                <MinistryList />
+              </AdminRoute>
+            } />
+            <Route path="/admin/ministries/new" element={
+              <AdminRoute>
+                <MinistryForm />
+              </AdminRoute>
+            } />
+            <Route path="/admin/ministries/edit/:id" element={
+              <AdminRoute>
+                <MinistryForm />
+              </AdminRoute>
+            } />
+            
             {/* Portal Access */}
             <Route path="/members" element={<MembersPortal />} />
             <Route path="/leaders" element={<LeadersPortal />} />
@@ -113,6 +144,23 @@ function App() {
               <ProtectedRoute>
                 <SeniorAdminDashboard />
               </ProtectedRoute>
+            } />
+
+            {/* Ministry Management */}
+            <Route path="/Admin/ministries" element={
+              <AdminRoute>
+                <MinistryList />
+              </AdminRoute>
+            } />
+            <Route path="/Admin/ministries/create" element={
+              <AdminRoute>
+                <MinistryForm />
+              </AdminRoute>
+            } />
+            <Route path="/Admin/ministries/edit/:id" element={
+              <AdminRoute>
+                <MinistryForm />
+              </AdminRoute>
             } />
 
             {/* About */}

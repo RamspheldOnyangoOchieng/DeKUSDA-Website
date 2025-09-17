@@ -27,7 +27,7 @@ const useTypingEffect = (text, speed = 100) => {
   return displayedText;
 };
 
-export const AboutDekusda = () => {
+const AboutDekusda = () => {
   const [pageContent, setPageContent] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -105,28 +105,26 @@ export const AboutDekusda = () => {
   const typedWelcome = useTypingEffect(welcomeText, 120);
 
   return (
-    <div>
-      <div className='flex'>
-        <div className='w-full lg:w-[85%]'>
-          <Header />
-          
-          <div className="page-container about-dekusda-page">
-            <div className="main-content">
-              {/* Sidebar */}
-              <aside className="sidebar">
-                <img src={sdaLogo} alt="SDA Logo" className="sda-logo" />
-                <h3>Quick Links</h3>
-                <ul>
-                  <li><a href="#who-we-are">Who We Are</a></li>
-                  <li><a href="#vision">MISSION & VISION</a></li>
-                  <li><a href="#activities">Activities</a></li>
-                  <li><a href="#worship">Worship</a></li>
-                  <li><a href="#where-to-find-us">Where to Find Us</a></li>
-                </ul>
-              </aside>
+    <div className="flex">
+      <div className="w-full lg:w-[85%]">
+        <Header />
+        <div className="page-container about-dekusda-page">
+          <div className="content-wrapper">
+            {/* Sidebar */}
+            <aside className="sidebar">
+              <img src={sdaLogo} alt="SDA Logo" className="sda-logo" />
+              <h3>Quick Links</h3>
+              <ul>
+                <li><a href="#who-we-are">Who We Are</a></li>
+                <li><a href="#vision">MISSION & VISION</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#worship">Worship</a></li>
+                <li><a href="#where-to-find-us">Where to Find Us</a></li>
+              </ul>
+            </aside>
 
-        {/* Main Content */}
-        <div className="content-container">
+            {/* Main Content */}
+            <div className="content-container">
           <div className="header-container">
             <div className="welcome-image-container">
               <img src={churchImage} alt="Church" className="church-image" />
@@ -242,15 +240,16 @@ export const AboutDekusda = () => {
               </div>
             </section>
           </main>
+          </div>
+          </div>
         </div>
+        <Footer />
       </div>
-
-      <Footer />
+      <div className="w-[15%] hidden lg:block">
+        <Sidebar />
+      </div>
     </div>
-    <Sidebar />
-  </div>
-  </div>
-);
+  );
 };
 
 export default AboutDekusda;

@@ -10,8 +10,10 @@ const AdminDashboard = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchDashboardStats();
-  }, []);
+    if (user) {
+      fetchDashboardStats();
+    }
+  }, [user]);
 
   const fetchDashboardStats = async () => {
     try {
