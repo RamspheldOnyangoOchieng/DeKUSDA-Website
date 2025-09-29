@@ -42,20 +42,36 @@ const SeniorAdminDashboard = () => {
     const userData = localStorage.getItem('user');
     const deptData = localStorage.getItem('department');
     
-    if (!token || !userData || !deptData) {
+    // Check for invalid or missing data
+    if (!token || !userData || !deptData || userData === 'undefined' || userData === 'null') {
+      // Clear any invalid localStorage data
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('department');
       navigate('/leaders');
       return;
     }
 
-    setUser(JSON.parse(userData));
-    setDepartment(deptData);
-    fetchDashboardData();
+    try {
+      const parsedUser = JSON.parse(userData);
+      setUser(parsedUser);
+      setDepartment(deptData);
+      fetchDashboardData();
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      // Clear invalid data and redirect to login
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('department');
+      navigate('/leaders');
+    }
   }, [navigate]);
 
   const fetchDashboardData = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/dashboard`, {
+      const token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+      const base = (import.meta?.env?.VITE_API_URL) ? `${import.meta.env.VITE_API_URL}` : 'http://127.0.0.1:8000';
+      const response = await fetch(`${base}/api/v1/admin/dashboard`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,

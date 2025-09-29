@@ -1,0 +1,55 @@
+import apiService from './apiService';
+
+class ChurchService {
+  // Events API
+  async getEvents(params = {}) {
+    return await apiService.get('/events', true, params);
+  }
+
+  async getEvent(id) {
+    return await apiService.get(`/events/${id}`, true);
+  }
+
+  async createEvent(eventData) {
+    return await apiService.post('/events', eventData, true);
+  }
+
+  async updateEvent(id, eventData) {
+    return await apiService.put(`/events/${id}`, eventData, true);
+  }
+
+  async deleteEvent(id) {
+    return await apiService.delete(`/events/${id}`, true);
+  }
+
+  // Gallery API
+  async getGalleryItems(params = {}) {
+    return await apiService.get('/gallery', true, params);
+  }
+
+  async getGalleryItem(id) {
+    return await apiService.get(`/gallery/${id}`, true);
+  }
+
+  async createGalleryItem(itemData) {
+    return await apiService.post('/gallery', itemData, true);
+  }
+
+  async updateGalleryItem(id, itemData) {
+    return await apiService.put(`/gallery/${id}`, itemData, true);
+  }
+
+  async deleteGalleryItem(id) {
+    return await apiService.delete(`/gallery/${id}`, true);
+  }
+
+  async uploadGalleryImage(file) {
+    const formData = new FormData();
+    formData.append('image', file);
+    return await apiService.post('/gallery/upload', formData, true, true);
+  }
+}
+
+// Export a singleton instance
+const churchService = new ChurchService();
+export default churchService;

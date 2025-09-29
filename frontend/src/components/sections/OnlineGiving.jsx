@@ -3,7 +3,7 @@ import {
   FaHeart, FaHandsHelping, FaBuilding, FaGraduationCap, 
   FaCreditCard, FaMobileAlt, FaUniversity, FaLock,
   FaDollarSign, FaChartBar, FaCalendarAlt, FaDownload,
-  FaGift, FaUsers, FaShieldAlt, FaChurch, FaBus, FaBook
+  FaGift, FaUsers, FaShieldAlt, FaChurch, FaBus, FaBook, FaChevronDown
 } from 'react-icons/fa';
 
 // Helper functions for dynamic project rendering
@@ -48,6 +48,7 @@ const OnlineGiving = ({ projects = [] }) => {
   const [selectedFund, setSelectedFund] = useState('tithe');
   const [isRecurring, setIsRecurring] = useState(false);
   const [frequency, setFrequency] = useState('monthly');
+  const [showGivingContent, setShowGivingContent] = useState(true);
 
   const predefinedAmounts = [500, 1000, 2000, 5000, 10000, 20000];
   
@@ -142,8 +143,25 @@ const OnlineGiving = ({ projects = [] }) => {
             Your faithful stewardship supports God's work at DeKUSDA and around the world.
           </p>
           <div className="mt-4 sm:mt-6 h-1 w-16 sm:w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+          
+          {/* Toggle Button */}
+          <button
+            onClick={() => setShowGivingContent(!showGivingContent)}
+            className="mt-6 flex items-center justify-center mx-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg"
+          >
+            <span className="mr-2">
+              {showGivingContent ? 'Hide' : 'Show'} Giving Options
+            </span>
+            <FaChevronDown 
+              className={`transform transition-transform duration-300 ${
+                showGivingContent ? 'rotate-180' : 'rotate-0'
+              }`}
+            />
+          </button>
         </div>
 
+        {showGivingContent && (
+        <>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Giving Form */}
           <div className="lg:col-span-2">
@@ -681,6 +699,8 @@ const OnlineGiving = ({ projects = [] }) => {
             </button>
           </div>
         </div>
+        </>
+        )}
       </div>
     </div>
   );

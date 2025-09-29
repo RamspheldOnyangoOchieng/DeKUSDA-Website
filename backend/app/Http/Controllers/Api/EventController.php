@@ -31,30 +31,53 @@ class EventController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'start_datetime' => 'required|date',
-            'end_datetime' => 'required|date|after:start_datetime',
-            'location' => 'nullable|string|max:255',
-            'event_type' => 'required|in:worship,bible_study,youth,choir,fellowship,community,conference,other',
-            'status' => 'required|in:draft,published,cancelled',
-            'featured_image' => 'nullable|string',
-            'additional_info' => 'nullable|string',
-            'is_recurring' => 'boolean',
-            'recurrence_pattern' => 'nullable|string',
-            'max_attendees' => 'nullable|integer|min:1',
-            'entry_fee' => 'nullable|numeric|min:0',
-        ]);
+        try {
+            $validated = $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'required|string',
+                'start_datetime' => 'required|date',
+                'end_datetime' => 'required|date|after:start_datetime',
+                'location' => 'nullable|string|max:255',
+                'event_type' => 'required|in:worship,bible_study,youth,choir,fellowship,community,conference,other',
+                'status' => 'required|in:draft,published,cancelled',
+                'featured_image' => 'nullable|string',
+                'additional_info' => 'nullable|string',
+                'is_recurring' => 'boolean',
+                'recurrence_pattern' => 'nullable|string',
+                'max_attendees' => 'nullable|integer|min:1',
+                'entry_fee' => 'nullable|numeric|min:0',
+            ]);
 
-        $validated['created_by'] = auth()->id();
-        $event = Event::create($validated);
+            // Set created_by to first user if no auth, otherwise use authenticated user
+            if (auth()->check()) {
+                $validated['created_by'] = auth()->id();
+            } else {
+                // Get the first user as default
+                $firstUser = \App\Models\User::first();
+                $validated['created_by'] = $firstUser ? $firstUser->id : 1;
+            }
+            
+            $event = Event::create($validated);
 
-        return response()->json([
-            'success' => true,
-            'data' => $event,
-            'message' => 'Event created successfully'
-        ], 201);
+            return response()->json([
+                'success' => true,
+                'data' => $event,
+                'message' => 'Event created successfully'
+            ], 201);
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            \Log::error('Error creating event: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create event: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     /**

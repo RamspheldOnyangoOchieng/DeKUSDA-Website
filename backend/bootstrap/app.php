@@ -14,13 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,
-            'cors' => \App\Http\Middleware\CorsMiddleware::class,
         ]);
         
-        // Add CORS middleware for API routes
-        $middleware->api([
-            \App\Http\Middleware\CorsMiddleware::class,
-        ]);
+        // Laravel handles CORS automatically with config/cors.php
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

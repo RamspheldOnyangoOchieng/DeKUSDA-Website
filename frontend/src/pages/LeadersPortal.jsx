@@ -102,7 +102,8 @@ const LeadersPortal = () => {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/leader-login`, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+      const response = await fetch(`${apiUrl}/auth/leader-login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,21 +113,32 @@ const LeadersPortal = () => {
       });
 
       const data = await response.json();
+      console.log('Login response:', data); // Debug log
 
-      if (response.ok) {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        localStorage.setItem('department', loginForm.department);
+      if (response.ok && data.success) {
+        // Backend returns data in nested structure
+        const { token, user, department } = data.data;
+        
+        // Store data in the format expected by authService
+        localStorage.setItem('auth_token', token);  // authService expects 'auth_token'
+        localStorage.setItem('user_data', JSON.stringify(user));  // authService expects 'user_data'
+        localStorage.setItem('user_role', user.role);  // authService expects 'user_role'
+        localStorage.setItem('department', department);
+        
+        // Also store in legacy format for dashboard components
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
         
         // Redirect based on department and role
-        if (loginForm.department === 'communication') {
+        if (department === 'communication') {
           navigate('/communication-dashboard');
-        } else if (['pastoral', 'finance'].includes(loginForm.department)) {
+        } else if (['pastoral', 'finance'].includes(department)) {
           navigate('/senior-admin-dashboard');
         } else {
           navigate('/department-dashboard');
         }
       } else {
+        console.error('Login failed:', data); // Debug log
         alert(data.message || 'Login failed. Please check your credentials and department access.');
       }
     } catch (error) {

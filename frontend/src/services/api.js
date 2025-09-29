@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with Laravel API base URL
 const API = axios.create({
-  baseURL: import.meta.env.VITE_LARAVEL_API_URL || 'http://localhost:8000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -12,6 +12,12 @@ const API = axios.create({
 
 // CSRF protection for Laravel Sanctum (disabled for public routes)
 API.interceptors.request.use(async (config) => {
+  // Add authentication token if available
+  const token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
   // Skip CSRF cookie for public API routes
   if (config.url?.includes('/v1/')) {
     return config;

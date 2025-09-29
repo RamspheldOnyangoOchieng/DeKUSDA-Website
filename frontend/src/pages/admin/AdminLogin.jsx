@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import authService from '../../services/authService';
+import { useAuth } from '../../contexts/AuthContext';
 
 const AdminLogin = () => {
+  const { login } = useAuth();
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -24,13 +25,16 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await authService.login(credentials);
-      if (response.success && response.data.role === 'admin') {
-        toast.success('Login successful!');
-        navigate('/admin/dashboard');
+      const response = await login(credentials);
+      if (response.success) {
+        if (response.data.role === 'admin') {
+          toast.success('Login successful!');
+          navigate('/admin/dashboard');
+        } else {
+          toast.error('Access denied. Admin privileges required.');
+        }
       } else {
-        toast.error('Access denied. Admin privileges required.');
-        authService.logout();
+        toast.error(response.message || 'Login failed');
       }
     } catch (error) {
       toast.error(error.message || 'Login failed. Please try again.');
@@ -76,6 +80,19 @@ const AdminLogin = () => {
               />
             </div>
           </div>
+
+          {/* Development helper - Admin credentials button */}
+          {import.meta.env.DEV && (
+            <div>
+              <button
+                type="button"
+                onClick={() => setCredentials({email: 'admin@dekusda.com', password: 'admin123'})}
+                className="w-full flex justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 mb-3"
+              >
+                Use Admin Credentials (Dev)
+              </button>
+            </div>
+          )}
 
           <div>
             <button

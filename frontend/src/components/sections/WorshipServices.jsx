@@ -7,6 +7,7 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 
 const WorshipServices = () => {
   const [activeTab, setActiveTab] = useState('schedule');
+  const [showWorshipContent, setShowWorshipContent] = useState(false);
 
   const services = [
     {
@@ -137,6 +138,29 @@ const WorshipServices = () => {
           <div className="mt-6 h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
 
+        {/* Toggle Button for Worship Content */}
+        <div className="text-center mb-8">
+          <button 
+            onClick={() => setShowWorshipContent(!showWorshipContent)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center mx-auto space-x-2 shadow-lg hover:shadow-xl"
+          >
+            <span>{showWorshipContent ? 'Hide Worship Details' : 'View Worship Details'}</span>
+            <div className={`transform transition-transform duration-300 ${showWorshipContent ? 'rotate-180' : ''}`}>
+              <svg 
+                className="w-5 h-5" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
+        </div>
+
+        {/* Worship Content - Conditionally Rendered */}
+        {showWorshipContent && (
+        <div>
         {/* Tab Navigation */}
         <div className="flex justify-center mb-12">
           <div className="bg-white rounded-lg shadow-md p-1 flex">
@@ -370,6 +394,8 @@ const WorshipServices = () => {
             </button>
           </div>
         </div>
+        </div>
+        )}
       </div>
     </div>
   );

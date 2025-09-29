@@ -46,6 +46,69 @@ class AuthController extends Controller
         ]);
     }
 
+    public function leaderLogin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|string',
+            'department' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        // Attempt authentication
+        $credentials = $request->only('email', 'password');
+        
+        if (!Auth::attempt($credentials)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials. Please check your email and password.'
+            ], 401);
+        }
+
+        $user = Auth::user();
+        
+        // Check if user has appropriate role/department access
+        $department = $request->department;
+        $allowedDepartments = [
+            'communication', 'youth', 'music', 'pastoral', 
+            'health', 'education', 'finance', 'prayer'
+        ];
+        
+        if (!in_array($department, $allowedDepartments)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid department selected.'
+            ], 400);
+        }
+
+        // For now, we'll allow access if credentials are correct
+        // In production, you might want to check user roles/departments
+        $role = $user->roles->first() ? $user->roles->first()->name : 'staff_admin';
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Login successful',
+            'data' => [
+                'token' => $user->createToken('leader-auth-token')->plainTextToken,
+                'user' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'role' => $role,
+                    'department' => $department
+                ],
+                'department' => $department
+            ]
+        ]);
+    }
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

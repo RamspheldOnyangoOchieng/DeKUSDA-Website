@@ -1,83 +1,62 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
-const FileUpload = ({
-  onFileSelect,
-  accept = "*/*",
-  maxSize = 10, // in MB
-  multiple = false,
-  label = "Upload File",
-  description = "Choose a file to upload",
-  disabled = false
+const FileUpload = ({ 
+  onFileSelect, 
+  accept = '*/*', 
+  multiple = false, 
+  maxSize = 5 * 1024 * 1024, // 5MB default
+  className = '',
+  disabled = false,
+  label = 'Choose File'
 }) => {
   const [dragActive, setDragActive] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [uploadProgress, setUploadProgress] = useState({});
-  const [errors, setErrors] = useState([]);
-  const fileInputRef = useRef(null);
-
-  // File type configurations
-  const fileTypes = {
-    image: {
-      accept: "image/*",
-      maxSize: 5,
-      description: "Upload images (JPG, PNG, GIF) up to 5MB"
-    },
-    audio: {
-      accept: "audio/*",
-      maxSize: 50,
-      description: "Upload audio files (MP3, WAV, M4A) up to 50MB"
-    },
-    video: {
-      accept: "video/*",
-      maxSize: 200,
-      description: "Upload video files (MP4, AVI, MOV) up to 200MB"
-    },
-    document: {
-      accept: ".pdf,.doc,.docx,.txt",
-      maxSize: 10,
-      description: "Upload documents (PDF, DOC, DOCX, TXT) up to 10MB"
-    }
-  };
-
-  const validateFile = (file) => {
-    const maxSizeBytes = maxSize * 1024 * 1024;
-    const errors = [];
-
-    if (file.size > maxSizeBytes) {
-      errors.push(`File size must be less than ${maxSize}MB`);
-    }
-
-    return errors;
-  };
+  const [error, setError] = useState('');
 
   const handleFiles = (files) => {
-    const fileList = Array.from(files);
-    const validFiles = [];
-    const fileErrors = [];
-
-    fileList.forEach((file, index) => {
-      const validation = validateFile(file);
-      if (validation.length === 0) {
-        validFiles.push(file);
-      } else {
-        fileErrors.push(`${file.name}: ${validation.join(', ')}`);
-      }
-    });
-
-    setErrors(fileErrors);
+    setError('');
+    const fileArray = Array.from(files);
     
-    if (validFiles.length > 0) {
-      setSelectedFiles(multiple ? [...selectedFiles, ...validFiles] : validFiles);
-      onFileSelect && onFileSelect(multiple ? validFiles : validFiles[0]);
+    // Validate file size
+    const oversizedFiles = fileArray.filter(file => file.size > maxSize);
+    if (oversizedFiles.length > 0) {
+      setError(`File size must be less than ${Math.round(maxSize / (1024 * 1024))}MB`);
+      return;
+    }
+
+    // Validate file type if accept is specified
+    if (accept !== '*/*') {
+      const acceptedTypes = accept.split(',').map(type => type.trim());
+      const invalidFiles = fileArray.filter(file => {
+        return !acceptedTypes.some(type => {
+          if (type.startsWith('.')) {
+            return file.name.toLowerCase().endsWith(type.toLowerCase());
+          }
+          return file.type.match(type.replace('*', '.*'));
+        });
+      });
+      
+      if (invalidFiles.length > 0) {
+        setError(`Invalid file type. Accepted types: ${accept}`);
+        return;
+      }
+    }
+
+    if (multiple) {
+      setSelectedFiles(prev => [...prev, ...fileArray]);
+      onFileSelect && onFileSelect([...selectedFiles, ...fileArray]);
+    } else {
+      setSelectedFiles(fileArray);
+      onFileSelect && onFileSelect(fileArray);
     }
   };
 
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
+    if (e.type === 'dragenter' || e.type === 'dragover') {
       setDragActive(true);
-    } else if (e.type === "dragleave") {
+    } else if (e.type === 'dragleave') {
       setDragActive(false);
     }
   };
@@ -88,25 +67,24 @@ const FileUpload = ({
     setDragActive(false);
     
     if (disabled) return;
-
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFiles(e.dataTransfer.files);
+    
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      handleFiles(files);
     }
   };
 
   const handleChange = (e) => {
-    e.preventDefault();
-    if (disabled) return;
-    
-    if (e.target.files && e.target.files[0]) {
-      handleFiles(e.target.files);
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      handleFiles(files);
     }
   };
 
   const removeFile = (index) => {
     const newFiles = selectedFiles.filter((_, i) => i !== index);
     setSelectedFiles(newFiles);
-    onFileSelect && onFileSelect(multiple ? newFiles : null);
+    onFileSelect && onFileSelect(newFiles);
   };
 
   const formatFileSize = (bytes) => {
@@ -117,122 +95,76 @@ const FileUpload = ({
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
-  const getFileIcon = (fileName) => {
-    const extension = fileName.split('.').pop().toLowerCase();
-    
-    if (['jpg', 'jpeg', 'png', 'gif', 'bmp'].includes(extension)) {
-      return '🖼️';
-    } else if (['mp3', 'wav', 'm4a', 'aac'].includes(extension)) {
-      return '🎵';
-    } else if (['mp4', 'avi', 'mov', 'wmv'].includes(extension)) {
-      return '🎬';
-    } else if (['pdf'].includes(extension)) {
-      return '📄';
-    } else if (['doc', 'docx'].includes(extension)) {
-      return '📝';
-    } else {
-      return '📁';
-    }
-  };
-
   return (
-    <div className="w-full">
-      {/* Upload Area */}
+    <div className={`w-full ${className}`}>
       <div
         className={`relative border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
-          dragActive
-            ? 'border-blue-400 bg-blue-50'
+          dragActive 
+            ? 'border-blue-400 bg-blue-50' 
             : 'border-gray-300 hover:border-gray-400'
         } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
         onDragOver={handleDrag}
         onDrop={handleDrop}
-        onClick={() => !disabled && fileInputRef.current?.click()}
+        onClick={() => !disabled && document.getElementById('file-input').click()}
       >
         <input
-          ref={fileInputRef}
+          id="file-input"
           type="file"
-          multiple={multiple}
           accept={accept}
+          multiple={multiple}
           onChange={handleChange}
-          className="hidden"
           disabled={disabled}
+          className="hidden"
         />
         
         <div className="space-y-2">
-          <div className="text-4xl">📁</div>
-          <div>
-            <p className="text-lg font-medium text-gray-700">{label}</p>
-            <p className="text-sm text-gray-500">{description}</p>
+          <div className="text-4xl text-gray-400">📁</div>
+          <div className="text-sm text-gray-600">
+            <span className="font-medium text-blue-600 hover:text-blue-500">
+              {label}
+            </span>
+            {' '}or drag and drop
           </div>
-          <p className="text-xs text-gray-400">
-            {dragActive ? 'Drop files here...' : 'Click to browse or drag and drop'}
-          </p>
+          <div className="text-xs text-gray-500">
+            Max size: {Math.round(maxSize / (1024 * 1024))}MB
+            {accept !== '*/*' && ` • Accepted: ${accept}`}
+          </div>
         </div>
       </div>
 
-      {/* Error Messages */}
-      {errors.length > 0 && (
-        <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-md">
-          <h4 className="text-sm font-medium text-red-800 mb-1">Upload Errors:</h4>
-          <ul className="text-sm text-red-700 space-y-1">
-            {errors.map((error, index) => (
-              <li key={index}>• {error}</li>
-            ))}
-          </ul>
+      {error && (
+        <div className="mt-2 text-sm text-red-600">
+          {error}
         </div>
       )}
 
-      {/* Selected Files */}
       {selectedFiles.length > 0 && (
         <div className="mt-4 space-y-2">
-          <h4 className="text-sm font-medium text-gray-700">
-            Selected Files ({selectedFiles.length})
-          </h4>
+          <div className="text-sm font-medium text-gray-700">
+            Selected Files ({selectedFiles.length}):
+          </div>
           {selectedFiles.map((file, index) => (
-            <div
-              key={index}
-              className="flex items-center justify-between p-3 bg-gray-50 rounded-md border"
-            >
-              <div className="flex items-center space-x-3">
-                <span className="text-2xl">{getFileIcon(file.name)}</span>
+            <div key={index} className="flex items-center justify-between bg-gray-50 rounded-md p-2">
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-600">📄</span>
                 <div>
-                  <p className="text-sm font-medium text-gray-700 truncate max-w-xs">
-                    {file.name}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    {formatFileSize(file.size)}
-                  </p>
+                  <div className="text-sm font-medium text-gray-900">{file.name}</div>
+                  <div className="text-xs text-gray-500">{formatFileSize(file.size)}</div>
                 </div>
               </div>
-              
-              {uploadProgress[file.name] && (
-                <div className="flex-1 mx-4">
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${uploadProgress[file.name]}%` }}
-                    ></div>
-                  </div>
-                  <p className="text-xs text-gray-500 mt-1">
-                    {uploadProgress[file.name]}% uploaded
-                  </p>
-                </div>
+              {!disabled && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeFile(index);
+                  }}
+                  className="text-red-500 hover:text-red-700 text-sm"
+                >
+                  Remove
+                </button>
               )}
-              
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  removeFile(index);
-                }}
-                className="text-red-500 hover:text-red-700 p-1"
-                disabled={disabled}
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
             </div>
           ))}
         </div>

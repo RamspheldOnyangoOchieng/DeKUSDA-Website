@@ -96,26 +96,6 @@ const PrayerDepartment = () => {
         {/* Main Content */}
         <div className="max-w-6xl mx-auto py-12 px-6">
 
-          {/* Leadership Section */}
-          <div className="mb-16 bg-white p-8 rounded-xl shadow-lg border-l-4 border-primaryBlue">
-            <h2 className="text-3xl font-bold text-darkBlue mb-6 flex items-center">
-              <AiOutlineTeam className="mr-3 text-primaryBlue" />
-              Leadership Team
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="text-2xl font-semibold text-primaryBlue mb-2">Department Leader</h3>
-                <p className="text-xl text-gray-800">Jessy Kiplimo</p>
-                <p className="text-gray-600 mt-2">Oversees all prayer initiatives and spiritual guidance</p>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="text-2xl font-semibold text-primaryBlue mb-2">Assistant Leader</h3>
-                <p className="text-xl text-gray-800">Brian Kitheka</p>
-                <p className="text-gray-600 mt-2">Coordinates prayer schedules and member participation</p>
-              </div>
-            </div>
-          </div>
-
           {/* Prayer Schedule */}
           <div className="mb-16 bg-white p-8 rounded-xl shadow-lg border-l-4 border-primaryBlue">
             <h2 className="text-3xl font-bold text-darkBlue mb-6 flex items-center">

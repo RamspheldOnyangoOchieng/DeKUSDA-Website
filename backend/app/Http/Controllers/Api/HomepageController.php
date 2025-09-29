@@ -214,4 +214,127 @@ class HomepageController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Create content section (Admin only)
+     */
+    public function createContent(Request $request): JsonResponse
+    {
+        try {
+            $request->validate([
+                'section_key' => 'required|string|max:255',
+                'title' => 'nullable|string|max:255',
+                'content' => 'required|string',
+                'subtitle' => 'nullable|string|max:255',
+                'image_url' => 'nullable|url|max:500',
+                'button_text' => 'nullable|string|max:100',
+                'button_link' => 'nullable|string|max:500',
+                'is_active' => 'boolean'
+            ]);
+
+            $content = HomepageContent::create([
+                'section_key' => $request->section_key,
+                'title' => $request->title,
+                'content' => $request->content,
+                'subtitle' => $request->subtitle,
+                'image_url' => $request->image_url,
+                'button_text' => $request->button_text,
+                'button_link' => $request->button_link,
+                'is_active' => $request->boolean('is_active', true),
+                'sort_order' => HomepageContent::where('section_key', $request->section_key)->max('sort_order') + 1
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Content created successfully',
+                'data' => $content
+            ], 201);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to create content',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Update content section (Admin only)
+     */
+    public function updateContent(Request $request, int $id): JsonResponse
+    {
+        try {
+            $request->validate([
+                'section_key' => 'sometimes|string|max:255',
+                'title' => 'nullable|string|max:255',
+                'content' => 'sometimes|string',
+                'subtitle' => 'nullable|string|max:255',
+                'image_url' => 'nullable|url|max:500',
+                'button_text' => 'nullable|string|max:100',
+                'button_link' => 'nullable|string|max:500',
+                'is_active' => 'boolean'
+            ]);
+
+            $content = HomepageContent::findOrFail($id);
+            
+            $content->update([
+                'section_key' => $request->section_key ?? $content->section_key,
+                'title' => $request->title ?? $content->title,
+                'content' => $request->content ?? $content->content,
+                'subtitle' => $request->subtitle ?? $content->subtitle,
+                'image_url' => $request->image_url ?? $content->image_url,
+                'button_text' => $request->button_text ?? $content->button_text,
+                'button_link' => $request->button_link ?? $content->button_link,
+                'is_active' => $request->has('is_active') ? $request->boolean('is_active') : $content->is_active
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Content updated successfully',
+                'data' => $content->fresh()
+            ]);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to update content',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Delete content section (Admin only)
+     */
+    public function deleteContent(int $id): JsonResponse
+    {
+        try {
+            $content = HomepageContent::findOrFail($id);
+            $content->delete();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Content deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to delete content',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

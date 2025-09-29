@@ -3,7 +3,7 @@ import api from './api';
 export const adminService = {
   async getDashboard() {
     try {
-      const response = await api.get('/admin/dashboard');
+      const response = await api.get('/v1/admin/dashboard');
       return response.data;
     } catch (error) {
       throw error;
@@ -12,7 +12,7 @@ export const adminService = {
 
   async getSettings() {
     try {
-      const response = await api.get('/admin/settings');
+      const response = await api.get('/v1/admin/settings');
       return response.data;
     } catch (error) {
       throw error;
@@ -21,7 +21,7 @@ export const adminService = {
 
   async updateSettings(settings) {
     try {
-      const response = await api.put('/admin/settings', settings);
+      const response = await api.put('/v1/admin/settings', settings);
       return response.data;
     } catch (error) {
       throw error;
@@ -30,7 +30,7 @@ export const adminService = {
 
   async getMonthlyStats() {
     try {
-      const response = await api.get('/admin/monthly-stats');
+      const response = await api.get('/v1/admin/monthly-stats');
       return response.data;
     } catch (error) {
       throw error;

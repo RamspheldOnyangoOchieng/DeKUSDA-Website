@@ -3,15 +3,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import { 
   AiOutlineHome, AiOutlineLogout, AiOutlineUser, AiOutlineTeam, 
   AiOutlineSetting, AiOutlineBarChart, AiOutlineBell, AiOutlineCalendar,
-  AiOutlineMail, AiOutlineFileText
+  AiOutlineMail, AiOutlineFileText, AiOutlineGlobal
 } from 'react-icons/ai';
 import { 
   FaUsers, FaMicrophone, FaHeartbeat, FaBookOpen, FaCalculator, FaPray,
-  FaUserTie, FaChartLine, FaClipboardList, FaTasks, FaCalendarAlt, FaDollarSign
+  FaUserTie, FaChartLine, FaClipboardList, FaTasks, FaCalendarAlt, FaDollarSign,
+  FaUserFriends
 } from 'react-icons/fa';
 import { BiStats, BiCog } from 'react-icons/bi';
 import { motion } from 'framer-motion';
 import Loader from '../components/Loader';
+import EventsManagement from '../components/admin/EventsManagement';
+import HomepageManagement from '../components/admin/HomepageManagement';
+import UniversalContentManagement from '../components/admin/UniversalContentManagement';
+import CalendarEventsManagement from '../components/admin/CalendarEventsManagement';
+import AnnouncementsManagement from '../components/admin/AnnouncementsManagement';
+import LeadershipManagement from '../components/admin/LeadershipManagement';
 
 const DepartmentDashboard = () => {
   const [user, setUser] = useState(null);
@@ -59,20 +66,36 @@ const DepartmentDashboard = () => {
     const userData = localStorage.getItem('user');
     const deptData = localStorage.getItem('department');
     
-    if (!token || !userData || !deptData) {
+    // Check for invalid or missing data
+    if (!token || !userData || !deptData || userData === 'undefined' || userData === 'null') {
+      // Clear any invalid localStorage data
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('department');
       navigate('/leaders');
       return;
     }
 
-    setUser(JSON.parse(userData));
-    setDepartment(deptData);
-    fetchDashboardData();
+    try {
+      const parsedUser = JSON.parse(userData);
+      setUser(parsedUser);
+      setDepartment(deptData);
+      fetchDashboardData();
+    } catch (error) {
+      console.error('Error parsing user data:', error);
+      // Clear invalid data and redirect to login
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      localStorage.removeItem('department');
+      navigate('/leaders');
+    }
   }, [navigate]);
 
   const fetchDashboardData = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/dashboard`, {
+      const base = (import.meta?.env?.VITE_API_URL) ? `${import.meta.env.VITE_API_URL}` : 'http://127.0.0.1:8000';
+      const token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+      const response = await fetch(`${base}/api/v1/admin/dashboard`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -109,9 +132,13 @@ const DepartmentDashboard = () => {
     { id: 'overview', label: 'Department Overview', icon: AiOutlineHome },
     { id: 'members', label: 'Department Members', icon: AiOutlineTeam },
     { id: 'activities', label: 'Activities & Events', icon: AiOutlineCalendar },
+    { id: 'homepage', label: 'Homepage Management', icon: AiOutlineGlobal },
+    { id: 'content', label: 'Page Content Management', icon: AiOutlineFileText },
+    { id: 'calendar', label: 'Calendar Events', icon: AiOutlineCalendar },
+    { id: 'announcements', label: 'Announcements', icon: AiOutlineBell },
+    { id: 'leadership', label: 'Leadership Management', icon: FaUserFriends },
     { id: 'reports', label: 'Reports & Analytics', icon: AiOutlineBarChart },
     { id: 'communications', label: 'Communications', icon: AiOutlineMail },
-    { id: 'resources', label: 'Resources', icon: AiOutlineFileText },
     { id: 'settings', label: 'Department Settings', icon: AiOutlineSetting }
   ];
 
@@ -291,8 +318,32 @@ const DepartmentDashboard = () => {
             </motion.div>
           )}
 
+          {activeSection === 'activities' && (
+            <EventsManagement />
+          )}
+
+          {activeSection === 'homepage' && (
+            <HomepageManagement />
+          )}
+
+          {activeSection === 'content' && (
+            <UniversalContentManagement />
+          )}
+
+          {activeSection === 'calendar' && (
+            <CalendarEventsManagement />
+          )}
+
+          {activeSection === 'announcements' && (
+            <AnnouncementsManagement />
+          )}
+
+          {activeSection === 'leadership' && (
+            <LeadershipManagement />
+          )}
+
           {/* Other sections placeholder */}
-          {activeSection !== 'overview' && (
+          {!['overview', 'activities', 'homepage', 'content', 'calendar', 'announcements', 'leadership'].includes(activeSection) && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

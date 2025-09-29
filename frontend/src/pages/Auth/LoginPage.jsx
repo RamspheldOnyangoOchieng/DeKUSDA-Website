@@ -81,6 +81,19 @@ const LoginPage = () => {
                         </div>
                     </div>
 
+                    {/* Development helper - Admin credentials button */}
+                    {import.meta.env.DEV && (
+                        <div className="mb-4">
+                            <button
+                                type="button"
+                                onClick={() => setCredentials({email: 'admin@dekusda.com', password: 'admin123'})}
+                                className="w-full flex justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200"
+                            >
+                                Use Admin Credentials (Dev)
+                            </button>
+                        </div>
+                    )}
+
                     <div>
                         <button
                             type="submit"

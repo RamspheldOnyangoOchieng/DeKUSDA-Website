@@ -16,7 +16,6 @@ import {
     AiOutlineUser,
 } from 'react-icons/ai';
 import { FiBookOpen, FiHeart, FiMusic, FiUsers } from "react-icons/fi";
-import { HiOutlineLocationMarker } from "react-icons/hi";
 
 // Swiper imports with all required CSS
 import 'swiper/css';
@@ -39,14 +38,12 @@ import Church from '../assets/church.jpeg';
 import Mission from '../assets/mission2.jpeg';
 
 // Import Professional Section Components
-import FeaturedMinistries from '../components/sections/FeaturedMinistries';
 import UpcomingEvents from '../components/sections/UpcomingEvents';
-import WorshipServices from '../components/sections/WorshipServices';
 import LeadershipDirectory from '../components/sections/LeadershipDirectory';
 import PrayerForm from '../components/Prayer/PrayerForm';
-import OnlineGiving from '../components/sections/OnlineGiving';
 import QuickAccess from '../components/sections/QuickAccess';
 import NewsletterSignup from '../components/sections/NewsletterSignup';
+import AnnouncementBanner from '../components/sections/AnnouncementBanner';
 
 import { Footer } from '../components/Layout/Footer';
 import { Header } from '../components/Layout/Header';
@@ -160,7 +157,7 @@ export const Home = () => {
                     <Header />
                     
                     {/* Enhanced Hero Slider Section */}
-                    <div className="relative -mt-2 overflow-hidden">
+                    <div className="relative overflow-hidden">
                         <Swiper
                             ref={swiperRef}
                             modules={[Autoplay, Navigation]}
@@ -178,9 +175,6 @@ export const Home = () => {
                             slidesPerView={1}
                             grabCursor={true}
                             watchSlidesProgress={true}
-                            preloadImages={true}
-                            updateOnImagesReady={true}
-                            lazy={false}
                             navigation={{
                                 nextEl: nextRef.current,
                                 prevEl: prevRef.current,
@@ -188,7 +182,7 @@ export const Home = () => {
                             onSwiper={(swiper) => {
                                 // Delay navigation initialization to ensure refs are ready
                                 setTimeout(() => {
-                                    if (prevRef.current && nextRef.current) {
+                                    if (prevRef.current && nextRef.current && swiper.navigation) {
                                         swiper.params.navigation.prevEl = prevRef.current;
                                         swiper.params.navigation.nextEl = nextRef.current;
                                         swiper.navigation.destroy();
@@ -218,7 +212,7 @@ export const Home = () => {
                                    alt={`${slide.title} - DeKUSDA Church`}
                                    loading={index === 0 ? "eager" : "lazy"}
                                    decoding="async"
-                                   fetchpriority={index === 0 ? "high" : "auto"}
+                                   fetchPriority={index === 0 ? "high" : "auto"}
                                    className={`w-full h-full rounded-xl transition-all duration-700 ease-in-out transform hover:scale-105 ${
                                      slide.title === "Mission Emphasis" ? 'object-contain' : 'object-cover'
                                    }`}
@@ -374,28 +368,8 @@ export const Home = () => {
 
 
 
-                    {/* Section 3: Communication Sabbath */}
-                    <div className="w-full bg-gradient-to-b from-lightBlue/50 to-primaryBlue/20 py-16 px-6">
-                        <div className="max-w-6xl mx-auto">
-                            {/* Communication Sabbath Banner */}
-                            <div className="mb-12 text-center">
-                                <div className="flex justify-center mb-8">
-                                    <div className="bg-gradient-to-r from-primaryBlue via-darkBlue to-primaryBlue rounded-2xl shadow-lg px-8 py-6 max-w-2xl text-center">
-                                        <h2 className="text-3xl font-bold text-white tracking-wide mb-3">
-                                            This Sabbath is a Communication Sabbath
-                                        </h2>
-                                        <p className="text-white/80 font-medium mb-4">
-                                            Join us for a special time of worship and fellowship — see you there!
-                                        </p>
-                                        <span className="inline-flex items-center gap-2 bg-white text-primaryBlue font-semibold px-5 py-2 rounded-full shadow hover:shadow-lg transition">
-                                            <HiOutlineLocationMarker className="w-5 h-5 text-primaryBlue" />
-                                            Food Science Workshop • 7:50 AM
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {/* Dynamic Announcement Banner */}
+                    <AnnouncementBanner />
 
                     {/* Upcoming Events - Beautiful Original Component */}
                     <UpcomingEvents />
@@ -474,9 +448,6 @@ export const Home = () => {
 
                     {/* Professional Website Sections */}
                     <QuickAccess />
-                    <FeaturedMinistries />
-                    <WorshipServices />
-                    <OnlineGiving projects={homepageData.featured_projects || []} />
                     <LeadershipDirectory />
                     <NewsletterSignup />
 

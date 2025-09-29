@@ -39,10 +39,10 @@ class SermonController extends Controller
             'sermon_date' => 'required|date',
             'scripture_reference' => 'nullable|string',
             'sermon_text' => 'nullable|string',
-            'audio_file' => 'nullable|file|mimes:mp3,wav,ogg|max:50000', // 50MB
-            'video_file' => 'nullable|file|mimes:mp4,avi,mov|max:200000', // 200MB
-            'pdf_file' => 'nullable|file|mimes:pdf|max:10000', // 10MB
-            'thumbnail' => 'nullable|image|max:5000', // 5MB
+            'audio_file' => 'nullable|file|mimes:mp3,wav,ogg|max:500000', // 500MB
+            'video_file' => 'nullable|file|mimes:mp4,avi,mov|max:1000000', // 1GB
+            'pdf_file' => 'nullable|file|mimes:pdf|max:50000', // 50MB
+            'thumbnail' => 'nullable|image|max:10000', // 10MB
             'series' => 'required|in:sabbath_service,vespers,week_of_prayer,revival,youth,special_event',
             'status' => 'required|in:draft,published,archived',
             'tags' => 'nullable|array',

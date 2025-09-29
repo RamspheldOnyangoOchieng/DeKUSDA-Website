@@ -4,12 +4,18 @@ import {
   FaChevronLeft, FaChevronRight, FaPlus 
 } from 'react-icons/fa';
 import { AiOutlineArrowRight } from 'react-icons/ai';
+import { eventService } from '../../services/events';
 
 const UpcomingEvents = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [showAllEvents, setShowAllEvents] = useState(false);
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const events = [
+  // Fallback hardcoded events in case API fails
+  const fallbackEvents = [
     {
       title: "PCM Mission Emphasis Week",
       date: "2025-09-15",
@@ -95,11 +101,11 @@ const UpcomingEvents = () => {
       register: true
     },
     {
-      title: "Church Choir & Blissful Tones Concert",
+      title: "Church Choir & Blissful Concert",
       date: "2025-10-10",
       time: "Sabbath Evening 6:00 PM",
       location: "Main Sanctuary",
-      description: "Musical worship evening featuring our Church Choir and Blissful Tones contemporary group.",
+      description: "Musical worship evening featuring our Church Choir and Blissful contemporary group.",
       attendees: "Music Lovers",
       category: "Music",
       image: "/src/assets/churchchoir.jpeg",
@@ -119,6 +125,51 @@ const UpcomingEvents = () => {
       register: true
     }
   ];
+
+  // Fetch events from API
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        const response = await eventService.getEvents();
+        
+        if (response.success && response.data && response.data.length > 0) {
+          // Transform API data to match component format
+          const transformedEvents = response.data.map(event => ({
+            id: event.id,
+            title: event.title,
+            date: event.start_datetime?.split('T')[0] || event.start_datetime,
+            time: new Date(event.start_datetime).toLocaleTimeString('en-US', { 
+              hour: 'numeric', 
+              minute: '2-digit',
+              hour12: true 
+            }),
+            location: event.location || 'TBD',
+            description: event.description,
+            attendees: event.max_attendees ? `Max ${event.max_attendees}` : 'Open to All',
+            category: event.event_type?.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'General',
+            image: event.featured_image || "/src/assets/church.jpeg",
+            featured: event.status === 'published',
+            register: event.entry_fee > 0 || event.max_attendees > 0
+          }));
+          
+          setEvents(transformedEvents);
+        } else {
+          // Use fallback events if API returns no data
+          setEvents(fallbackEvents);
+        }
+      } catch (error) {
+        console.error('Error fetching events:', error);
+        setError('Failed to load events');
+        // Use fallback events on error
+        setEvents(fallbackEvents);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   const featuredEvents = events.filter(event => event.featured);
   
@@ -282,7 +333,28 @@ const UpcomingEvents = () => {
           </div>
         </div>
 
-        {/* All Events Grid */}
+        {/* Toggle Button for All Events */}
+        <div className="text-center mb-8">
+          <button 
+            onClick={() => setShowAllEvents(!showAllEvents)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center mx-auto space-x-2 shadow-lg hover:shadow-xl"
+          >
+            <span>{showAllEvents ? 'Hide All Events' : 'View All Events'}</span>
+            <div className={`transform transition-transform duration-300 ${showAllEvents ? 'rotate-180' : ''}`}>
+              <svg 
+                className="w-5 h-5" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
+        </div>
+
+        {/* All Events Grid - Conditionally Rendered */}
+        {showAllEvents && (
         <div className="mb-8 sm:mb-12">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
             <h3 className="text-xl sm:text-2xl font-bold text-gray-800">All Upcoming Events</h3>
@@ -344,6 +416,7 @@ const UpcomingEvents = () => {
             ))}
           </div>
         </div>
+        )}
 
         {/* Quick Add Event (For Admins) */}
         <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-xl p-6">

@@ -9,11 +9,26 @@ class AuthService {
 
   // Load user data from localStorage
   loadUserFromStorage() {
-    const userData = localStorage.getItem('user_data');
-    const userRole = localStorage.getItem('user_role');
+    // Check for both storage formats
+    let userData = localStorage.getItem('user_data');
+    let userRole = localStorage.getItem('user_role');
+    
+    // Fallback to legacy format
+    if (!userData) {
+      userData = localStorage.getItem('user');
+      if (userData) {
+        try {
+          const parsedUser = JSON.parse(userData);
+          userRole = parsedUser.role;
+        } catch (error) {
+          console.error('Error parsing legacy user data:', error);
+          return;
+        }
+      }
+    }
     
     if (userData) {
-      this.currentUser = JSON.parse(userData);
+      this.currentUser = typeof userData === 'string' ? JSON.parse(userData) : userData;
       this.userRole = userRole;
     }
   }

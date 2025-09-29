@@ -15,10 +15,19 @@ const ManageSermons = () => {
     description: '',
     speaker: '',
     sermon_date: '',
-    series: '',
+    scripture_reference: '',
+    sermon_text: '',
+    series: 'sabbath_service', // Default to a valid series
+    status: 'published', // Default to published
+    tags: [],
     is_featured: false
   });
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState({
+    audio: null,
+    video: null,
+    pdf: null,
+    thumbnail: null
+  });
 
   useEffect(() => {
     fetchSermons();
@@ -28,11 +37,17 @@ const ManageSermons = () => {
     try {
       setIsLoading(true);
       const response = await churchService.getSermons();
-      if (response.success) {
+      if (response.success && Array.isArray(response.data)) {
         setSermons(response.data);
+      } else if (response.success) {
+        // If data is not an array but request was successful, set empty array
+        setSermons([]);
+      } else {
+        throw new Error(response.message || 'Failed to load sermons');
       }
     } catch (err) {
-      setError('Failed to load sermons');
+      setError(err.message || 'Failed to load sermons');
+      setSermons([]); // Ensure sermons is always an array
     } finally {
       setIsLoading(false);
     }
@@ -46,8 +61,11 @@ const ManageSermons = () => {
     }));
   };
 
-  const handleFileSelect = (file) => {
-    setSelectedFile(file);
+  const handleFileSelect = (file, type) => {
+    setSelectedFiles(prev => ({
+      ...prev,
+      [type]: file
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -61,23 +79,37 @@ const ManageSermons = () => {
         sermonResponse = await churchService.createSermon(formData);
       }
 
-      // Upload file if selected
-      if (selectedFile && sermonResponse.success) {
+      // Upload files if selected
+      if (sermonResponse.success) {
         setUploadingFile(true);
-        const fileFormData = new FormData();
-        fileFormData.append('file', selectedFile);
-        await churchService.uploadSermonFile(sermonResponse.data.id, fileFormData);
+        const fileTypes = ['audio', 'video', 'pdf', 'thumbnail'];
+        
+        for (const type of fileTypes) {
+          const file = selectedFiles[type];
+          if (file) {
+            await churchService.uploadSermonFile(file, type);
+          }
+        }
       }
       
       setShowModal(false);
       setEditingSermon(null);
-      setSelectedFile(null);
+      setSelectedFiles({
+        audio: null,
+        video: null,
+        pdf: null,
+        thumbnail: null
+      });
       setFormData({
         title: '',
         description: '',
         speaker: '',
         sermon_date: '',
-        series: '',
+        scripture_reference: '',
+        sermon_text: '',
+        series: 'sabbath_service',
+        status: 'published',
+        tags: [],
         is_featured: false
       });
       fetchSermons();
@@ -95,7 +127,11 @@ const ManageSermons = () => {
       description: sermon.description,
       speaker: sermon.speaker,
       sermon_date: sermon.sermon_date,
-      series: sermon.series || '',
+      scripture_reference: sermon.scripture_reference || '',
+      sermon_text: sermon.sermon_text || '',
+      series: sermon.series || 'sabbath_service',
+      status: sermon.status || 'published',
+      tags: sermon.tags || [],
       is_featured: sermon.is_featured
     });
     setShowModal(true);
@@ -112,12 +148,38 @@ const ManageSermons = () => {
     }
   };
 
-  const handleDownload = async (sermon) => {
+  const handleDownload = async (sermon, fileType) => {
     try {
-      await churchService.downloadSermonFile(sermon.id);
+      let fileUrl;
+      switch (fileType) {
+        case 'audio':
+          fileUrl = sermon.audio_file;
+          break;
+        case 'video':
+          fileUrl = sermon.video_file;
+          break;
+        case 'pdf':
+          fileUrl = sermon.pdf_file;
+          break;
+        default:
+          throw new Error('Invalid file type');
+      }
+
+      // Create a temporary anchor element to trigger the download
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      link.download = `${sermon.title}-${fileType}${getFileExtension(fileUrl)}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (err) {
-      setError('Failed to download sermon file');
+      setError(`Failed to download sermon ${fileType}`);
     }
+  };
+
+  const getFileExtension = (url) => {
+    const match = url.match(/\.[0-9a-z]+$/i);
+    return match ? match[0] : '';
   };
 
   if (isLoading) {
@@ -136,13 +198,22 @@ const ManageSermons = () => {
           <button
             onClick={() => {
               setEditingSermon(null);
-              setSelectedFile(null);
+              setSelectedFiles({
+                audio: null,
+                video: null,
+                pdf: null,
+                thumbnail: null
+              });
               setFormData({
                 title: '',
                 description: '',
                 speaker: '',
                 sermon_date: '',
-                series: '',
+                scripture_reference: '',
+                sermon_text: '',
+                series: 'sabbath_service',
+                status: 'published',
+                tags: [],
                 is_featured: false
               });
               setShowModal(true);
@@ -184,9 +255,14 @@ const ManageSermons = () => {
                             Featured
                           </span>
                         )}
-                        {sermon.file_path && (
+                        {sermon.audio_file && (
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                             Audio Available
+                          </span>
+                        )}
+                        {sermon.video_file && (
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 ml-2">
+                            Video Available
                           </span>
                         )}
                       </div>
@@ -198,15 +274,35 @@ const ManageSermons = () => {
                       </div>
                     </div>
                     <div className="flex items-center space-x-2 ml-4">
-                      {sermon.file_path && (
-                        <button
-                          onClick={() => handleDownload(sermon)}
-                          className="text-green-600 hover:text-green-800 p-2"
-                          title="Download audio"
-                        >
-                          📥
-                        </button>
-                      )}
+                      <div className="flex space-x-2">
+                        {sermon.audio_file && (
+                          <button
+                            onClick={() => handleDownload(sermon, 'audio')}
+                            className="text-green-600 hover:text-green-800 p-2"
+                            title="Download audio"
+                          >
+                            🎵
+                          </button>
+                        )}
+                        {sermon.video_file && (
+                          <button
+                            onClick={() => handleDownload(sermon, 'video')}
+                            className="text-blue-600 hover:text-blue-800 p-2"
+                            title="Download video"
+                          >
+                            🎥
+                          </button>
+                        )}
+                        {sermon.pdf_file && (
+                          <button
+                            onClick={() => handleDownload(sermon, 'pdf')}
+                            className="text-red-600 hover:text-red-800 p-2"
+                            title="Download PDF"
+                          >
+                            �
+                          </button>
+                        )}
+                      </div>
                       <button
                         onClick={() => handleEdit(sermon)}
                         className="text-blue-600 hover:text-blue-800 p-2"
@@ -310,20 +406,131 @@ const ManageSermons = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Series (Optional)
+                      Series *
                     </label>
-                    <input
-                      type="text"
+                    <select
                       name="series"
                       value={formData.series}
                       onChange={handleInputChange}
+                      required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Enter sermon series"
+                    >
+                      <option value="sabbath_service">Sabbath Service</option>
+                      <option value="vespers">Vespers</option>
+                      <option value="week_of_prayer">Week of Prayer</option>
+                      <option value="revival">Revival</option>
+                      <option value="youth">Youth</option>
+                      <option value="special_event">Special Event</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Additional fields */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Scripture Reference
+                    </label>
+                    <input
+                      type="text"
+                      name="scripture_reference"
+                      value={formData.scripture_reference}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="e.g., John 3:16"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Status *
+                    </label>
+                    <select
+                      name="status"
+                      value={formData.status}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="draft">Draft</option>
+                      <option value="published">Published</option>
+                      <option value="archived">Archived</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Sermon Text
+                  </label>
+                  <textarea
+                    name="sermon_text"
+                    value={formData.sermon_text}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter the main sermon text or key points..."
+                  />
+                </div>
+
+                                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Audio File
+                    </label>
+                    <FileUpload
+                      onFileSelect={(file) => handleFileSelect(file, 'audio')}
+                      accept="audio/*"
+                      selectedFile={selectedFiles.audio}
+                      className="w-full"
+                    />
+                    <p className="mt-1 text-sm text-gray-500">
+                      Accepted formats: MP3, WAV, OGG (max 500MB)
+                    </p>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Video File
+                    </label>
+                    <FileUpload
+                      onFileSelect={(file) => handleFileSelect(file, 'video')}
+                      accept="video/*"
+                      selectedFile={selectedFiles.video}
+                      className="w-full"
+                    />
+                    <p className="mt-1 text-sm text-gray-500">
+                      Accepted formats: MP4, AVI, MOV (max 1GB)
+                    </p>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      PDF Notes (Optional)
+                    </label>
+                    <FileUpload
+                      onFileSelect={(file) => handleFileSelect(file, 'pdf')}
+                      accept=".pdf"
+                      selectedFile={selectedFiles.pdf}
+                      className="w-full"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Thumbnail Image (Optional)
+                    </label>
+                    <FileUpload
+                      onFileSelect={(file) => handleFileSelect(file, 'thumbnail')}
+                      accept="image/*"
+                      selectedFile={selectedFiles.thumbnail}
+                      className="w-full"
                     />
                   </div>
                 </div>
 
                 <div className="flex items-center">
+```
                   <input
                     type="checkbox"
                     name="is_featured"
@@ -345,9 +552,9 @@ const ManageSermons = () => {
                   <FileUpload
                     onFileSelect={handleFileSelect}
                     accept="audio/*"
-                    maxSize={50}
+                    maxSize={500 * 1024 * 1024}
                     label="Upload Sermon Audio"
-                    description="Upload MP3, WAV, or M4A files up to 50MB"
+                    description="Upload MP3, WAV, or OGG files up to 500MB"
                     disabled={uploadingFile}
                   />
                 </div>

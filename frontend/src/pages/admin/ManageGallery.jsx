@@ -14,18 +14,18 @@ const ManageGallery = () => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    category: 'event',
+    category: 'Events',
     date_taken: '',
     is_featured: false
   });
   const [selectedFile, setSelectedFile] = useState(null);
 
   const categories = [
-    { value: 'event', label: 'Events' },
-    { value: 'service', label: 'Services' },
-    { value: 'ministry', label: 'Ministries' },
-    { value: 'community', label: 'Community' },
-    { value: 'other', label: 'Other' }
+    { value: 'Services', label: 'Services' },
+    { value: 'Events', label: 'Events' },
+    { value: 'Outreach', label: 'Outreach' },
+    { value: 'Youth', label: 'Youth' },
+    { value: 'Other', label: 'Other' }
   ];
 
   useEffect(() => {
@@ -61,20 +61,30 @@ const ManageGallery = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setUploadingFile(true);
       let galleryResponse;
       
       if (editingItem) {
         galleryResponse = await churchService.updateGalleryItem(editingItem.id, formData);
+        
+        // Upload file if selected for update
+        if (selectedFile && galleryResponse.success) {
+          const fileFormData = new FormData();
+          fileFormData.append('file', selectedFile);
+          await churchService.uploadGalleryFile(galleryResponse.data.id, fileFormData);
+        }
       } else {
-        galleryResponse = await churchService.createGalleryItem(formData);
-      }
-
-      // Upload file if selected
-      if (selectedFile && galleryResponse.success) {
-        setUploadingFile(true);
-        const fileFormData = new FormData();
-        fileFormData.append('file', selectedFile);
-        await churchService.uploadGalleryFile(galleryResponse.data.id, fileFormData);
+        // For new items, include the file in the form data
+        const submitFormData = new FormData();
+        Object.keys(formData).forEach(key => {
+          submitFormData.append(key, formData[key]);
+        });
+        
+        if (selectedFile) {
+          submitFormData.append('image', selectedFile);
+        }
+        
+        galleryResponse = await churchService.createGalleryItem(submitFormData);
       }
       
       setShowModal(false);
@@ -83,7 +93,7 @@ const ManageGallery = () => {
       setFormData({
         title: '',
         description: '',
-        category: 'event',
+        category: 'Events',
         date_taken: '',
         is_featured: false
       });
@@ -100,7 +110,7 @@ const ManageGallery = () => {
     setFormData({
       title: item.title,
       description: item.description,
-      category: item.category || 'event',
+      category: item.category || 'Events',
       date_taken: item.date_taken || '',
       is_featured: item.is_featured
     });
@@ -165,7 +175,7 @@ const ManageGallery = () => {
               setFormData({
                 title: '',
                 description: '',
-                category: 'event',
+                category: 'Events',
                 date_taken: '',
                 is_featured: false
               });
@@ -384,9 +394,9 @@ const ManageGallery = () => {
                   <FileUpload
                     onFileSelect={handleFileSelect}
                     accept="image/*,video/*"
-                    maxSize={200}
+                    maxSize={200 * 1024 * 1024}
                     label="Upload Photo or Video"
-                    description="Upload images up to 5MB or videos up to 200MB"
+                    description="Upload images up to 10MB or videos up to 200MB"
                     disabled={uploadingFile}
                   />
                 </div>

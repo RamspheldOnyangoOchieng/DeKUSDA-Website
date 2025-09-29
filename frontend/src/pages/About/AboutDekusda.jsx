@@ -105,149 +105,186 @@ const AboutDekusda = () => {
   const typedWelcome = useTypingEffect(welcomeText, 120);
 
   return (
-    <div className="flex">
-      <div className="w-full lg:w-[85%]">
-        <Header />
-        <div className="page-container about-dekusda-page">
-          <div className="content-wrapper">
-            {/* Sidebar */}
-            <aside className="sidebar">
-              <img src={sdaLogo} alt="SDA Logo" className="sda-logo" />
-              <h3>Quick Links</h3>
-              <ul>
-                <li><a href="#who-we-are">Who We Are</a></li>
-                <li><a href="#vision">MISSION & VISION</a></li>
-                <li><a href="#activities">Activities</a></li>
-                <li><a href="#worship">Worship</a></li>
-                <li><a href="#where-to-find-us">Where to Find Us</a></li>
-              </ul>
-            </aside>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      
+      <div className="flex max-w-7xl mx-auto gap-6 p-4 lg:p-6">
+        {/* Sidebar */}
+        <aside className="hidden lg:block w-64 bg-slate-800 text-white p-6 rounded-lg h-fit sticky top-6">
+          <img src={sdaLogo} alt="SDA Logo" className="w-16 h-16 rounded-full mx-auto mb-4" />
+          <h3 className="text-lg font-semibold mb-4 pb-2 border-b border-blue-300">Quick Links</h3>
+          <ul className="space-y-3">
+            <li><a href="#who-we-are" className="text-blue-200 hover:text-blue-100 transition-colors">Who We Are</a></li>
+            <li><a href="#vision" className="text-blue-200 hover:text-blue-100 transition-colors">Mission & Vision</a></li>
+            <li><a href="#activities" className="text-blue-200 hover:text-blue-100 transition-colors">Activities</a></li>
+            <li><a href="#worship" className="text-blue-200 hover:text-blue-100 transition-colors">Worship</a></li>
+            <li><a href="#where-to-find-us" className="text-blue-200 hover:text-blue-100 transition-colors">Where to Find Us</a></li>
+          </ul>
+        </aside>
 
-            {/* Main Content */}
-            <div className="content-container">
-          <div className="header-container">
-            <div className="welcome-image-container">
-              <img src={churchImage} alt="Church" className="church-image" />
+        {/* Main Content */}
+        <div className="flex-1 max-w-4xl">
+          {/* Header Section */}
+          <div className="mb-8">
+            <div className="mb-6 rounded-lg overflow-hidden shadow-lg">
+              <img src={churchImage} alt="Church" className="w-full h-48 lg:h-64 object-cover" />
             </div>
-            <h1 className="welcome-message">{typedWelcome}</h1>
-            <p className="invitation-message">
+            <h1 className="text-2xl lg:text-4xl font-bold text-blue-900 mb-4 text-center">
+              {typedWelcome}
+            </h1>
+            <p className="text-lg text-gray-700 text-center mb-4 italic">
               We'd love to have you worship and grow with us. Would you like to join us?
             </p>
-            <blockquote className="bible-verse">
-              <em>"For where two or three gather in my name, there am I with them." - Matthew 18:20</em>
+            <blockquote className="text-center text-blue-800 italic border-l-4 border-blue-500 pl-4 max-w-md mx-auto">
+              "For where two or three gather in my name, there am I with them." - Matthew 18:20
             </blockquote>
           </div>
 
-         
-          <main className="main-container">
-            <section id="who-we-are" className="section-container">
-              <h2>{getContent('about_us').title || 'ABOUT US!'}</h2>
-              <div dangerouslySetInnerHTML={{ __html: getContent('about_us').content || 
-                'SDA Church Dedan Kimathi University is a vibrant Seventh-day Adventist congregation based in Kimathi. We are passionate about faith, fellowship, and community service.' 
-              }} />
+          {/* Content Sections */}
+          <main className="space-y-8">
+            <section id="who-we-are" className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-2xl font-bold text-blue-900 mb-4">
+                {getContent('about_us').title || 'ABOUT US!'}
+              </h2>
+              <div 
+                className="text-gray-700 leading-relaxed prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: getContent('about_us').content || 
+                  'SDA Church Dedan Kimathi University is a vibrant Seventh-day Adventist congregation based in Kimathi. We are passionate about faith, fellowship, and community service.' 
+                }} 
+              />
             </section>
 
-            <section id="vision" className="section-container">
-              <h2>{getContent('mission').title || 'Mission'}</h2>
-              <div dangerouslySetInnerHTML={{ __html: getContent('mission').content || 
-                'To make disciples of all people by proclaiming the everlasting gospel in the context of the three angel messages of <b>Revelation 14:6–12</b>, leading them to accept Jesus as their personal Savior, unite with the remnant church, nurturing them to serve Him as Lord, and preparing them for His soon return.' 
-              }} />
+            <section id="vision" className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-2xl font-bold text-blue-900 mb-4">
+                {getContent('mission').title || 'Mission'}
+              </h2>
+              <div 
+                className="text-gray-700 leading-relaxed prose max-w-none mb-6"
+                dangerouslySetInnerHTML={{ __html: getContent('mission').content || 
+                  'To make disciples of all people by proclaiming the everlasting gospel in the context of the three angel messages of <b>Revelation 14:6–12</b>, leading them to accept Jesus as their personal Savior, unite with the remnant church, nurturing them to serve Him as Lord, and preparing them for His soon return.' 
+                }} 
+              />
 
-              <h2>{getContent('vision').title || 'Our Vision'}</h2>
-              <div dangerouslySetInnerHTML={{ __html: getContent('vision').content || 
-                'Empowering Seventh-day Adventist students, professionals, the church, and healing the nation.' 
-              }} />
+              <h2 className="text-2xl font-bold text-blue-900 mb-4">
+                {getContent('vision').title || 'Our Vision'}
+              </h2>
+              <div 
+                className="text-gray-700 leading-relaxed prose max-w-none mb-6"
+                dangerouslySetInnerHTML={{ __html: getContent('vision').content || 
+                  'Empowering Seventh-day Adventist students, professionals, the church, and healing the nation.' 
+                }} 
+              />
 
-              <h2>{getContent('purpose').title || 'Our Purpose'}</h2>
-              <div dangerouslySetInnerHTML={{ __html: getContent('purpose').content || 
-                '<ol type="A"><li>To assist students studying in Dedan Kimathi University of Technology (DEKUT) to resolve problems that negatively impact their Christian principles and lifestyles.</li><li>To promote a culture of continued learning in the Adventist church and community at large, embracing the principle of Christian education.</li><li>To create mechanisms for integrating and inducting students into the world of work.</li><li>To mobilize Adventist professionals for professional input to Adventist students in DEKUT, the church, and the community.</li></ol>' 
-              }} />
+              <h2 className="text-2xl font-bold text-blue-900 mb-4">
+                {getContent('purpose').title || 'Our Purpose'}
+              </h2>
+              <div 
+                className="text-gray-700 leading-relaxed prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: getContent('purpose').content || 
+                  '<ol type="A"><li>To assist students studying in Dedan Kimathi University of Technology (DEKUT) to resolve problems that negatively impact their Christian principles and lifestyles.</li><li>To promote a culture of continued learning in the Adventist church and community at large, embracing the principle of Christian education.</li><li>To create mechanisms for integrating and inducting students into the world of work.</li><li>To mobilize Adventist professionals for professional input to Adventist students in DEKUT, the church, and the community.</li></ol>' 
+                }} 
+              />
             </section>
 
-            <section id="activities" className="section-container">
-              <h2>{getContent('activities').title || 'Our Activities'}</h2>
-              <div dangerouslySetInnerHTML={{ __html: getContent('activities').content }} />
+            <section id="activities" className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-2xl font-bold text-blue-900 mb-4">
+                {getContent('activities').title || 'Our Activities'}
+              </h2>
+              <div 
+                className="text-gray-700 leading-relaxed prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: getContent('activities').content }} 
+              />
               
               {/* Fallback to original cards if no dynamic content */}
               {!getContent('activities').content && (
-                <div className="activities-container">
-                  <div className="activity-card">
-                    <img src={bibleStudyImg} alt="Bible Study" className="activity-img" />
-                    <h3>Bible Study</h3>
-                    <p>Join us for deep, interactive study of the Bible every Wednesday from 6pm.</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="bg-blue-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <img src={bibleStudyImg} alt="Bible Study" className="w-full h-40 object-cover rounded-lg mb-4" />
+                    <h3 className="text-lg font-semibold text-blue-900 mb-2">Bible Study</h3>
+                    <p className="text-gray-700">Join us for deep, interactive study of the Bible every Wednesday from 6pm.</p>
                   </div>
-                  <div className="activity-card">
-                    <img src={choirImg} alt="Choir Ministry" className="activity-img" />
-                    <h3>HARMONIZATION</h3>
-                    <p>Join us every Thursday for a powerful harmonization session as we prepare for Sabbath!</p>
+                  <div className="bg-blue-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <img src={choirImg} alt="Choir Ministry" className="w-full h-40 object-cover rounded-lg mb-4" />
+                    <h3 className="text-lg font-semibold text-blue-900 mb-2">HARMONIZATION</h3>
+                    <p className="text-gray-700">Join us every Thursday for a powerful harmonization session as we prepare for Sabbath!</p>
                   </div>
-                  <div className="activity-card">
-                    <img src={missionsImg} alt="Missions" className="activity-img" />
-                    <h3>Missions</h3>
-                    <p>We serve the community — helping the needy, sharing hope and love. We also have missions
-                      every year. Want to know about our upcoming mission?
-                    </p>
+                  <div className="bg-blue-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <img src={missionsImg} alt="Missions" className="w-full h-40 object-cover rounded-lg mb-4" />
+                    <h3 className="text-lg font-semibold text-blue-900 mb-2">Missions</h3>
+                    <p className="text-gray-700">We serve the community — helping the needy, sharing hope and love. We also have missions every year. Want to know about our upcoming mission?</p>
                   </div>
                 </div>
               )}
             </section>
 
-            <section id="worship" className="section-container">
-              <h2>{getContent('worship').title || 'Worship with Us'}</h2>
-              <div dangerouslySetInnerHTML={{ __html: getContent('worship').content || 
-                'Join us every <strong>Saturday (Sabbath)</strong> in KIMATHI UNIVERSITY around Student\'s Mess. Services begin at <strong>7:50 AM</strong>.' 
-              }} />
+            <section id="worship" className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-2xl font-bold text-blue-900 mb-4">
+                {getContent('worship').title || 'Worship with Us'}
+              </h2>
+              <div 
+                className="text-gray-700 leading-relaxed prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: getContent('worship').content || 
+                  'Join us every <strong>Saturday (Sabbath)</strong> in KIMATHI UNIVERSITY around Student\'s Mess. Services begin at <strong>7:50 AM</strong>.' 
+                }} 
+              />
             </section>
 
-            <section id="where-to-find-us" className="section-container">
-              <h2>{getContent('location').title || 'Where to Find Us'}</h2>
-              <div dangerouslySetInnerHTML={{ __html: getContent('location').content || 
-                'Dekusda church is located in DEDAN KIMATHI UNIVERSITY OF TECHNOLOGY in Nyeri County.' 
-              }} />
+            <section id="where-to-find-us" className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-2xl font-bold text-blue-900 mb-4">
+                {getContent('location').title || 'Where to Find Us'}
+              </h2>
+              <div 
+                className="text-gray-700 leading-relaxed prose max-w-none mb-6"
+                dangerouslySetInnerHTML={{ __html: getContent('location').content || 
+                  'Dekusda church is located in DEDAN KIMATHI UNIVERSITY OF TECHNOLOGY in Nyeri County.' 
+                }} 
+              />
 
-              <div className="contact-us">
-                <h3>{getContent('contact').title || 'Contact Us'}</h3>
-                <div dangerouslySetInnerHTML={{ __html: getContent('contact').content }} />
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold text-blue-900 mb-3">
+                  {getContent('contact').title || 'Contact Us'}
+                </h3>
+                <div 
+                  className="text-gray-700 leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: getContent('contact').content }} 
+                />
                 
                 {/* Fallback if no dynamic contact content */}
                 {!getContent('contact').content && (
-                  <>
-                    <p>Email: <a href="mailto:dekutsda@students.dkut.ac.ke">dekutsda@students.dkut.ac.ke</a></p>
-                    <div className="social-icons">
-                      <a href="" target="_blank" rel="noopener noreferrer">
-                        <img src={instagramIcon} alt="Instagram" className="icon" />
+                  <div className="space-y-3">
+                    <p className="text-gray-700">
+                      Email: <a href="mailto:dekutsda@students.dkut.ac.ke" className="text-blue-600 hover:text-blue-800">dekutsda@students.dkut.ac.ke</a>
+                    </p>
+                    <div className="flex gap-4">
+                      <a href="" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                        <img src={instagramIcon} alt="Instagram" className="w-8 h-8" />
                       </a>
-                      <img
-                        src={youtubeIcon}
-                        alt="YouTube"
-                        className="icon"
-                      />
+                      <div className="hover:opacity-80 transition-opacity">
+                        <img src={youtubeIcon} alt="YouTube" className="w-8 h-8" />
+                      </div>
                     </div>
-                  </>
+                  </div>
                 )}
               </div>
 
-              <div className="map-container">
+              <div className="rounded-lg overflow-hidden shadow-md">
                 <iframe
                   title="DEKUSDA Church Location"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.339622036175!2d36.95100065!3d-0.3940003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182867cc4b1df407%3A0x540c830f1b693f26!2sDedan%20Kimathi%20University%20of%20Technology!5e0!3m2!1sen!2ske!4v1719057450000!5m2!1sen!2ske"
                   width="100%"
-                  height="250"
+                  height="300"
                   style={{ border: 0 }}
                   allowFullScreen=""
                   loading="lazy"
+                  className="w-full"
                 ></iframe>
               </div>
             </section>
           </main>
-          </div>
-          </div>
         </div>
-        <Footer />
       </div>
-      <div className="w-[15%] hidden lg:block">
-        <Sidebar />
-      </div>
+      
+      <Footer />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   FaUsers, FaHandsHelping, FaHeartbeat, FaBookOpen, FaPray, 
   FaBible, FaMusic, FaMicrophone, FaChurch
@@ -6,6 +6,8 @@ import {
 import { AiOutlineArrowRight } from 'react-icons/ai';
 
 const FeaturedMinistries = () => {
+  const [showAllMinistries, setShowAllMinistries] = useState(false);
+  
   const ministries = [
     {
       title: "Deconary Department",
@@ -72,7 +74,7 @@ const FeaturedMinistries = () => {
       link: "/Music/ChurchChoir"
     },
     {
-      title: "Blissful Tones",
+      title: "Blissful",
       description: "Contemporary worship group bringing modern praise to our university services.",
       icon: FaMicrophone,
       members: "Youth Choir",
@@ -96,6 +98,29 @@ const FeaturedMinistries = () => {
           <div className="mt-4 sm:mt-6 h-1 w-16 sm:w-24 bg-primaryBlue mx-auto rounded-full"></div>
         </div>
 
+        {/* Toggle Button for All Ministries */}
+        <div className="text-center mb-8">
+          <button 
+            onClick={() => setShowAllMinistries(!showAllMinistries)}
+            className="bg-primaryBlue hover:bg-darkBlue text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center mx-auto space-x-2 shadow-lg hover:shadow-xl"
+          >
+            <span>{showAllMinistries ? 'Hide All Ministries' : 'View All Ministries'}</span>
+            <div className={`transform transition-transform duration-300 ${showAllMinistries ? 'rotate-180' : ''}`}>
+              <svg 
+                className="w-5 h-5" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
+        </div>
+
+        {/* Ministries Grid - Conditionally Rendered */}
+        {showAllMinistries && (
+        <div>
         {/* Ministries Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
           {ministries.map((ministry, index) => (
@@ -149,6 +174,8 @@ const FeaturedMinistries = () => {
             </button>
           </div>
         </div>
+        </div>
+        )}
       </div>
     </div>
   );

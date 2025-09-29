@@ -16,6 +16,8 @@ use App\Http\Controllers\Api\HomepageController;
 use App\Http\Controllers\Api\ChurchProjectController;
 use App\Http\Controllers\Api\WorshipServiceController;
 use App\Http\Controllers\Api\AboutController;
+use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\LeaderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,10 +48,22 @@ Route::get('/test', function () {
     ]);
 });
 
-// Ministry routes
+// Protected routes
 Route::middleware(['auth:sanctum'])->group(function () {
+    // Ministry routes
     Route::apiResource('ministries', MinistryController::class);
     Route::get('ministries/category/{category}', [MinistryController::class, 'getByCategory']);
+    
+    // Events routes (excluding store which is now public for testing)
+    Route::apiResource('events', EventController::class)->except(['store']);
+    
+    // Sermon routes
+    Route::apiResource('sermons', SermonController::class);
+    Route::post('sermons/upload', [SermonController::class, 'upload']);
+    
+    // Gallery routes
+    Route::apiResource('gallery', GalleryController::class);
+    Route::post('gallery/upload', [GalleryController::class, 'upload']);
 });
 
 // Debug about controller
@@ -104,13 +118,16 @@ Route::prefix('v1')->group(function () {
     Route::get('/homepage/slides', [App\Http\Controllers\Api\HomepageController::class, 'getSlides']);
     Route::get('/homepage/content/{section}', [App\Http\Controllers\Api\HomepageController::class, 'getContentBySection']);
     
+    // Leaders (public read access)
+    Route::get('/leaders', [LeaderController::class, 'index']);
+    Route::get('/leaders/{leader}', [LeaderController::class, 'show']);
+    
     // Church Projects (public viewing)
     Route::get('/church-projects', [App\Http\Controllers\Api\ChurchProjectController::class, 'index']);
     Route::get('/church-projects/featured', [App\Http\Controllers\Api\ChurchProjectController::class, 'featured']);
-});
 
-// About Pages Content - Simple Routes (outside v1 group)
-Route::get('/about/{pageType}', function ($pageType) {
+    // About Pages Content - Simple Routes (inside v1 group)
+    Route::get('/about/{pageType}', function ($pageType) {
     try {
         $content = \App\Models\AboutContent::getPageContent($pageType);
         return response()->json([
@@ -124,9 +141,9 @@ Route::get('/about/{pageType}', function ($pageType) {
             'error' => $e->getMessage()
         ], 500);
     }
-});
+    });
 
-Route::get('/about/{pageType}/{sectionKey}', function ($pageType, $sectionKey) {
+    Route::get('/about/{pageType}/{sectionKey}', function ($pageType, $sectionKey) {
     try {
         $content = \App\Models\AboutContent::getSectionContent($pageType, $sectionKey);
         return response()->json([
@@ -140,18 +157,15 @@ Route::get('/about/{pageType}/{sectionKey}', function ($pageType, $sectionKey) {
             'error' => $e->getMessage()
         ], 500);
     }
-});
-    
-    // Church Projects (public viewing)
-    Route::get('/church-projects', [App\Http\Controllers\Api\ChurchProjectController::class, 'index']);
-    Route::get('/church-projects/featured', [App\Http\Controllers\Api\ChurchProjectController::class, 'featured']);
-    
+    });
+
     // Worship Services (public viewing)
     Route::get('/worship-services', [App\Http\Controllers\Api\WorshipServiceController::class, 'index']);
     
-    // Events (public viewing)
+    // Events (public viewing and temporary public creation for testing)
     Route::get('/events', [EventController::class, 'index']);
     Route::get('/events/{event}', [EventController::class, 'show']);
+    Route::post('/events', [EventController::class, 'store']); // Temporary public access for testing
     
     // Sermons (public viewing and downloads)
     Route::get('/sermons', [SermonController::class, 'index']);
@@ -177,6 +191,37 @@ Route::get('/about/{pageType}/{sectionKey}', function ($pageType, $sectionKey) {
     
     // Donations (public submissions)
     Route::post('/donations', [DonationController::class, 'store']);
+});
+
+// Public V1 API Routes (no authentication required) - for frontend services expecting /v1/ prefix
+Route::prefix('v1')->group(function () {
+    // Events (public viewing and creation)
+    Route::get('/events', [EventController::class, 'index']);
+    Route::get('/events/{event}', [EventController::class, 'show']);
+    Route::post('/events', [EventController::class, 'store']);
+    
+    // Homepage content
+    Route::get('/homepage', [HomepageController::class, 'getContent']);
+    Route::get('/homepage/slides', [HomepageController::class, 'getSlides']);
+    Route::get('/homepage/content/{sectionKey}', [HomepageController::class, 'getSectionContent']);
+    
+    // Church Projects (public viewing)
+    Route::get('/church-projects', [ChurchProjectController::class, 'index']);
+    Route::get('/church-projects/{id}', [ChurchProjectController::class, 'show']);
+    Route::get('/church-projects/featured', [ChurchProjectController::class, 'featured']);
+    
+    // Leaders (public viewing)
+    Route::get('/leaders', [LeaderController::class, 'index']);
+    Route::get('/leaders/{leader}', [LeaderController::class, 'show']);
+    
+    // Worship Services (public viewing)
+    Route::get('/worship-services', [App\Http\Controllers\Api\WorshipServiceController::class, 'index']);
+    
+    // Prayer Requests (public submissions and viewing)
+    Route::post('/prayer-requests', [PrayerRequestController::class, 'store']);
+    Route::get('/prayer-requests/public', [PrayerRequestController::class, 'public']);
+    Route::post('/prayer-requests/{prayerRequest}/pray', [PrayerRequestController::class, 'pray']);
+});
 
 // Protected API Routes (authentication required)
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
@@ -186,6 +231,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard']);
         Route::get('/statistics', [AdminController::class, 'statistics']);
         Route::get('/recent-activities', [AdminController::class, 'recentActivities']);
+        Route::get('/monthly-stats', [AdminController::class, 'monthlyStats']);
     });
     
     // About Pages Management (Admin only)
@@ -198,8 +244,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::apiResource('church-members', ChurchMemberController::class);
     Route::post('church-members/{churchMember}/upload-photo', [ChurchMemberController::class, 'uploadPhoto']);
     
-    // Events Management
-    Route::post('/events', [EventController::class, 'store']);
+    // Events Management - Additional routes not covered by apiResource
     Route::put('/events/{event}', [EventController::class, 'update']);
     Route::delete('/events/{event}', [EventController::class, 'destroy']);
     Route::post('/events/{event}/upload-image', [EventController::class, 'uploadImage']);
@@ -235,6 +280,9 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     
     // Homepage Content Management (Admin only)
     Route::put('/homepage/content/{section}', [App\Http\Controllers\Api\HomepageController::class, 'updateContentBySection']);
+    Route::post('/homepage/content', [App\Http\Controllers\Api\HomepageController::class, 'createContent']);
+    Route::put('/homepage/content/{id}', [App\Http\Controllers\Api\HomepageController::class, 'updateContent']);
+    Route::delete('/homepage/content/{id}', [App\Http\Controllers\Api\HomepageController::class, 'deleteContent']);
     Route::post('/homepage/slides', [App\Http\Controllers\Api\HomepageController::class, 'createSlide']);
     Route::put('/homepage/slides/{id}', [App\Http\Controllers\Api\HomepageController::class, 'updateSlide']);
     Route::delete('/homepage/slides/{id}', [App\Http\Controllers\Api\HomepageController::class, 'deleteSlide']);
@@ -255,5 +303,11 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::put('/donations/{donation}', [DonationController::class, 'update']);
     Route::delete('/donations/{donation}', [DonationController::class, 'destroy']);
     Route::get('/donations/reports/summary', [DonationController::class, 'summary']);
+    
+    // Leaders Management (Admin only)
+    Route::post('/leaders', [LeaderController::class, 'store']);
+    Route::put('/leaders/{leader}', [LeaderController::class, 'update']);
+    Route::delete('/leaders/{leader}', [LeaderController::class, 'destroy']);
+    Route::post('/leaders/reorder', [LeaderController::class, 'reorder']);
     
 });

@@ -4,7 +4,7 @@ const homepageService = {
   // Get all homepage data in one request
   getHomepageData: async () => {
     try {
-      const response = await API.get('/v1/homepage');
+      const response = await API.get('/homepage');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch homepage data:', error);
@@ -15,7 +15,7 @@ const homepageService = {
   // Get slides for carousel
   getSlides: async () => {
     try {
-      const response = await API.get('/v1/homepage/slides');
+      const response = await API.get('/homepage/slides');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch slides:', error);
@@ -26,7 +26,7 @@ const homepageService = {
   // Get content by section
   getContentBySection: async (sectionKey) => {
     try {
-      const response = await API.get(`/v1/homepage/content/${sectionKey}`);
+      const response = await API.get(`/homepage/content/${sectionKey}`);
       return response.data;
     } catch (error) {
       console.error(`Failed to fetch content for section ${sectionKey}:`, error);
@@ -37,7 +37,7 @@ const homepageService = {
   // Get church projects
   getChurchProjects: async () => {
     try {
-      const response = await API.get('/v1/church-projects');
+      const response = await API.get('/church-projects');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch church projects:', error);
@@ -48,7 +48,7 @@ const homepageService = {
   // Get featured projects for homepage
   getFeaturedProjects: async () => {
     try {
-      const response = await API.get('/v1/church-projects/featured');
+      const response = await API.get('/church-projects/featured');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch featured projects:', error);
@@ -59,7 +59,7 @@ const homepageService = {
   // Get worship services
   getWorshipServices: async () => {
     try {
-      const response = await API.get('/v1/worship-services');
+      const response = await API.get('/worship-services');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch worship services:', error);
@@ -72,7 +72,7 @@ const homepageService = {
     // Update content by section
     updateContentBySection: async (sectionKey, data) => {
       try {
-        const response = await API.put(`/v1/homepage/content/${sectionKey}`, data);
+        const response = await API.put(`/homepage/content/${sectionKey}`, data);
         return response.data;
       } catch (error) {
         console.error(`Failed to update content for section ${sectionKey}:`, error);
@@ -83,7 +83,7 @@ const homepageService = {
     // Create slide
     createSlide: async (slideData) => {
       try {
-        const response = await API.post('/v1/homepage/slides', slideData);
+        const response = await API.post('/homepage/slides', slideData);
         return response.data;
       } catch (error) {
         console.error('Failed to create slide:', error);
@@ -94,7 +94,7 @@ const homepageService = {
     // Update slide
     updateSlide: async (id, slideData) => {
       try {
-        const response = await API.put(`/v1/homepage/slides/${id}`, slideData);
+        const response = await API.put(`/homepage/slides/${id}`, slideData);
         return response.data;
       } catch (error) {
         console.error(`Failed to update slide ${id}:`, error);
@@ -105,7 +105,7 @@ const homepageService = {
     // Delete slide
     deleteSlide: async (id) => {
       try {
-        const response = await API.delete(`/v1/homepage/slides/${id}`);
+        const response = await API.delete(`/homepage/slides/${id}`);
         return response.data;
       } catch (error) {
         console.error(`Failed to delete slide ${id}:`, error);
@@ -113,10 +113,43 @@ const homepageService = {
       }
     },
 
+    // Create content section
+    createContent: async (contentData) => {
+      try {
+        const response = await API.post('/homepage/content', contentData);
+        return response.data;
+      } catch (error) {
+        console.error('Failed to create content:', error);
+        throw error;
+      }
+    },
+
+    // Update content section
+    updateContent: async (id, contentData) => {
+      try {
+        const response = await API.put(`/homepage/content/${id}`, contentData);
+        return response.data;
+      } catch (error) {
+        console.error(`Failed to update content ${id}:`, error);
+        throw error;
+      }
+    },
+
+    // Delete content section
+    deleteContent: async (id) => {
+      try {
+        const response = await API.delete(`/homepage/content/${id}`);
+        return response.data;
+      } catch (error) {
+        console.error(`Failed to delete content ${id}:`, error);
+        throw error;
+      }
+    },
+
     // Create church project
     createProject: async (projectData) => {
       try {
-        const response = await API.post('/v1/church-projects', projectData);
+        const response = await API.post('/church-projects', projectData);
         return response.data;
       } catch (error) {
         console.error('Failed to create project:', error);
@@ -127,7 +160,7 @@ const homepageService = {
     // Update church project
     updateProject: async (id, projectData) => {
       try {
-        const response = await API.put(`/v1/church-projects/${id}`, projectData);
+        const response = await API.put(`/church-projects/${id}`, projectData);
         return response.data;
       } catch (error) {
         console.error(`Failed to update project ${id}:`, error);
@@ -138,7 +171,7 @@ const homepageService = {
     // Delete church project
     deleteProject: async (id) => {
       try {
-        const response = await API.delete(`/v1/church-projects/${id}`);
+        const response = await API.delete(`/church-projects/${id}`);
         return response.data;
       } catch (error) {
         console.error(`Failed to delete project ${id}:`, error);
@@ -149,7 +182,7 @@ const homepageService = {
     // Create worship service
     createWorshipService: async (serviceData) => {
       try {
-        const response = await API.post('/v1/worship-services', serviceData);
+        const response = await API.post('/worship-services', serviceData);
         return response.data;
       } catch (error) {
         console.error('Failed to create worship service:', error);
@@ -160,7 +193,7 @@ const homepageService = {
     // Update worship service
     updateWorshipService: async (id, serviceData) => {
       try {
-        const response = await API.put(`/v1/worship-services/${id}`, serviceData);
+        const response = await API.put(`/worship-services/${id}`, serviceData);
         return response.data;
       } catch (error) {
         console.error(`Failed to update worship service ${id}:`, error);
@@ -171,7 +204,7 @@ const homepageService = {
     // Delete worship service
     deleteWorshipService: async (id) => {
       try {
-        const response = await API.delete(`/v1/worship-services/${id}`);
+        const response = await API.delete(`/worship-services/${id}`);
         return response.data;
       } catch (error) {
         console.error(`Failed to delete worship service ${id}:`, error);
