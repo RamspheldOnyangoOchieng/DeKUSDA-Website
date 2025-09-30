@@ -4,7 +4,7 @@ const homepageService = {
   // Get all homepage data in one request
   getHomepageData: async () => {
     try {
-      const response = await API.get('/homepage');
+      const response = await API.get('/v1/homepage');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch homepage data:', error);
@@ -15,7 +15,7 @@ const homepageService = {
   // Get slides for carousel
   getSlides: async () => {
     try {
-      const response = await API.get('/homepage/slides');
+      const response = await API.get('/v1/homepage/slides');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch slides:', error);
@@ -26,7 +26,7 @@ const homepageService = {
   // Get content by section
   getContentBySection: async (sectionKey) => {
     try {
-      const response = await API.get(`/homepage/content/${sectionKey}`);
+      const response = await API.get(`/v1/homepage/content/${sectionKey}`);
       return response.data;
     } catch (error) {
       console.error(`Failed to fetch content for section ${sectionKey}:`, error);
@@ -37,7 +37,7 @@ const homepageService = {
   // Get church projects
   getChurchProjects: async () => {
     try {
-      const response = await API.get('/church-projects');
+      const response = await API.get('/v1/church-projects');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch church projects:', error);
@@ -48,7 +48,7 @@ const homepageService = {
   // Get featured projects for homepage
   getFeaturedProjects: async () => {
     try {
-      const response = await API.get('/church-projects/featured');
+      const response = await API.get('/v1/church-projects/featured');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch featured projects:', error);
@@ -59,7 +59,7 @@ const homepageService = {
   // Get worship services
   getWorshipServices: async () => {
     try {
-      const response = await API.get('/worship-services');
+      const response = await API.get('/v1/worship-services');
       return response.data;
     } catch (error) {
       console.error('Failed to fetch worship services:', error);
@@ -72,7 +72,7 @@ const homepageService = {
     // Update content by section
     updateContentBySection: async (sectionKey, data) => {
       try {
-        const response = await API.put(`/homepage/content/${sectionKey}`, data);
+        const response = await API.put(`/v1/homepage/content/${sectionKey}`, data);
         return response.data;
       } catch (error) {
         console.error(`Failed to update content for section ${sectionKey}:`, error);
@@ -83,7 +83,7 @@ const homepageService = {
     // Create slide
     createSlide: async (slideData) => {
       try {
-        const response = await API.post('/homepage/slides', slideData);
+        const response = await API.post('/v1/homepage/slides', slideData);
         return response.data;
       } catch (error) {
         console.error('Failed to create slide:', error);
@@ -94,7 +94,7 @@ const homepageService = {
     // Update slide
     updateSlide: async (id, slideData) => {
       try {
-        const response = await API.put(`/homepage/slides/${id}`, slideData);
+        const response = await API.put(`/v1/homepage/slides/${id}`, slideData);
         return response.data;
       } catch (error) {
         console.error(`Failed to update slide ${id}:`, error);
@@ -105,7 +105,7 @@ const homepageService = {
     // Delete slide
     deleteSlide: async (id) => {
       try {
-        const response = await API.delete(`/homepage/slides/${id}`);
+        const response = await API.delete(`/v1/homepage/slides/${id}`);
         return response.data;
       } catch (error) {
         console.error(`Failed to delete slide ${id}:`, error);
@@ -116,7 +116,7 @@ const homepageService = {
     // Create content section
     createContent: async (contentData) => {
       try {
-        const response = await API.post('/homepage/content', contentData);
+        const response = await API.post('/v1/homepage/content', contentData);
         return response.data;
       } catch (error) {
         console.error('Failed to create content:', error);

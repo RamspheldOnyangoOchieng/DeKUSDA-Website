@@ -1,9 +1,9 @@
-import api from './api';
+import API from './api';
 
 export const adminService = {
   async getDashboard() {
     try {
-      const response = await api.get('/v1/admin/dashboard');
+      const response = await API.get('/v1/admin/dashboard');
       return response.data;
     } catch (error) {
       throw error;
@@ -12,7 +12,7 @@ export const adminService = {
 
   async getSettings() {
     try {
-      const response = await api.get('/v1/admin/settings');
+      const response = await API.get('/v1/admin/settings');
       return response.data;
     } catch (error) {
       throw error;
@@ -21,7 +21,7 @@ export const adminService = {
 
   async updateSettings(settings) {
     try {
-      const response = await api.put('/v1/admin/settings', settings);
+      const response = await API.put('/v1/admin/settings', settings);
       return response.data;
     } catch (error) {
       throw error;
@@ -30,7 +30,7 @@ export const adminService = {
 
   async getMonthlyStats() {
     try {
-      const response = await api.get('/v1/admin/monthly-stats');
+      const response = await API.get('/v1/admin/monthly-stats');
       return response.data;
     } catch (error) {
       throw error;
@@ -41,7 +41,7 @@ export const adminService = {
 export const memberService = {
   async getDashboard() {
     try {
-      const response = await api.get('/member/dashboard');
+      const response = await API.get('/member/dashboard');
       return response.data;
     } catch (error) {
       throw error;
@@ -50,7 +50,7 @@ export const memberService = {
 
   async getProfile() {
     try {
-      const response = await api.get('/member/profile');
+      const response = await API.get('/member/profile');
       return response.data;
     } catch (error) {
       throw error;
@@ -59,7 +59,7 @@ export const memberService = {
 
   async updateProfile(profileData) {
     try {
-      const response = await api.put('/member/profile', profileData);
+      const response = await API.put('/member/profile', profileData);
       return response.data;
     } catch (error) {
       throw error;
@@ -68,7 +68,7 @@ export const memberService = {
 
   async getMyPrayerRequests() {
     try {
-      const response = await api.get('/member/prayer-requests');
+      const response = await API.get('/member/prayer-requests');
       return response.data;
     } catch (error) {
       throw error;
@@ -77,7 +77,7 @@ export const memberService = {
 
   async getMyDonations() {
     try {
-      const response = await api.get('/member/donations');
+      const response = await API.get('/member/donations');
       return response.data;
     } catch (error) {
       throw error;
@@ -86,7 +86,7 @@ export const memberService = {
 
   async getMyEvents() {
     try {
-      const response = await api.get('/member/events');
+      const response = await API.get('/member/events');
       return response.data;
     } catch (error) {
       throw error;

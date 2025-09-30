@@ -1,10 +1,10 @@
-import apiService from './apiService';
+import API from './api';
 
 class AnnouncementService {
   // Get all announcements (public)
   async getAllAnnouncements() {
     try {
-      const response = await apiService.get('/v1/announcements');
+      const response = await API.get('/v1/announcements');
       return response.data;
     } catch (error) {
       console.error('Error fetching announcements:', error);
@@ -15,7 +15,7 @@ class AnnouncementService {
   // Get featured/active announcement for homepage
   async getFeaturedAnnouncement() {
     try {
-      const response = await apiService.get('/v1/announcements?featured=true&active=true');
+      const response = await API.get('/v1/announcements?featured=true&active=true');
       return response.data;
     } catch (error) {
       console.error('Error fetching featured announcement:', error);
@@ -26,7 +26,7 @@ class AnnouncementService {
   // Get announcement by ID
   async getAnnouncementById(id) {
     try {
-      const response = await apiService.get(`/v1/announcements/${id}`);
+      const response = await API.get(`/v1/announcements/${id}`);
       return response.data;
     } catch (error) {
       console.error('Error fetching announcement:', error);
@@ -37,7 +37,7 @@ class AnnouncementService {
   // Admin: Create new announcement
   async createAnnouncement(announcementData) {
     try {
-      const response = await apiService.post('/v1/announcements', announcementData);
+      const response = await API.post('/v1/announcements', announcementData);
       return response.data;
     } catch (error) {
       console.error('Error creating announcement:', error);
@@ -48,7 +48,7 @@ class AnnouncementService {
   // Admin: Update announcement
   async updateAnnouncement(id, announcementData) {
     try {
-      const response = await apiService.put(`/v1/announcements/${id}`, announcementData);
+      const response = await API.put(`/v1/announcements/${id}`, announcementData);
       return response.data;
     } catch (error) {
       console.error('Error updating announcement:', error);
@@ -59,7 +59,7 @@ class AnnouncementService {
   // Admin: Delete announcement
   async deleteAnnouncement(id) {
     try {
-      const response = await apiService.delete(`/v1/announcements/${id}`);
+      const response = await API.delete(`/v1/announcements/${id}`);
       return response.data;
     } catch (error) {
       console.error('Error deleting announcement:', error);
@@ -70,7 +70,7 @@ class AnnouncementService {
   // Admin: Get all announcements for management
   async getAnnouncementsForAdmin() {
     try {
-      const response = await apiService.get('/v1/announcements');
+      const response = await API.get('/v1/announcements');
       return response.data;
     } catch (error) {
       console.error('Error fetching announcements for admin:', error);

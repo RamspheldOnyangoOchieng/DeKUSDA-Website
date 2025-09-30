@@ -1,79 +1,50 @@
-import axios from 'axios';
+import API from './api';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
-
-// Create axios instance with base configuration
-const api = axios.create({
-  baseURL: API_BASE,
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  },
-  withCredentials: true,
-});
-
-// Add request interceptor for authentication
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-// Add response interceptor for error handling
-api.interceptors.response.use(
-  (response) => response.data,
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      window.location.href = '/admin/login';
-    }
-    return Promise.reject(error);
-  }
-);
+// Use the shared API instance instead of creating a new one
 
 export const leaderService = {
   // Get all leaders (public)
   getLeaders: async (category = null) => {
     const url = category ? `/v1/leaders?category=${category}` : '/v1/leaders';
-    return await api.get(url);
+    const response = await API.get(url);
+    return response.data;
   },
 
   // Get public leaders (for homepage display)
   getPublicLeaders: async (category = null) => {
     const url = category ? `/v1/leaders?category=${category}&status=active` : '/v1/leaders?status=active';
-    return await api.get(url);
+    const response = await API.get(url);
+    return response.data;
   },
 
   // Get single leader (public)
   getLeader: async (id) => {
-    return await api.get(`/v1/leaders/${id}`);
+    const response = await API.get(`/v1/leaders/${id}`);
+    return response.data;
   },
 
   // Create leader (admin)
   createLeader: async (leaderData) => {
-    return await api.post('/v1/leaders', leaderData);
+    const response = await API.post('/v1/leaders', leaderData);
+    return response.data;
   },
 
   // Update leader (admin)
   updateLeader: async (id, leaderData) => {
-    return await api.put(`/v1/leaders/${id}`, leaderData);
+    const response = await API.put(`/v1/leaders/${id}`, leaderData);
+    return response.data;
   },
 
   // Delete leader (admin)
   deleteLeader: async (id) => {
-    return await api.delete(`/v1/leaders/${id}`);
+    const response = await API.delete(`/v1/leaders/${id}`);
+    return response.data;
   },
 
   // Reorder leaders (admin)
   reorderLeaders: async (leaders) => {
-    return await api.post('/v1/leaders/reorder', { leaders });
+    const response = await API.post('/v1/leaders/reorder', { leaders });
+    return response.data;
   },
 
   // Get categories

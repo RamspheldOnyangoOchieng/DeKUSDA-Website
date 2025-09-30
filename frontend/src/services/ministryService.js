@@ -1,10 +1,10 @@
-import api from './api';
+import API from './api';
 
 const ministryService = {
     // Get all ministries
     getAllMinistries: async () => {
         try {
-            const response = await api.get('/ministries');
+            const response = await API.get('/ministries');
             return response.data;
         } catch (error) {
             throw error;
@@ -14,7 +14,7 @@ const ministryService = {
     // Get ministry by ID
     getMinistry: async (id) => {
         try {
-            const response = await api.get(`/ministries/${id}`);
+            const response = await API.get(`/ministries/${id}`);
             return response.data;
         } catch (error) {
             throw error;
@@ -24,7 +24,7 @@ const ministryService = {
     // Get ministries by category
     getMinisteriesByCategory: async (category) => {
         try {
-            const response = await api.get(`/ministries/category/${category}`);
+            const response = await API.get(`/ministries/category/${category}`);
             return response.data;
         } catch (error) {
             throw error;
@@ -47,7 +47,7 @@ const ministryService = {
                 }
             });
 
-            const response = await api.post('/ministries', formData, {
+            const response = await API.post('/ministries', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -77,7 +77,7 @@ const ministryService = {
             // Add PUT method to form data for Laravel
             formData.append('_method', 'PUT');
 
-            const response = await api.post(`/ministries/${id}`, formData, {
+            const response = await API.post(`/ministries/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -91,7 +91,7 @@ const ministryService = {
     // Delete ministry
     deleteMinistry: async (id) => {
         try {
-            const response = await api.delete(`/ministries/${id}`);
+            const response = await API.delete(`/ministries/${id}`);
             return response.data;
         } catch (error) {
             throw error;

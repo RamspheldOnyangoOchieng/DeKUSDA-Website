@@ -55,6 +55,25 @@ const ManageEvents = () => {
     e.preventDefault();
     try {
       setError(''); // Clear previous errors
+      
+      // Basic client-side validation
+      if (!formData.title.trim()) {
+        setError('Event title is required.');
+        return;
+      }
+      if (!formData.description.trim()) {
+        setError('Event description is required.');
+        return;
+      }
+      if (!formData.start_datetime) {
+        setError('Start date and time is required.');
+        return;
+      }
+      if (!formData.end_datetime) {
+        setError('End date and time is required.');
+        return;
+      }
+      
       if (editingEvent) {
         await churchService.updateEvent(editingEvent.id, formData);
       } else {
@@ -76,12 +95,18 @@ const ManageEvents = () => {
       fetchEvents();
     } catch (err) {
       console.error('Event creation/update error:', err);
-      if (err.message.includes('401')) {
+      
+      // Handle validation errors (422)
+      if (err.response?.status === 422) {
+        const validationErrors = err.response.data.errors;
+        const errorMessages = Object.values(validationErrors).flat();
+        setError(`Validation failed: ${errorMessages.join(', ')}`);
+      } else if (err.response?.status === 401) {
         setError('Authentication failed. Please log in again.');
-      } else if (err.message.includes('403')) {
+      } else if (err.response?.status === 403) {
         setError('You do not have permission to perform this action.');
       } else {
-        setError(`Failed to save event: ${err.message}`);
+        setError(`Failed to save event: ${err.response?.data?.message || err.message}`);
       }
     }
   };

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with Laravel API base URL
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api',
+  baseURL: (import.meta.env.VITE_API_URL || 'http://localhost:8000') + '/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ API.interceptors.request.use(async (config) => {
   
   // Get CSRF cookie for authenticated routes only
   try {
-    await axios.get(`${import.meta.env.VITE_LARAVEL_BASE_URL || 'http://localhost:8000'}/sanctum/csrf-cookie`);
+    await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/sanctum/csrf-cookie`);
   } catch (error) {
     console.warn('Could not get CSRF cookie:', error);
   }

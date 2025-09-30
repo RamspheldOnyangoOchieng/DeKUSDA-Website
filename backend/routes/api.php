@@ -200,11 +200,6 @@ Route::prefix('v1')->group(function () {
     Route::get('/events/{event}', [EventController::class, 'show']);
     Route::post('/events', [EventController::class, 'store']);
     
-    // Homepage content
-    Route::get('/homepage', [HomepageController::class, 'getContent']);
-    Route::get('/homepage/slides', [HomepageController::class, 'getSlides']);
-    Route::get('/homepage/content/{sectionKey}', [HomepageController::class, 'getSectionContent']);
-    
     // Church Projects (public viewing)
     Route::get('/church-projects', [ChurchProjectController::class, 'index']);
     Route::get('/church-projects/{id}', [ChurchProjectController::class, 'show']);
@@ -232,6 +227,20 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::get('/statistics', [AdminController::class, 'statistics']);
         Route::get('/recent-activities', [AdminController::class, 'recentActivities']);
         Route::get('/monthly-stats', [AdminController::class, 'monthlyStats']);
+        
+        // Content moderation
+        Route::get('/content/pending', [AdminController::class, 'getPendingContent']);
+        Route::put('/content/{id}/approve', [AdminController::class, 'approveContent']);
+        Route::delete('/content/{id}/reject', [AdminController::class, 'rejectContent']);
+        
+        // Prayer moderation
+        Route::get('/prayers/moderate', [AdminController::class, 'getPrayersToModerate']);
+        Route::put('/prayers/{id}/feature', [AdminController::class, 'featurePrayer']);
+        Route::delete('/prayers/{id}', [AdminController::class, 'removePrayer']);
+        
+        // User management
+        Route::get('/users', [AdminController::class, 'getUsers']);
+        Route::put('/users/{id}/role', [AdminController::class, 'updateUserRole']);
     });
     
     // About Pages Management (Admin only)
@@ -261,6 +270,7 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::delete('/ministries/{ministry}', [MinistryController::class, 'destroy']);
     
     // Announcements Management
+    Route::get('/announcements', [AnnouncementController::class, 'index']);
     Route::post('/announcements', [AnnouncementController::class, 'store']);
     Route::put('/announcements/{announcement}', [AnnouncementController::class, 'update']);
     Route::delete('/announcements/{announcement}', [AnnouncementController::class, 'destroy']);

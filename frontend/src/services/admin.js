@@ -3,23 +3,23 @@ import API from './api';
 export const adminService = {
   // Dashboard
   getDashboard: async () => {
-    const response = await API.get('/admin/dashboard');
+    const response = await API.get('/v1/admin/dashboard');
     return response.data;
   },
 
   // Content Moderation
   getPendingContent: async () => {
-    const response = await API.get('/admin/content/pending');
+    const response = await API.get('/v1/admin/content/pending');
     return response.data;
   },
 
   approveContent: async (contentId) => {
-    const response = await API.put(`/admin/content/${contentId}/approve`);
+    const response = await API.put(`/v1/admin/content/${contentId}/approve`);
     return response.data;
   },
 
   rejectContent: async (contentId, reason) => {
-    const response = await API.delete(`/admin/content/${contentId}/reject`, {
+    const response = await API.delete(`/v1/admin/content/${contentId}/reject`, {
       data: { reason }
     });
     return response.data;
@@ -27,23 +27,23 @@ export const adminService = {
 
   // Prayer Moderation
   getPrayersToModerate: async () => {
-    const response = await API.get('/admin/prayers/moderate');
+    const response = await API.get('/v1/admin/prayers/moderate');
     return response.data;
   },
 
   featurePrayer: async (prayerId) => {
-    const response = await API.put(`/admin/prayers/${prayerId}/feature`);
+    const response = await API.put(`/v1/admin/prayers/${prayerId}/feature`);
     return response.data;
   },
 
   removePrayer: async (prayerId) => {
-    const response = await API.delete(`/admin/prayers/${prayerId}`);
+    const response = await API.delete(`/v1/admin/prayers/${prayerId}`);
     return response.data;
   },
 
   // User Management
   getUsers: async (params = {}) => {
-    const response = await API.get('/admin/users', { params });
+    const response = await API.get('/v1/admin/users', { params });
     return response.data;
   },
 

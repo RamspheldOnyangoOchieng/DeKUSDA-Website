@@ -1,4 +1,4 @@
-import apiService from './apiService';
+import API from './api';
 
 class AuthService {
   constructor() {
@@ -47,20 +47,21 @@ class AuthService {
     this.userRole = null;
     localStorage.removeItem('user_data');
     localStorage.removeItem('user_role');
-    apiService.removeToken();
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('token');
   }
 
   // Login user
   async login(credentials) {
     try {
-      const response = await apiService.post('/auth/login', credentials, false);
+      const response = await API.post('/auth/login', credentials);
       
-      if (response.success) {
-        apiService.setToken(response.data.token);
-        this.saveUserToStorage(response.data.user, response.data.role);
-        return response;
+      if (response.data.success) {
+        localStorage.setItem('auth_token', response.data.data.token);
+        this.saveUserToStorage(response.data.data.user, response.data.data.role);
+        return response.data;
       }
-      throw new Error(response.message || 'Login failed');
+      throw new Error(response.data.message || 'Login failed');
     } catch (error) {
       throw error;
     }
@@ -69,14 +70,14 @@ class AuthService {
   // Register new user
   async register(userData) {
     try {
-      const response = await apiService.post('/auth/register', userData, false);
+      const response = await API.post('/auth/register', userData);
       
-      if (response.success) {
-        apiService.setToken(response.data.token);
-        this.saveUserToStorage(response.data.user, response.data.role);
-        return response;
+      if (response.data.success) {
+        localStorage.setItem('auth_token', response.data.data.token);
+        this.saveUserToStorage(response.data.data.user, response.data.data.role);
+        return response.data;
       }
-      throw new Error(response.message || 'Registration failed');
+      throw new Error(response.data.message || 'Registration failed');
     } catch (error) {
       throw error;
     }
@@ -85,7 +86,7 @@ class AuthService {
   // Logout user
   async logout() {
     try {
-      await apiService.post('/auth/logout', {}, true);
+      await API.post('/auth/logout');
     } catch (error) {
       console.warn('Logout API call failed:', error);
     } finally {
@@ -105,7 +106,8 @@ class AuthService {
 
   // Check if user is authenticated
   isAuthenticated() {
-    return !!this.currentUser && !!apiService.token;
+    const token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+    return !!this.currentUser && !!token;
   }
 
   // Check if user is admin
@@ -116,12 +118,12 @@ class AuthService {
   // Fetch current user from API
   async fetchCurrentUser() {
     try {
-      const response = await apiService.get('/auth/user', true);
-      if (response.success) {
-        this.saveUserToStorage(response.data.user, response.data.role);
-        return response.data;
+      const response = await API.get('/auth/user');
+      if (response.data.success) {
+        this.saveUserToStorage(response.data.data.user, response.data.data.role);
+        return response.data.data;
       }
-      throw new Error(response.message || 'Failed to fetch user data');
+      throw new Error(response.data.message || 'Failed to fetch user data');
     } catch (error) {
       throw error;
     }
@@ -129,7 +131,8 @@ class AuthService {
 
   // Initialize auth state from token
   async initializeAuth() {
-    if (apiService.token && this.currentUser) {
+    const token = localStorage.getItem('auth_token') || localStorage.getItem('token');
+    if (token && this.currentUser) {
       try {
         await this.fetchCurrentUser();
         return true;
@@ -154,10 +157,10 @@ class AuthService {
   // Refresh user data
   async refreshUser() {
     try {
-      const response = await apiService.get('/user', true);
-      if (response.success) {
-        this.saveUserToStorage(response.data.user, response.data.role);
-        return response.data;
+      const response = await API.get('/user');
+      if (response.data.success) {
+        this.saveUserToStorage(response.data.data.user, response.data.data.role);
+        return response.data.data;
       }
     } catch (error) {
       console.error('Failed to refresh user:', error);
