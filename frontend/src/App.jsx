@@ -117,6 +117,7 @@ function App() {
             
             {/* Portal Access */}
             <Route path="/members" element={<MembersPortal />} />
+            <Route path="/members-portal" element={<MembersPortal />} />
             <Route path="/leaders" element={<LeadersPortal />} />
 
             {/* Dashboard Routes */}

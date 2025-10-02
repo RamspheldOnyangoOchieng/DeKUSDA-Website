@@ -200,6 +200,11 @@ Route::prefix('v1')->group(function () {
     Route::get('/events/{event}', [EventController::class, 'show']);
     Route::post('/events', [EventController::class, 'store']);
     
+    // Homepage content
+    Route::get('/homepage', [HomepageController::class, 'index']);
+    Route::get('/homepage/slides', [HomepageController::class, 'getSlides']);
+    Route::get('/homepage/content/{sectionKey}', [HomepageController::class, 'getContentBySection']);
+    
     // Church Projects (public viewing)
     Route::get('/church-projects', [ChurchProjectController::class, 'index']);
     Route::get('/church-projects/{id}', [ChurchProjectController::class, 'show']);

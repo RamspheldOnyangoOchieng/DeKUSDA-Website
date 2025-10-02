@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AiOutlineMail, AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible, AiOutlineUser, AiOutlinePhone, AiOutlineCalendar } from 'react-icons/ai';
+import { AiOutlineMail, AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible, AiOutlineUser, AiOutlinePhone } from 'react-icons/ai';
 import { BiChurch } from 'react-icons/bi';
 import { motion } from 'framer-motion';
 import Loader from '../components/Loader';
@@ -25,9 +25,7 @@ const MembersPortal = () => {
     email: '',
     password: '',
     password_confirmation: '',
-    phone: '',
-    date_of_birth: '',
-    address: ''
+    phone: ''
   });
 
   const handleLoginSubmit = async (e) => {
@@ -91,7 +89,11 @@ const MembersPortal = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert('Registration successful! Please login with your credentials.');
+        alert('Registration successful! You will now be redirected to our DEKUSDA Community WhatsApp group.');
+        
+        // Redirect to DEKUSDA Community WhatsApp group
+        window.open('https://chat.whatsapp.com/ILydxcM2OmlDT4Z0egZhNu', '_blank');
+        
         setActiveTab('login');
         setRegisterForm({
           first_name: '',
@@ -99,9 +101,7 @@ const MembersPortal = () => {
           email: '',
           password: '',
           password_confirmation: '',
-          phone: '',
-          date_of_birth: '',
-          address: ''
+          phone: ''
         });
       } else {
         alert(data.message || 'Registration failed. Please try again.');
@@ -299,34 +299,6 @@ const MembersPortal = () => {
                       placeholder="+254 XXX XXX XXX"
                     />
                   </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Date of Birth
-                  </label>
-                  <div className="relative">
-                    <AiOutlineCalendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                    <input
-                      type="date"
-                      value={registerForm.date_of_birth}
-                      onChange={(e) => setRegisterForm({...registerForm, date_of_birth: e.target.value})}
-                      className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Address (Optional)
-                  </label>
-                  <textarea
-                    value={registerForm.address}
-                    onChange={(e) => setRegisterForm({...registerForm, address: e.target.value})}
-                    className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Your address"
-                    rows="2"
-                  />
                 </div>
 
                 <div>

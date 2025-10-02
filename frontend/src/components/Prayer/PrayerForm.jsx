@@ -1,17 +1,15 @@
 import { useState } from 'react';
-import { prayerService } from '../../services/prayers';
-import { PRAYER_CATEGORIES } from '../../utils/constants';
+import churchService from '../../services/churchService';
 import { Button } from '../UI/Button';
 import { AiOutlineHeart, AiOutlineUser } from 'react-icons/ai';
 
 const PrayerForm = ({ onSubmitSuccess }) => {
   const [formData, setFormData] = useState({
     requester_name: '',
-    requester_email: '',
-    prayer_text: '',
-    is_anonymous: false,
-    is_public: false,
-    category: 'other'
+    prayer_request: '',
+    category: 'thanksgiving',
+    is_urgent: false,
+    is_public: true
   });
   
   const [loading, setLoading] = useState(false);
@@ -32,12 +30,12 @@ const PrayerForm = ({ onSubmitSuccess }) => {
 
     try {
       // Validate required fields
-      if (!formData.prayer_text.trim()) {
+      if (!formData.prayer_request.trim()) {
         throw new Error('Prayer request text is required');
       }
 
       console.log('Submitting prayer request:', formData);
-      await prayerService.submitPrayer(formData);
+      const response = await churchService.createPrayerRequest(formData);
       console.log('Prayer request submitted successfully');
       
       setMessage({
@@ -48,11 +46,10 @@ const PrayerForm = ({ onSubmitSuccess }) => {
       // Reset form
       setFormData({
         requester_name: '',
-        requester_email: '',
-        prayer_text: '',
-        is_anonymous: false,
-        is_public: false,
-        category: 'other'
+        prayer_request: '',
+        category: 'thanksgiving',
+        is_urgent: false,
+        is_public: true
       });
 
       if (onSubmitSuccess) {
@@ -85,20 +82,6 @@ const PrayerForm = ({ onSubmitSuccess }) => {
     }
   };
 
-  const testConnection = async () => {
-    try {
-      setMessage({ type: 'info', text: 'Testing API connection...' });
-      await prayerService.testConnection();
-      setMessage({ type: 'success', text: 'API connection test successful!' });
-    } catch (error) {
-      console.error('Connection test error:', error);
-      setMessage({ 
-        type: 'error', 
-        text: `Connection test failed: ${error.response?.status || error.message}` 
-      });
-    }
-  };
-
   return (
     <div className="bg-white p-8 rounded-xl shadow-lg border-l-4 border-primaryBlue">
       <div className="flex items-center mb-6">
@@ -118,66 +101,22 @@ const PrayerForm = ({ onSubmitSuccess }) => {
         </div>
       )}
 
-      {/* Test Connection Button */}
-      <div className="mb-4">
-        <Button
-          type="button"
-          onClick={testConnection}
-          className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm"
-        >
-          Test API Connection
-        </Button>
-      </div>
-
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Anonymous/Named Toggle */}
-        <div className="flex items-center space-x-4">
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              name="is_anonymous"
-              checked={formData.is_anonymous}
-              onChange={handleInputChange}
-              className="mr-2 h-4 w-4 text-primaryBlue focus:ring-primaryBlue border-gray-300 rounded"
-            />
-            <span className="text-gray-700">Submit anonymously</span>
-          </label>
-        </div>
-
-        {/* Name Field (hidden if anonymous) */}
-        {!formData.is_anonymous && (
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">
-              <AiOutlineUser className="inline w-4 h-4 mr-1" />
-              Your Name
-            </label>
-            <input
-              type="text"
-              name="requester_name"
-              value={formData.requester_name}
-              onChange={handleInputChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryBlue focus:border-transparent"
-              placeholder="Enter your name (optional)"
-            />
-          </div>
-        )}
-
-        {/* Email Field (optional) */}
+        {/* Name Field */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">
-            Email (Optional)
+            <AiOutlineUser className="inline w-4 h-4 mr-1" />
+            Your Name *
           </label>
           <input
-            type="email"
-            name="requester_email"
-            value={formData.requester_email}
+            type="text"
+            name="requester_name"
+            value={formData.requester_name}
             onChange={handleInputChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryBlue focus:border-transparent"
-            placeholder="Your email for follow-up (optional)"
+            placeholder="Enter your name"
+            required
           />
-          <p className="text-sm text-gray-500 mt-1">
-            Email will only be used to follow up on your prayer request if needed
-          </p>
         </div>
 
         {/* Category Selection */}
@@ -191,22 +130,24 @@ const PrayerForm = ({ onSubmitSuccess }) => {
             onChange={handleInputChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryBlue focus:border-transparent"
           >
-            {PRAYER_CATEGORIES.map(category => (
-              <option key={category.value} value={category.value}>
-                {category.label}
-              </option>
-            ))}
+            <option value="thanksgiving">Thanksgiving</option>
+            <option value="healing">Healing</option>
+            <option value="guidance">Guidance</option>
+            <option value="family">Family</option>
+            <option value="financial">Financial</option>
+            <option value="spiritual">Spiritual Growth</option>
+            <option value="other">Other</option>
           </select>
         </div>
 
-        {/* Prayer Text */}
+        {/* Prayer Request */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">
             Prayer Request *
           </label>
           <textarea
-            name="prayer_text"
-            value={formData.prayer_text}
+            name="prayer_request"
+            value={formData.prayer_request}
             onChange={handleInputChange}
             rows="5"
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primaryBlue focus:border-transparent"
@@ -215,25 +156,35 @@ const PrayerForm = ({ onSubmitSuccess }) => {
           ></textarea>
         </div>
 
-        {/* Public Prayer Wall Option */}
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            name="is_public"
-            id="is_public"
-            checked={formData.is_public}
-            onChange={handleInputChange}
-            className="mr-3 h-4 w-4 text-primaryBlue focus:ring-primaryBlue border-gray-300 rounded"
-          />
-          <label htmlFor="is_public" className="text-gray-700">
-            Share this request publicly on our prayer wall for the community to pray together
+        {/* Options */}
+        <div className="flex items-center space-x-6">
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              name="is_urgent"
+              checked={formData.is_urgent}
+              onChange={handleInputChange}
+              className="mr-2 h-4 w-4 text-primaryBlue focus:ring-primaryBlue border-gray-300 rounded"
+            />
+            <span className="text-gray-700">Urgent Request</span>
+          </label>
+
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              name="is_public"
+              checked={formData.is_public}
+              onChange={handleInputChange}
+              className="mr-2 h-4 w-4 text-primaryBlue focus:ring-primaryBlue border-gray-300 rounded"
+            />
+            <span className="text-gray-700">Make Public</span>
           </label>
         </div>
 
         {/* Submit Button */}
         <Button
           type="submit"
-          disabled={loading || !formData.prayer_text.trim()}
+          disabled={loading || !formData.prayer_request.trim()}
           className="w-full py-3 bg-primaryBlue text-white rounded-lg hover:bg-darkBlue transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? (

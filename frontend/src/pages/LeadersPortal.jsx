@@ -5,7 +5,6 @@ import { BiChurch, BiCrown, BiShield } from 'react-icons/bi';
 import { FaUserTie, FaMicrophone, FaUsers, FaHeartbeat, FaBookOpen, FaCalculator, FaPray, FaBroadcastTower } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import Loader from '../components/Loader';
-import API from '../services/api';
 
 const LeadersPortal = () => {
   const [selectedDepartment, setSelectedDepartment] = useState('');
@@ -103,11 +102,20 @@ const LeadersPortal = () => {
     }
 
     try {
-      const response = await API.post('/auth/leader-login', loginForm);
-      const data = response.data;
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+      const response = await fetch(`${apiUrl}/auth/leader-login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(loginForm),
+      });
+
+      const data = await response.json();
       console.log('Login response:', data); // Debug log
 
-      if (data.success) {
+      if (response.ok && data.success) {
         // Backend returns data in nested structure
         const { token, user, department } = data.data;
         

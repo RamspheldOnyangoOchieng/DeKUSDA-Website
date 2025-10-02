@@ -1,45 +1,12 @@
 import React from 'react';
 import { 
-  FaCalendarAlt, FaClock, FaMapMarkerAlt, FaBible, 
+  FaCalendarAlt, FaClock, FaMapMarkerAlt,
   FaHandsHelping, FaEnvelope, FaPhone, FaGift,
   FaArrowRight
 } from 'react-icons/fa';
 
 const QuickAccess = () => {
-  const quickLinks = [
-    {
-      title: "Plan Your Visit",
-      description: "First time visitor information",
-      icon: FaMapMarkerAlt,
-      color: "from-blue-500 to-cyan-500",
-      link: "/visit",
-      action: "Learn More"
-    },
-    {
-      title: "Give Online",
-      description: "Support our ministry securely",
-      icon: FaGift,
-      color: "from-green-500 to-emerald-500",
-      link: "/give",
-      action: "Donate Now"
-    },
-    {
-      title: "Prayer Request",
-      description: "Submit a prayer request",
-      icon: FaHandsHelping,
-      color: "from-purple-500 to-pink-500",
-      link: "/prayer",
-      action: "Submit Request"
-    },
-    {
-      title: "Bible Study",
-      description: "Join our weekly study groups",
-      icon: FaBible,
-      color: "from-orange-500 to-red-500",
-      link: "/bible-study",
-      action: "Join Group"
-    }
-  ];
+  const quickLinks = [];
 
   const contactInfo = [
     {
@@ -126,7 +93,7 @@ const QuickAccess = () => {
 
               <div className="flex items-center justify-between bg-white/10 rounded-lg p-4">
                 <div className="flex items-center space-x-3">
-                  <FaBible className="text-blue-200" />
+                  <FaHandsHelping className="text-blue-200" />
                   <div>
                     <div className="font-semibold">Prayer Meeting</div>
                     <div className="text-blue-100 text-sm">Midweek Prayer</div>

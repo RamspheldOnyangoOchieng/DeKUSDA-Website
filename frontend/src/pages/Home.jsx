@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
     AiFillFacebook,
     AiFillInstagram,
@@ -357,9 +358,12 @@ export const Home = () => {
                                             alt="DEKUSDA Church Family" 
                                             className="object-cover border-4 border-white rounded-full shadow-2xl w-96 h-96"
                                         />
-                                        <div className="absolute px-4 py-2 text-sm font-bold text-white rounded-full -bottom-4 -right-4 bg-primaryBlue">
+                                        <Link 
+                                            to="/members-portal"
+                                            className="absolute px-4 py-2 text-sm font-bold text-white rounded-full -bottom-4 -right-4 bg-primaryBlue hover:bg-darkBlue transition-colors cursor-pointer"
+                                        >
                                             Join Our Family
-                                        </div>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

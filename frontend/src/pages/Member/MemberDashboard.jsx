@@ -27,11 +27,19 @@ const MemberDashboard = () => {
       ]);
 
       if (eventsResponse.success) {
-        setUpcomingEvents(eventsResponse.data.slice(0, 5));
+        // Handle both array and paginated responses for events
+        const eventsData = Array.isArray(eventsResponse.data) 
+          ? eventsResponse.data 
+          : eventsResponse.data.data || [];
+        setUpcomingEvents(eventsData.slice(0, 5));
       }
 
       if (sermonsResponse.success) {
-        setRecentSermons(sermonsResponse.data.slice(0, 5));
+        // Handle paginated response for sermons - data is nested in response.data.data
+        const sermonsData = Array.isArray(sermonsResponse.data) 
+          ? sermonsResponse.data 
+          : sermonsResponse.data.data || [];
+        setRecentSermons(sermonsData.slice(0, 5));
       }
 
       // Mock member data if API doesn't return it

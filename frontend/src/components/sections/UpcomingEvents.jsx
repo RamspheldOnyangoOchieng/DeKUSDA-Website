@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   FaCalendarAlt, FaClock, FaMapMarkerAlt, FaUsers, 
   FaChevronLeft, FaChevronRight, FaPlus 
@@ -426,13 +427,12 @@ const UpcomingEvents = () => {
               <p className="text-gray-600">Stay up to date with all church activities and important dates.</p>
             </div>
             <div className="flex space-x-3">
-              <button className="bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg border border-gray-300 font-medium transition-colors">
+              <Link 
+                to="/SabbathCalendar" 
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+              >
                 View Full Calendar
-              </button>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2">
-                <FaPlus className="text-sm" />
-                <span>Subscribe to Calendar</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

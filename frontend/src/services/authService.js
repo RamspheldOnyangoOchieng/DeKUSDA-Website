@@ -56,12 +56,12 @@ class AuthService {
     try {
       const response = await API.post('/auth/login', credentials);
       
-      if (response.data.success) {
-        localStorage.setItem('auth_token', response.data.data.token);
-        this.saveUserToStorage(response.data.data.user, response.data.data.role);
-        return response.data;
+      if (response.success) {
+        localStorage.setItem('auth_token', response.data.token);
+        this.saveUserToStorage(response.data.user, response.data.role);
+        return response;
       }
-      throw new Error(response.data.message || 'Login failed');
+      throw new Error(response.message || 'Login failed');
     } catch (error) {
       throw error;
     }
@@ -72,12 +72,12 @@ class AuthService {
     try {
       const response = await API.post('/auth/register', userData);
       
-      if (response.data.success) {
-        localStorage.setItem('auth_token', response.data.data.token);
-        this.saveUserToStorage(response.data.data.user, response.data.data.role);
-        return response.data;
+      if (response.success) {
+        localStorage.setItem('auth_token', response.data.token);
+        this.saveUserToStorage(response.data.user, response.data.role);
+        return response;
       }
-      throw new Error(response.data.message || 'Registration failed');
+      throw new Error(response.message || 'Registration failed');
     } catch (error) {
       throw error;
     }
@@ -119,11 +119,11 @@ class AuthService {
   async fetchCurrentUser() {
     try {
       const response = await API.get('/auth/user');
-      if (response.data.success) {
-        this.saveUserToStorage(response.data.data.user, response.data.data.role);
-        return response.data.data;
+      if (response.success) {
+        this.saveUserToStorage(response.data.user, response.data.role);
+        return response.data;
       }
-      throw new Error(response.data.message || 'Failed to fetch user data');
+      throw new Error(response.message || 'Failed to fetch user data');
     } catch (error) {
       throw error;
     }
@@ -157,10 +157,10 @@ class AuthService {
   // Refresh user data
   async refreshUser() {
     try {
-      const response = await API.get('/user');
-      if (response.data.success) {
-        this.saveUserToStorage(response.data.data.user, response.data.data.role);
-        return response.data.data;
+      const response = await API.get('/auth/user');
+      if (response.success) {
+        this.saveUserToStorage(response.data.user, response.data.role);
+        return response.data;
       }
     } catch (error) {
       console.error('Failed to refresh user:', error);

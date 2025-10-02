@@ -128,6 +128,22 @@ class ChurchService {
     return response.data;
   }
 
+  // Prayer Requests API
+  async getPrayerRequests(params = {}) {
+    const response = await API.get('/v1/prayer-requests/public', { params });
+    return response.data;
+  }
+
+  async createPrayerRequest(requestData) {
+    const response = await API.post('/v1/prayer-requests', requestData);
+    return response.data;
+  }
+
+  async prayForRequest(requestId) {
+    const response = await API.post(`/v1/prayer-requests/${requestId}/pray`);
+    return response.data;
+  }
+
   // Dashboard API
   async getDashboardStats() {
     const response = await API.get('/v1/admin/dashboard');
